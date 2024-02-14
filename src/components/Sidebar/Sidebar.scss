@@ -1,0 +1,57 @@
+.main {
+  height: 100dvh;
+  width: 400px;
+  background-color: #fafcfe;
+  font-family: "Roboto", sans-serif;
+  display: flex;
+  flex-direction: column;
+  color: gray;
+  .section-1 {
+    display: flex;
+    flex-direction: row;
+    .Überschrift-text {
+      display: flex;
+      flex-direction: column;
+      h1 {
+        margin-bottom: 0;
+      }
+      p {
+        margin-top: 0;
+      }
+    }
+  }
+  .section-2 {
+    padding-left: 30px;
+    .icon-text {
+      display: flex;
+      flex-direction: row;
+      font-size: 24px;
+      align-items: center;
+    }
+  }
+  .section-3 {
+    padding-left: 30px;
+    .icon-text {
+      display: flex;
+      flex-direction: row;
+      font-size: 24px;
+      align-items: center;
+    }
+  }
+  .section-4 {
+    padding-left: 30px;
+    .icon-text {
+      display: flex;
+      flex-direction: row;
+      font-size: 24px;
+      align-items: center;
+    }
+  }
+  hr {
+    height: 1px;
+    width: 350px;
+    color: gray;
+    background-color: gray;
+    border-radius: 15px;
+  }
+}
