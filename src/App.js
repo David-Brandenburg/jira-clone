@@ -1,5 +1,11 @@
+import { TicketErstellen } from "./components/ticket/ticketErstellen";
+
 function App() {
-  return <></>;
+  return (
+    <>
+      <TicketErstellen />
+    </>
+  );
 }
 
 export default App;

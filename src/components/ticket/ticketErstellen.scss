@@ -1,0 +1,20 @@
+.form-card {
+  height: 700px;
+  width: 500px;
+  background-color: gray;
+  font-family: "Roboto", sans-serif;
+  padding: 30px;
+  input {
+    height: 50px;
+    width: 100%;
+  }
+  select {
+    height: 25px;
+    width: 50%;
+  }
+  .btn {
+    height: 50px;
+    width: 50%;
+    margin-top: 20px;
+  }
+}
