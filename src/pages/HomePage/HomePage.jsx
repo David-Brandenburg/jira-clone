@@ -1,13 +1,12 @@
-import React, { useContext } from 'react'
-import { LoggedinContext } from '../../context/loggedinContext'
+import React, { useContext } from "react";
+import { Sidebar } from "../../components/Sidebar/Sidebar";
+import { LoggedinContext } from "../../context/loggedinContext";
 
 const HomePage = () => {
-	const {loggedIn} = useContext(LoggedinContext)
-	console.log(loggedIn)
+  const { loggedIn } = useContext(LoggedinContext);
+  console.log(loggedIn);
 
-	return (
-		<div>HomePage</div>
-	)
-}
+  return <Sidebar />;
+};
 
-export default HomePage
+export default HomePage;
