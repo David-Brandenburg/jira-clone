@@ -1,5 +1,7 @@
 import { useState } from "react";
 import "./ticketErstellen.scss";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 export const TicketErstellen = () => {
   const [inputValues, setInputValues] = useState({
@@ -31,60 +33,63 @@ export const TicketErstellen = () => {
       if (!response.ok) {
         throw new Error("Network response was not ok");
       }
-      console.log("Ticket created successfully");
+      toast.success("Ticket created successfully");
     } catch (error) {
       console.error("Error creating ticket:", error);
     }
   };
 
   return (
-    <div className="form-card">
-      <form onSubmit={handleSubmit}>
-        <h2>Title</h2>
-        <input
-          type="text"
-          name="title"
-          value={inputValues.title}
-          onChange={handleChange}
-          placeholder="Title?"
-        />
-        <h2>Beschreibung</h2>
-        <input
-          type="text"
-          name="desc"
-          value={inputValues.desc}
-          onChange={handleChange}
-        />
-        <h2>Status</h2>
-        <select
-          name="status"
-          value={inputValues.status}
-          onChange={handleChange}>
-          <option value="Fertig">Fertig</option>
-          <option value="In Progress">In Progress</option>
-          <option value="Nicht zugewiesen">Nicht zugewiesen</option>
-        </select>
-        <h2>Deadline</h2>
-        <input
-          type="date"
-          name="deadline"
-          value={inputValues.deadline}
-          onChange={handleChange}
-        />
-        <h2>Benutzer zuordnen:</h2>
-        <select
-          name="creator"
-          value={inputValues.creator}
-          onChange={handleChange}>
-          <option value=""></option>
-          <option value="1">danny</option>
-          <option value="2">michelle</option>
-          <option value="3">david</option>
-        </select>
-        <button type="submit" className="btn">
-          Erstelle Ticket
-        </button>
-      </form>
-    </div>
+    <>
+      <ToastContainer />
+      <div className="form-card">
+        <form onSubmit={handleSubmit}>
+          <h2>Title</h2>
+          <input
+            type="text"
+            name="title"
+            value={inputValues.title}
+            onChange={handleChange}
+            placeholder="Title?"
+          />
+          <h2>Beschreibung</h2>
+          <input
+            type="text"
+            name="desc"
+            value={inputValues.desc}
+            onChange={handleChange}
+          />
+          <h2>Status</h2>
+          <select
+            name="status"
+            value={inputValues.status}
+            onChange={handleChange}>
+            <option value="Fertig">Fertig</option>
+            <option value="In Progress">In Progress</option>
+            <option value="Nicht zugewiesen">Nicht zugewiesen</option>
+          </select>
+          <h2>Deadline</h2>
+          <input
+            type="date"
+            name="deadline"
+            value={inputValues.deadline}
+            onChange={handleChange}
+          />
+          <h2>Benutzer zuordnen:</h2>
+          <select
+            name="creator"
+            value={inputValues.creator}
+            onChange={handleChange}>
+            <option value=""></option>
+            <option value="1">danny</option>
+            <option value="2">michelle</option>
+            <option value="3">david</option>
+          </select>
+          <button type="submit" className="btn">
+            Erstelle Ticket
+          </button>
+        </form>
+      </div>
+    </>
   );
 };

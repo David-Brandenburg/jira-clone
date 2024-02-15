@@ -1,12 +1,15 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import "./ticket.scss";
 import { TicketBearbeiten } from "./ticketBearbeiten";
+import { TicketErstellen } from "./ticketErstellen";
 
 export const Ticket = () => {
   const [tickets, setTickets] = useState([]);
   const [loading, setLoading] = useState(true);
   const [selectedTicketId, setSelectedTicketId] = useState(null);
-  const [creator, setCreator] = useState(""); // Neue State-Variable für den ausgewählten Benutzer
+  const [benutzer, setBenutzer] = useState(""); // Neue State-Variable für den ausgewählten Benutzer
+  const [erstellen, setErstellen] = useState(false);
+  const [profielName, setProfielName] = useState("");
 
   const handleEdit = (id) => {
     setSelectedTicketId((prevId) => (prevId === id ? null : id));
@@ -25,7 +28,7 @@ export const Ticket = () => {
     }
 
     const userData = await userResponse.json();
-    const selectedUser = userData.find((user) => user.id === creator);
+    const selectedUser = userData.find((user) => user.id === benutzer);
     if (selectedUser) {
       const updatedUser = {
         ...selectedUser,
@@ -59,6 +62,17 @@ export const Ticket = () => {
       .catch((error) => console.error(error));
   }, []);
 
+  useEffect(() => {
+    fetch("http://localhost:5000/users")
+      .then((response) => response.json())
+      .then((userData1) => {
+        const names = userData1.map((user) => user.fname);
+        setProfielName(names);
+        console.log(names); // Logging names instead of profielName
+      })
+      .catch((error) => console.error(error));
+  }, []);
+
   const handleSubmit = (e, id) => {
     e.preventDefault();
     updateCreator(id);
@@ -68,18 +82,28 @@ export const Ticket = () => {
     return <div>Loading...</div>;
   }
 
+  const handelErstellen = () => {
+    setErstellen(!erstellen);
+  };
+
   return (
     <div className="tickets-container">
       {tickets.map(function (item) {
         return (
           <div className="card" key={item.id}>
-            <h2>{item.title}</h2>
+            <div className="überschrift_id">
+              <h2>{item.title}</h2> <p>{item.id}</p> <p>{benutzer}</p>
+            </div>
             <p>{item.desc}</p>
+            <h4>Status</h4>
             <p>{item.status}</p>
+            <h4>Fällig am:</h4>
             <p>{item.deadline}</p>
-            <p>{item.id}</p>
-            <button onClick={() => handleEdit(item.id)}>
-              {selectedTicketId === item.id ? "Abbrechen" : "Bearbeiten"}
+
+            <button
+              className="beabrbeiten-btn"
+              onClick={() => handleEdit(item.id)}>
+              {selectedTicketId === item.id ? "Abbrechen" : "Ticket Bearbeiten"}
             </button>
             {selectedTicketId === item.id && (
               <div className="ticket-bearbeiten-container">
@@ -88,23 +112,26 @@ export const Ticket = () => {
             )}
             <h2>Benutzer zuordnen:</h2>
             <select
-              value={creator}
-              onChange={(e) => setCreator(e.target.value)}>
+              value={benutzer}
+              onChange={(e) => setBenutzer(e.target.value)}>
               <option value=""></option>
               <option value="1">danny</option>
               <option value="2">michelle</option>
               <option value="3">david</option>
             </select>
             <button onClick={(e) => handleSubmit(e, item.id)}>
-              Update Creator
+              Update Benutzer
             </button>
           </div>
         );
       })}
-      <div className="card">
-        <a href="http://" target="_blank" rel="noopener noreferrer">
-          <button>Ticket erstellen</button>
-        </a>
+      <div className="card2">
+        <button
+          className="erstellen-btn"
+          onClick={() => handelErstellen(erstellen)}>
+          Ticket erstellen
+        </button>
+        {erstellen && <TicketErstellen />}
       </div>
     </div>
   );

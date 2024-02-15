@@ -1,11 +1,41 @@
 .tickets-container {
+  font-family: "Roboto", sans-serif;
   .card {
-    height: 300px;
-    width: 300px;
+    min-height: 400px;
+    min-width: 300px;
+    max-width: 600px;
     background-color: gray;
     margin-bottom: 20px;
-    .ticket-bearbeiten-container {
-      margin-left: 300px;
+    border-radius: 15px;
+    padding: 15px;
+    background-color: lightgray;
+    .überschrift_id {
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+    }
+    .beabrbeiten-btn {
+      font-size: 16px;
+      padding: 10px;
+      border-radius: 15px;
+    }
+  }
+  .card2 {
+    min-height: 400px;
+    min-width: 300px;
+    max-width: 600px;
+    background-color: gray;
+    margin-bottom: 20px;
+    border-radius: 15px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: lightgray;
+    .erstellen-btn {
+      font-size: 36px;
+      padding: 20px;
+      border-radius: 15px;
     }
   }
 }

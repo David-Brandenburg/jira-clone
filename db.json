@@ -1,20 +1,12 @@
 {
   "tickets": [
     {
-      "title": "asdadw",
-      "desc": "sdasdwdawdfwa",
+      "id": "ceea",
+      "title": "Cock",
+      "desc": "komische flackern",
       "status": "Nicht zugewiesen",
-      "deadline": "2024-02-23",
-      "creator": "2",
-      "id": "1"
-    },
-    {
-      "title": "test2",
-      "desc": "Lorem ipsum dolor, sit amet consectetur adipisicing elit. Cum delectus amet illum error neque maxime dolore labore sit, obcaecati assumenda vel maiores, odio minima blanditiis itaque. Consequatur totam quod quibusdam.",
-      "status": "In progress..",
-      "deadline": "TT:MM:JJJJ",
-      "creator": 1,
-      "id": "2"
+      "deadline": "2024-02-16",
+      "creator": ""
     }
   ],
   "users": [
@@ -24,7 +16,7 @@
       "lname": "Böhm",
       "password": "test1234",
       "avatar": "https://robohash.org/12313asda123155sdda?set=set4",
-      "ticketId": ["1"],
+      "ticketId": [],
       "isadmin": true,
       "isloggedin": false,
       "id": "1"
@@ -46,7 +38,7 @@
       "lname": "Brandenburg",
       "password": "test1234",
       "avatar": "https://robohash.org/da1234dsa?set=set4",
-      "ticketId": [],
+      "ticketId": ["ceea"],
       "isadmin": true,
       "isloggedin": false,
       "id": "3"
