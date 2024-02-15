@@ -1,9 +1,15 @@
 import React, { useState, useEffect } from "react";
 import "./ticket.scss";
+import { TicketBearbeiten } from "./ticketBearbeiten";
 
 export const Ticket = () => {
   const [tickets, setTickets] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [selectedTicketId, setSelectedTicketId] = useState(null);
+
+  const handleEdit = (id) => {
+    setSelectedTicketId(id);
+  };
 
   useEffect(() => {
     fetch("http://localhost:5000/tickets")
@@ -28,6 +34,13 @@ export const Ticket = () => {
             <p>{item.desc}</p>
             <p>{item.status}</p>
             <p>{item.deadline}</p>
+            <p>{item.id}</p>
+            <button onClick={() => handleEdit(item.id)}>Beabrbeiten</button>
+            {selectedTicketId === item.id && (
+              <div className="ticket-bearbeiten-container">
+                <TicketBearbeiten id={item.id} />
+              </div>
+            )}
           </div>
         );
       })}

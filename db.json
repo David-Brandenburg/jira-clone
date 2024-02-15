@@ -1,11 +1,11 @@
 {
   "tickets": [
     {
-      "title": "test",
-      "desc": "Lorem ipsum dolor, sit amet consectetur adipisicing elit. Cum delectus amet illum error neque maxime dolore labore sit, obcaecati assumenda vel maiores, odio minima blanditiis itaque. Consequatur totam quod quibusdam.",
-      "status": "In progress..",
-      "deadline": "TT:MM:JJJJ",
-      "creator": 1,
+      "title": "fest",
+      "desc": "komische flackern",
+      "status": "Nicht zugewiesen",
+      "deadline": "2024-02-15",
+      "creator": "",
       "id": "1"
     },
     {
@@ -24,7 +24,9 @@
       "lname": "Böhm",
       "password": "test1234",
       "avatar": "https://robohash.org/12313asda123155sdda?set=set4",
-      "ticketId": ["1"],
+      "ticketId": [
+        "1"
+      ],
       "isadmin": true,
       "isloggedin": false,
       "id": "1"
