@@ -1,88 +1,81 @@
 import { useState } from "react";
 
 export const TicketBearbeiten = ({ id }) => {
-  console.log(id);
-  const [inputValues, setInputValues] = useState({
-    title: "",
-    desc: "",
-    status: "",
-    deadline: "",
-    creator: "",
-  });
+  const [title, setTitle] = useState("");
+  const [desc, setDesc] = useState("");
+  const [status, setStatus] = useState("");
+  const [deadline, setDeadline] = useState("");
+  const [creator, setCreator] = useState("");
 
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    setInputValues({
-      ...inputValues,
-      [name]: value,
-    });
-  };
-
-  const handleSubmit = async (e) => {
+  const handleSubmit = async (e, fieldName) => {
     e.preventDefault();
     try {
+      const inputValue = {
+        title,
+        desc,
+        status,
+        deadline,
+        creator,
+      };
+
       const response = await fetch(`http://localhost:5000/tickets/${id}`, {
         method: "PATCH",
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify(inputValues),
+        body: JSON.stringify({ [fieldName]: inputValue[fieldName] }),
       });
+
       if (!response.ok) {
         throw new Error("Network response was not ok");
       }
-      console.log("Ticket created successfully");
+
+      console.log(`${fieldName} updated successfully`);
     } catch (error) {
-      console.error("Error creating ticket:", error);
+      console.error(`Error updating ${fieldName}:`, error);
     }
   };
 
   return (
     <div className="form-card">
-      <form onSubmit={handleSubmit}>
+      <form>
         <h2>Title</h2>
         <input
           type="text"
-          name="title"
-          value={inputValues.title}
-          onChange={handleChange}
+          value={title}
+          onChange={(e) => setTitle(e.target.value)}
           placeholder="Title?"
         />
+        <button onClick={(e) => handleSubmit(e, "title")}>Update Title</button>
+
         <h2>Beschreibung</h2>
         <input
           type="text"
-          name="desc"
-          value={inputValues.desc}
-          onChange={handleChange}
+          value={desc}
+          onChange={(e) => setDesc(e.target.value)}
         />
+        <button onClick={(e) => handleSubmit(e, "desc")}>
+          Update Description
+        </button>
+
         <h2>Status</h2>
-        <select
-          name="status"
-          value={inputValues.status}
-          onChange={handleChange}>
+        <select value={status} onChange={(e) => setStatus(e.target.value)}>
           <option value="Fertig">Fertig</option>
           <option value="In Progress">In Progress</option>
           <option value="Nicht zugewiesen">Nicht zugewiesen</option>
         </select>
+        <button onClick={(e) => handleSubmit(e, "status")}>
+          Update Status
+        </button>
+
         <h2>Deadline</h2>
         <input
           type="date"
-          name="deadline"
-          value={inputValues.deadline}
-          onChange={handleChange}
+          value={deadline}
+          onChange={(e) => setDeadline(e.target.value)}
         />
-        <h2>Benutzer zuordnen:</h2>
-        <select
-          name="creator"
-          value={inputValues.creator}
-          onChange={handleChange}>
-          <option value=""></option>
-          <option value="1">danny</option>
-          <option value="2">michelle</option>
-          <option value="3">david</option>
-        </select>
-        <button type="submit" className="btn">
-          Bearbeitung Speichern
+        <button onClick={(e) => handleSubmit(e, "deadline")}>
+          Update Deadline
         </button>
       </form>
     </div>

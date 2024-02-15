@@ -6,9 +6,47 @@ export const Ticket = () => {
   const [tickets, setTickets] = useState([]);
   const [loading, setLoading] = useState(true);
   const [selectedTicketId, setSelectedTicketId] = useState(null);
+  const [creator, setCreator] = useState(""); // Neue State-Variable für den ausgewählten Benutzer
 
   const handleEdit = (id) => {
-    setSelectedTicketId(id);
+    setSelectedTicketId((prevId) => (prevId === id ? null : id));
+  };
+
+  const updateCreator = async (id) => {
+    const userResponse = await fetch(`http://localhost:5000/users`, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+
+    if (!userResponse.ok) {
+      throw new Error("Network response was not ok");
+    }
+
+    const userData = await userResponse.json();
+    const selectedUser = userData.find((user) => user.id === creator);
+    if (selectedUser) {
+      const updatedUser = {
+        ...selectedUser,
+        ticketId: [...selectedUser.ticketId, id],
+      };
+
+      const updateUserResponse = await fetch(
+        `http://localhost:5000/users/${selectedUser.id}`,
+        {
+          method: "PATCH",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(updatedUser),
+        }
+      );
+
+      if (!updateUserResponse.ok) {
+        throw new Error("Network response was not ok");
+      }
+    }
   };
 
   useEffect(() => {
@@ -20,6 +58,11 @@ export const Ticket = () => {
       })
       .catch((error) => console.error(error));
   }, []);
+
+  const handleSubmit = (e, id) => {
+    e.preventDefault();
+    updateCreator(id);
+  };
 
   if (loading) {
     return <div>Loading...</div>;
@@ -35,12 +78,26 @@ export const Ticket = () => {
             <p>{item.status}</p>
             <p>{item.deadline}</p>
             <p>{item.id}</p>
-            <button onClick={() => handleEdit(item.id)}>Beabrbeiten</button>
+            <button onClick={() => handleEdit(item.id)}>
+              {selectedTicketId === item.id ? "Abbrechen" : "Bearbeiten"}
+            </button>
             {selectedTicketId === item.id && (
               <div className="ticket-bearbeiten-container">
                 <TicketBearbeiten id={item.id} />
               </div>
             )}
+            <h2>Benutzer zuordnen:</h2>
+            <select
+              value={creator}
+              onChange={(e) => setCreator(e.target.value)}>
+              <option value=""></option>
+              <option value="1">danny</option>
+              <option value="2">michelle</option>
+              <option value="3">david</option>
+            </select>
+            <button onClick={(e) => handleSubmit(e, item.id)}>
+              Update Creator
+            </button>
           </div>
         );
       })}

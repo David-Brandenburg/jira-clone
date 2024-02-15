@@ -1,11 +1,11 @@
 {
   "tickets": [
     {
-      "title": "fest",
-      "desc": "komische flackern",
+      "title": "asdadw",
+      "desc": "sdasdwdawdfwa",
       "status": "Nicht zugewiesen",
-      "deadline": "2024-02-15",
-      "creator": "",
+      "deadline": "2024-02-23",
+      "creator": "2",
       "id": "1"
     },
     {
@@ -24,9 +24,7 @@
       "lname": "Böhm",
       "password": "test1234",
       "avatar": "https://robohash.org/12313asda123155sdda?set=set4",
-      "ticketId": [
-        "1"
-      ],
+      "ticketId": ["1"],
       "isadmin": true,
       "isloggedin": false,
       "id": "1"
