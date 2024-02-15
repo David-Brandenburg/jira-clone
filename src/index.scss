@@ -1,0 +1,22 @@
+@import 'variables.scss';
+
+*, *::before, *::after{
+	margin: 0;
+	padding: 0;
+	outline: 0;
+	border: 0;
+	appearance: 0;
+	list-style: none;
+	text-decoration: none;
+	box-sizing: border-box;
+	font-family: "Roboto", sans-serif;
+}
+
+body{
+	height: 100dvh;
+	background-color: $main-white;
+	#root{
+		height: inherit;
+	}
+}
+
