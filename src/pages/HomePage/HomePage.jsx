@@ -6,7 +6,11 @@ const HomePage = () => {
   const { loggedIn } = useContext(LoggedinContext);
   console.log(loggedIn);
 
-  return <Sidebar />;
+  return (
+    <>
+      <Sidebar />
+    </>
+  );
 };
 
 export default HomePage;

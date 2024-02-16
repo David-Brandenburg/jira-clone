@@ -9,6 +9,11 @@
   .section-1 {
     display: flex;
     flex-direction: row;
+    align-items: center;
+    .bi {
+      font-size: 36px;
+      padding: 30px;
+    }
     .Überschrift-text {
       display: flex;
       flex-direction: column;
@@ -27,15 +32,28 @@
       flex-direction: row;
       font-size: 24px;
       align-items: center;
+      margin-top: 30px;
+      margin-bottom: 30px;
+      p {
+        margin-left: 30px;
+      }
     }
   }
   .section-3 {
     padding-left: 30px;
+    h2 {
+      margin-bottom: 10px;
+    }
     .icon-text {
       display: flex;
       flex-direction: row;
       font-size: 24px;
       align-items: center;
+      margin-top: 30px;
+      margin-bottom: 30px;
+      p {
+        margin-left: 30px;
+      }
     }
   }
   .section-4 {
@@ -45,6 +63,11 @@
       flex-direction: row;
       font-size: 24px;
       align-items: center;
+      margin-top: 30px;
+      margin-bottom: 30px;
+      p {
+        margin-left: 30px;
+      }
     }
   }
   hr {
@@ -53,5 +76,7 @@
     color: gray;
     background-color: gray;
     border-radius: 15px;
+    margin-left: 30px;
+    margin-top: 30px;
   }
 }
