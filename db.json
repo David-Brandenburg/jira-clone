@@ -21,7 +21,7 @@
       ],
       "isadmin": true,
       "isloggedin": false,
-      "id": 1
+      "id": "1"
     },
     {
       "email": "michelle@mail.com",
@@ -32,7 +32,7 @@
       "ticketId": [],
       "isadmin": true,
       "isloggedin": false,
-      "id": 2
+      "id": "2"
     },
     {
       "email": "david@mail.com",
@@ -42,8 +42,8 @@
       "avatar": "https://robohash.org/da1234dsa?set=set4",
       "ticketId": [],
       "isadmin": false,
-      "isloggedin": false,
-      "id": 3
+      "isloggedin": true,
+      "id": "3"
     },
     {
       "email": "test@mail.com",
@@ -54,7 +54,7 @@
       "ticketId": [],
       "isadmin": false,
       "isloggedin": false,
-      "id": 4
+      "id": "4"
     },
     {
       "email": "test2@mail.com",
@@ -65,7 +65,7 @@
       "ticketId": [],
       "isadmin": false,
       "isloggedin": true,
-      "id": 5
+      "id": "5"
     }
   ]
 }
