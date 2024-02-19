@@ -7,6 +7,14 @@
       "status": "Nicht zugewiesen",
       "deadline": "2024-02-16",
       "creator": ""
+    },
+    {
+      "id": "0612",
+      "title": "cock2",
+      "desc": "kek",
+      "status": "Nicht zugewiesen",
+      "deadline": "2024-02-21",
+      "creator": ""
     }
   ],
   "users": [
@@ -38,7 +46,9 @@
       "lname": "Brandenburg",
       "password": "test1234",
       "avatar": "https://robohash.org/da1234dsa?set=set4",
-      "ticketId": ["ceea"],
+      "ticketId": [
+        "ceea"
+      ],
       "isadmin": true,
       "isloggedin": false,
       "id": "3"

@@ -7,9 +7,8 @@ export const Ticket = () => {
   const [tickets, setTickets] = useState([]);
   const [loading, setLoading] = useState(true);
   const [selectedTicketId, setSelectedTicketId] = useState(null);
-  const [benutzer, setBenutzer] = useState(""); // Neue State-Variable für den ausgewählten Benutzer
+  const [benutzer, setBenutzer] = useState("");
   const [erstellen, setErstellen] = useState(false);
-  const [profielName, setProfielName] = useState("");
 
   const handleEdit = (id) => {
     setSelectedTicketId((prevId) => (prevId === id ? null : id));
@@ -62,17 +61,6 @@ export const Ticket = () => {
       .catch((error) => console.error(error));
   }, []);
 
-  useEffect(() => {
-    fetch("http://localhost:5000/users")
-      .then((response) => response.json())
-      .then((userData1) => {
-        const names = userData1.map((user) => user.fname);
-        setProfielName(names);
-        console.log(names); // Logging names instead of profielName
-      })
-      .catch((error) => console.error(error));
-  }, []);
-
   const handleSubmit = (e, id) => {
     e.preventDefault();
     updateCreator(id);
@@ -92,7 +80,7 @@ export const Ticket = () => {
         return (
           <div className="card" key={item.id}>
             <div className="überschrift_id">
-              <h2>{item.title}</h2> <p>{item.id}</p> <p>{benutzer}</p>
+              <h2>{item.title}</h2> <p>{item.id}</p> <p>{}</p>
             </div>
             <p>{item.desc}</p>
             <h4>Status</h4>
