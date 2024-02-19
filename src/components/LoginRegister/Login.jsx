@@ -6,7 +6,7 @@ import "react-toastify/dist/ReactToastify.css";
 
 const Login = ({ setPage }) => {
   const [loginData, setLoginData] = useState({ mail: "", pass: "" });
-  const { setLoggedIn, setStayLoggedIn } = useContext(LoggedinContext);
+  const { setLoggedIn, setStayLoggedIn, setLoggedInUser } = useContext(LoggedinContext);
   const usenavigate = useNavigate();
 
   const handleSubmit = (e) => {
@@ -63,7 +63,8 @@ const Login = ({ setPage }) => {
           setLoggedIn(true);
           setTimeout(() => {
             usenavigate("/home");
-          }, 500);
+			setLoggedInUser(findUser)
+          }, 6000);
         } else {
           toast.error("Wrong username or password!");
           throw new Error("Wrong username or password!");

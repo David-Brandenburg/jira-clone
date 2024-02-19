@@ -39,6 +39,7 @@ const Register = ({setPage}) => {
                 "ticketId": [],
                 "isadmin": false,
                 "isloggedin": false,
+				"id": Number,
             })
         }
 
@@ -60,8 +61,8 @@ const Register = ({setPage}) => {
 					setPage("login")
 				}, 6000);
             } else {
-                toast.warn("User already exists")
-                throw new Error("User already exists!")
+                toast.warn("E-Mail is already in use!")
+                throw new Error("E-Mail is already in use!")
             }
         } catch (error) {
             console.error(error)

@@ -20,8 +20,8 @@
         "1"
       ],
       "isadmin": true,
-      "isloggedin": true,
-      "id": "1"
+      "isloggedin": false,
+      "id": 1
     },
     {
       "email": "michelle@mail.com",
@@ -32,7 +32,7 @@
       "ticketId": [],
       "isadmin": true,
       "isloggedin": false,
-      "id": "2"
+      "id": 2
     },
     {
       "email": "david@mail.com",
@@ -41,9 +41,31 @@
       "password": "test1234",
       "avatar": "https://robohash.org/da1234dsa?set=set4",
       "ticketId": [],
-      "isadmin": true,
+      "isadmin": false,
+      "isloggedin": false,
+      "id": 3
+    },
+    {
+      "email": "test@mail.com",
+      "fname": "",
+      "lname": "",
+      "password": "test1234",
+      "avatar": "https://robohash.org/fzmpoq2id9zdul6?set=set4",
+      "ticketId": [],
+      "isadmin": false,
+      "isloggedin": false,
+      "id": 4
+    },
+    {
+      "email": "test2@mail.com",
+      "fname": "",
+      "lname": "",
+      "password": "test1234",
+      "avatar": "https://robohash.org/bzz18?set=set4",
+      "ticketId": [],
+      "isadmin": false,
       "isloggedin": true,
-      "id": "3"
+      "id": 5
     }
   ]
 }
