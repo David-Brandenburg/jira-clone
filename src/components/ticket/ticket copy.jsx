@@ -5,10 +5,12 @@ import { TicketErstellen } from "./ticketErstellen";
 
 export const Ticket2 = () => {
   const [tickets, setTickets] = useState(null);
+  const [users, setUsers] = useState(null);
   const [editTicket, setEditTicket] = useState(null);
   const [erstellen, setErstellen] = useState(false);
   const [benutzer, setBenutzer] = useState("");
   const url = `http://localhost:5000/tickets`;
+  const url2 = `http://localhost:5000/users`;
   const optionsGet = {
     method: "GET",
   };
@@ -22,6 +24,20 @@ export const Ticket2 = () => {
       const fetchedTickets = await response.json();
       console.log("fetchedtickets:", fetchedTickets);
       setTickets(fetchedTickets);
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+  const fetchUsers = async () => {
+    try {
+      const response = await fetch(url2, optionsGet);
+      if (!response.ok) {
+        throw new Error("Failed to fetch!", response.status);
+      }
+      const fetchedUsers = await response.json();
+      console.log("fetchedusers:", fetchedUsers);
+      setUsers(fetchedUsers);
     } catch (error) {
       console.error(error);
     }
@@ -78,6 +94,7 @@ export const Ticket2 = () => {
 
   useEffect(() => {
     fetchTickets();
+    fetchUsers();
   }, []);
 
   const handelErstellen = () => {
@@ -116,13 +133,16 @@ export const Ticket2 = () => {
               </button>
             </div>
             <h2>Benutzer zuordnen:</h2>
-            <select>
-              <option value=""></option>
-              <option value="1">danny</option>
-              <option value="2">michelle</option>
-              <option value="3">david</option>
-            </select>
-            <button>Update Benutzer</button>
+            <div>
+              <select>
+                {users?.map((user, index) => (
+                  <option key={index} value={user.id}>
+                    {user.fname}
+                  </option>
+                ))}
+              </select>
+              <button>Update Benutzer</button>
+            </div>
           </div>
         ))}
       </div>
