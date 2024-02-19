@@ -13,7 +13,7 @@ const Navbar2 = () => {
 	const { loggedInUser, setLoggedIn, setLoggedInUser, setStayLoggedIn } = useContext(LoggedinContext);
 	const { theme, setTheme } = useContext(ThemeContext);
 	const [showMenu, setShowMenu] = useState(false);
-	const navigateHome = useNavigate();
+	const navigateBack = useNavigate();
 
 	const toggleTheme = () => {
 		setTheme(theme === "dark" ? "light" : "dark")
@@ -44,7 +44,7 @@ const Navbar2 = () => {
 				setLoggedIn(false)
 				setStayLoggedIn(false)
 				setLoggedInUser(null)
-				navigateHome("/")
+				navigateBack("/")
 			}, 6000);
 		} catch (error) {
 			console.error(error)

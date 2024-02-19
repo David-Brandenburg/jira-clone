@@ -6,7 +6,7 @@ export const LoggedinContextProvider = ({children}) => {
     const [stayLoggedIn, setStayLoggedIn] = useState(localStorage.getItem("stayLoggedIn") === "true" ? true : false);
     const [loggedIn, setLoggedIn] = useState(stayLoggedIn ? (localStorage.getItem("loggedIn") === "true" ? true : false) : false);
     const storedLoggedInUser = localStorage.getItem("loggedInUser");
-    const [loggedInUser, setLoggedInUser] = useState(storedLoggedInUser ? JSON.parse(storedLoggedInUser) : null);
+    const [loggedInUser, setLoggedInUser] = useState(loggedIn ? (storedLoggedInUser ? JSON.parse(storedLoggedInUser) : null) : null);
 
     useEffect(() => {
         localStorage.setItem("stayLoggedIn", stayLoggedIn);
