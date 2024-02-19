@@ -41,8 +41,8 @@
       "password": "test1234",
       "avatar": "https://robohash.org/da1234dsa?set=set4",
       "ticketId": [],
-      "isadmin": false,
-      "isloggedin": true,
+      "isadmin": true,
+      "isloggedin": false,
       "id": "3"
     },
     {
@@ -64,7 +64,7 @@
       "avatar": "https://robohash.org/bzz18?set=set4",
       "ticketId": [],
       "isadmin": false,
-      "isloggedin": true,
+      "isloggedin": false,
       "id": "5"
     }
   ]

@@ -1,44 +1,94 @@
-import React from "react";
-import "./Navbar.scss";
-import logo_light from "./assets/logo_light";
-import logo_dark from "./assets/logo_dark";
-import search_icon_light from "./assets/search-w.png";
-import search_icon_dark from "./assets/search-b.png";
-import toggle_light from "./assets/day.png";
-import toggle_dark from "./assets/night.png";
+import { useContext, useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { ToastContainer, toast } from "react-toastify";
+import { LoggedinContext } from "../../context/loggedinContext";
+import { ThemeContext } from "../../context/themeContext";
+import search_icon_light from "../../assets/search-w.png";
+import search_icon_dark from "../../assets/search-b.png";
+import toggle_light from "../../assets/day.png";
+import toggle_dark from "../../assets/night.png";
+import './Navbar.scss'
 
+const Navbar2 = () => {
+	const { loggedInUser, setLoggedIn, setLoggedInUser, setStayLoggedIn } = useContext(LoggedinContext);
+	const { theme, setTheme } = useContext(ThemeContext);
+	const [showMenu, setShowMenu] = useState(false);
+	const navigateHome = useNavigate();
 
-const Navigationbar = ({theme, setTheme}) => {
+	const toggleTheme = () => {
+		setTheme(theme === "dark" ? "light" : "dark")
+	}
 
-const toggle_mode = ()=> {
-    theme == 'light'? setTheme('dark') : setTheme('light');
+	const toggleProfileMenu = () => {
+		setShowMenu(prev => !prev)
+	}
+
+	const logout = async (loggedInUserId) => {
+		const url = `http://localhost:5000/users/${loggedInUserId}`
+		const options = {
+			method: "PATCH",
+			headers: {
+				"Content-Type": "application/json",
+				},
+			body: JSON.stringify({
+				isloggedin: false,
+			}),
+		}
+		try {
+			const response = await fetch(url, options);
+			if (!response.ok){
+				throw new Error("Failed to fetch", response.status)
+			}
+			toast.success("You're getting logged out!")
+			setTimeout(() => {
+				setLoggedIn(false)
+				setStayLoggedIn(false)
+				setLoggedInUser(null)
+				navigateHome("/")
+			}, 6000);
+		} catch (error) {
+			console.error(error)
+		}
+		console.log("Logout", url)
+	}
+
+	return (
+		<>
+			<ToastContainer />
+			<nav>
+				<div className={`nav-wrapper ${theme}`}>
+					<div className="toggle-wrapper">
+						<img src={theme === "light" ? toggle_dark : toggle_light} alt="" onClick={toggleTheme}/>
+					</div>
+					<div className="item-wrapper">
+						<ul className="nav-links">
+							<li>Your Work</li>
+							<li>Projects</li>
+							<li>Filters</li>
+							<li>Dashboards</li>
+							<li>Teams</li>
+							<li>Plans</li>
+							<li>Apps</li>
+						</ul>
+						<div className="search-wrapper">
+							<input type="text" name="search" id="search" />
+							<img src={theme === "light" ? search_icon_dark : search_icon_light } alt="" />
+						</div>
+						<div className="profile-wrapper">
+							<div className="profile-avatar" onClick={toggleProfileMenu}>
+								<img src={loggedInUser?.avatar} alt=""/>
+							</div>
+							<div className="profile-menu" style={{visibility: showMenu ? "visible" : "hidden"}}>
+								<p>Placeholder</p>
+								<p>Profil</p>
+								<p onClick={(() => {logout(loggedInUser.id); setShowMenu(false)})}>Ausloggen</p>
+							</div>
+						</div>
+					</div>
+				</div>
+			</nav>
+		</>
+	)
 }
 
-    return[
-<div className="navbar">
-
-    <img src={theme == 'light' ? logo_light : logo_dark} alt="" className="logo">
-
-<ul>
-    <li>Your Work</li>
-    <li>Projects</li>
-    <li>Filters</li>
-    <li>Dashboards</li>
-    <li>Teams</li>
-    <li>Plans</li>
-    <li>Apps</li>
-</ul>
-<div className="search-box">
-    <input type="text" placeholder="Search"/>
-    <img src={theme == 'light' ? search_icon_light : search_icon_dark} alt=""/>
-</div>
-
-<img onClick={()=>{toggle_mode()}} src={theme == 'light' ? search_icon_light : search_icon_dark} alt="" className="toggle-icon"/>
-    </img>
-  
-</div>
-
-    ];
-}
-
-export default Navigationbar;
+export default Navbar2

@@ -60,8 +60,8 @@ const Login = ({ setPage }) => {
             throw new Error("Failed to fetch/login", patch.status);
           }
           toast.success("Successfully logged in!");
-          setLoggedIn(true);
           setTimeout(() => {
+			setLoggedIn(true);
             usenavigate("/home");
 			setLoggedInUser(findUser)
           }, 6000);
