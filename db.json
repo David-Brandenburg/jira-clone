@@ -1,20 +1,13 @@
 {
   "tickets": [
     {
-      "id": "ceea",
-      "title": "Cock",
-      "desc": "komische flackern",
-      "status": "Nicht zugewiesen",
-      "deadline": "2024-02-16",
-      "creator": ""
-    },
-    {
-      "id": "0612",
-      "title": "cock2",
-      "desc": "kek",
-      "status": "Nicht zugewiesen",
+      "id": "c0d1",
+      "title": "Black Screen",
+      "desc": "Black screen on start",
+      "status": "In Progress",
       "deadline": "2024-02-21",
-      "creator": ""
+      "creator": "",
+      "editor": "Danny"
     }
   ],
   "users": [
@@ -24,7 +17,10 @@
       "lname": "Böhm",
       "password": "test1234",
       "avatar": "https://robohash.org/12313asda123155sdda?set=set4",
-      "ticketId": [],
+      "ticketId": [
+        "0612",
+        "c0d1"
+      ],
       "isadmin": true,
       "isloggedin": false,
       "id": "1"
@@ -35,7 +31,11 @@
       "lname": "Sträßer",
       "password": "test1234",
       "avatar": "https://robohash.org/asd213sd?set=set4",
-      "ticketId": [],
+      "ticketId": [
+        "ceea",
+        "c9cb",
+        "2830"
+      ],
       "isadmin": true,
       "isloggedin": false,
       "id": "2"
@@ -47,7 +47,8 @@
       "password": "test1234",
       "avatar": "https://robohash.org/da1234dsa?set=set4",
       "ticketId": [
-        "ceea"
+        "0612",
+        "8e98"
       ],
       "isadmin": true,
       "isloggedin": false,

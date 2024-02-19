@@ -9,6 +9,8 @@ export const Ticket2 = () => {
   const [editTicket, setEditTicket] = useState(null);
   const [erstellen, setErstellen] = useState(false);
   const [benutzer, setBenutzer] = useState("");
+  const [profile, setProfile] = useState("");
+
   const url = `http://localhost:5000/tickets`;
   const url2 = `http://localhost:5000/users`;
   const optionsGet = {
@@ -92,6 +94,36 @@ export const Ticket2 = () => {
     console.log(ticketId);
   };
 
+  const updateEditor = async (ticketId) => {
+    const selectedUser = users.find((user) => user.id === benutzer);
+    const ticket = tickets.find((ticket) => ticket.id === ticketId);
+
+    if (selectedUser && ticket) {
+      // Überprüfen, ob die Ticket-ID bereits im Benutzerprofil vorhanden ist
+      if (!selectedUser.ticketId.includes(ticketId)) {
+        const updatedUser = {
+          ...selectedUser,
+          ticketId: [...selectedUser.ticketId, ticketId], // Hinzufügen der neuen Ticket-ID
+        };
+
+        // Benutzerprofil aktualisieren
+        const updateUserResponse = await fetch(`${url2}/${selectedUser.id}`, {
+          method: "PATCH",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(updatedUser),
+        });
+
+        if (!updateUserResponse.ok) {
+          throw new Error("Network response was not ok");
+        }
+      } else {
+        console.log("Ticket ID already exists in user profile.");
+      }
+    }
+  };
+
   useEffect(() => {
     fetchTickets();
     fetchUsers();
@@ -99,6 +131,34 @@ export const Ticket2 = () => {
 
   const handelErstellen = () => {
     setErstellen(!erstellen);
+  };
+
+  const handleUpdateEditor = async (e, ticketId) => {
+    e.preventDefault();
+    updateEditor(ticketId);
+    const selectedUser = users.find((user) => user.id === benutzer);
+    if (selectedUser) {
+      const optionsPatch = {
+        method: "PATCH",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          editor: selectedUser.fname,
+        }),
+      };
+      try {
+        const response = await fetch(`${url}/${ticketId}`, optionsPatch);
+        if (!response.ok) {
+          throw new Error("Failed to update editor!", response.status);
+        }
+        toast.success("Editor erfolgreich aktualisiert!");
+        fetchTickets(); // Tickets erneut abrufen, um die aktualisierten Daten anzuzeigen
+      } catch (error) {
+        toast.error("Editor konnte nicht aktualisiert werden!");
+        console.error(error);
+      }
+    }
   };
 
   return (
@@ -111,6 +171,7 @@ export const Ticket2 = () => {
               <h2>{ticket.title}</h2>
               <p>{ticket.id}</p>
               <p>{ticket.creator}</p>
+              <p>{ticket.editor}</p>
             </div>
             <div className="ticket-description">
               <p>{ticket.desc}</p>
@@ -134,14 +195,19 @@ export const Ticket2 = () => {
             </div>
             <h2>Benutzer zuordnen:</h2>
             <div>
-              <select>
+              <select
+                value={benutzer}
+                onChange={(e) => setBenutzer(e.target.value)}>
+                <option></option>
                 {users?.map((user, index) => (
                   <option key={index} value={user.id}>
                     {user.fname}
                   </option>
                 ))}
               </select>
-              <button>Update Benutzer</button>
+              <button onClick={(e) => handleUpdateEditor(e, ticket.id)}>
+                Update Benutzer
+              </button>
             </div>
           </div>
         ))}
