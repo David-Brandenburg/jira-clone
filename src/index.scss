@@ -12,9 +12,16 @@
 	font-family: "Roboto", sans-serif;
 }
 
+.body-dark{
+	--bg-color: #666;
+}
+.body-light{
+	--bg-color: $main-white;
+}
+
 body{
 	height: calc(100dvh - 60px);
-	background-color: $main-white;
+	background-color: var(--bg-color);
 	#root{
 		height: inherit;
 	}

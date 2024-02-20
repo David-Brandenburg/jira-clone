@@ -1,3 +1,24 @@
+@import "../variables";
+
+.error-page{
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	flex-direction: column;
+	color: #808080;
+	.bi, h2{
+		font-size: clamp(40px, 7vw, 100px);
+		text-shadow: 2px 2px 5px rgba(0,0,0,1);
+		user-select: none;
+	}
+	small{
+		color: $accent-color;
+		text-decoration: underline;
+		cursor: pointer;
+		margin-top: 50px;
+	}
+}
+
 .main-content {
   height: calc(100dvh - 60px);
   margin-left: 400px;

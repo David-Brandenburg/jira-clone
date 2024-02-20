@@ -1,4 +1,4 @@
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { ToastContainer, toast } from "react-toastify";
 import { LoggedinContext } from "../../context/loggedinContext";
@@ -14,6 +14,18 @@ const Navbar2 = () => {
 	const { theme, setTheme } = useContext(ThemeContext);
 	const [showMenu, setShowMenu] = useState(false);
 	const navigateBack = useNavigate();
+
+	
+	useEffect(() => {
+		const body = document.querySelector("body");
+		if (theme === "light"){
+			body.classList.add("body-light")
+			body.classList.remove("body-dark")
+		} else {
+			body.classList.add("body-dark")
+			body.classList.remove("body-light")
+		}
+	}, [theme])
 
 	const toggleTheme = () => {
 		setTheme(theme === "dark" ? "light" : "dark")
