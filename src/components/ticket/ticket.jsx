@@ -1,8 +1,7 @@
-import React, { useState, useEffect } from "react";
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import "./ticket.scss";
 import { ToastContainer, toast } from "react-toastify";
-import { TicketErstellen } from "./ticketErstellen";
+import { LoggedinContext } from "../../context/loggedinContext";
 
 export const Ticket = () => {
   const [tickets, setTickets] = useState(null);
@@ -10,6 +9,18 @@ export const Ticket = () => {
   const [editTicket, setEditTicket] = useState(null);
   const [erstellen, setErstellen] = useState(false);
   const [benutzer, setBenutzer] = useState("");
+  const [creator, setCreator] = useState(null);
+  const [inputValues, setInputValues] = useState({
+    title: "",
+    desc: "",
+    status: "",
+    deadline: "",
+    creator: "",
+    editor: "",
+    editorId: "",
+  });
+
+  const { loggedInUser } = useContext(LoggedinContext);
 
   const url = `http://localhost:5000/tickets`;
   const url2 = `http://localhost:5000/users`;
@@ -45,6 +56,26 @@ export const Ticket = () => {
     }
   };
 
+  (async () => {
+    try {
+      const findCurrentUser = await fetch(
+        `${url2}/${loggedInUser.userId}`,
+        optionsGet
+      );
+      if (!findCurrentUser.ok) {
+        throw new Error(
+          "Failed to fetch, User not found!",
+          findCurrentUser.status
+        );
+      }
+      const currentUser = await findCurrentUser.json();
+      console.log(currentUser.fname);
+      setCreator(currentUser.fname);
+    } catch (error) {
+      console.error(error);
+    }
+  })();
+
   const handleTicketEdit = async (ticketId) => {
     try {
       const response = await fetch(`${url}/${ticketId}`, optionsGet);
@@ -65,7 +96,7 @@ export const Ticket = () => {
     const editedDesc = e.target.description.value;
     const editedStatus = e.target.status.value;
     const editedDate = e.target.deadline.value;
-    const ticketId = document.getElementById("ticketId").innerText;
+    const ticketId2 = document.getElementById("ticketId").innerText;
     console.log(editedTitle, editedDesc, editedStatus, editedDate);
     try {
       const optionsPatch = {
@@ -80,7 +111,7 @@ export const Ticket = () => {
           deadline: editedDate,
         }),
       };
-      const response = await fetch(`${url}/${ticketId}`, optionsPatch);
+      const response = await fetch(`${url}/${ticketId2}`, optionsPatch);
       if (!response.ok) {
         throw new Error("Failed to fetch!", response.status);
       }
@@ -91,7 +122,7 @@ export const Ticket = () => {
       toast.error("Ticket konnte nicht gespeichert werden!");
       console.error(error);
     }
-    console.log(ticketId);
+    console.log(ticketId2);
   };
 
   const updateEditor = async (ticketId) => {
@@ -103,7 +134,7 @@ export const Ticket = () => {
       if (!selectedUser.ticketId.includes(ticketId)) {
         const updatedUser = {
           ...selectedUser,
-          ticketId: [...selectedUser.ticketId, ticketId], // Hinzufügen der neuen Ticket-ID
+          ticketId: [ticketId], // Hinzufügen der neuen Ticket-ID
         };
 
         // Benutzerprofil aktualisieren
@@ -145,6 +176,7 @@ export const Ticket = () => {
         },
         body: JSON.stringify({
           editor: selectedUser.fname,
+          editorId: selectedUser.id,
         }),
       };
       try {
@@ -161,6 +193,43 @@ export const Ticket = () => {
     }
   };
 
+  const updateUserTicketId = async (userEditorId, ticketId) => {
+    try {
+      console.log("User ID:", userEditorId);
+      console.log("Ticket ID to remove:", ticketId);
+
+      const userToUpdate = users.find((user) => user.id === userEditorId);
+      if (!userToUpdate) {
+        throw new Error("User not found!");
+      }
+
+      console.log("User to update:", userToUpdate);
+
+      const optionsPatch = {
+        method: "PATCH",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          ticketId: [], // Setze die Ticket-IDs auf eine leere Liste
+        }),
+      };
+
+      const updateUserResponse = await fetch(
+        `${url2}/${userEditorId}`,
+        optionsPatch
+      );
+
+      if (!updateUserResponse.ok) {
+        throw new Error("Network response was not ok");
+      }
+
+      console.log("User updated successfully!");
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
   const handleDeleteTicket = async (ticketId) => {
     try {
       const response = await fetch(`${url}/${ticketId}`, { method: "DELETE" });
@@ -168,10 +237,56 @@ export const Ticket = () => {
         throw new Error("Failed to delete ticket!", response.status);
       }
       toast.success("Ticket erfolgreich gelöscht!");
+
+      const editedTicket = tickets.find((ticket) => ticket.id === ticketId);
+      console.log(editedTicket);
+      if (!editedTicket) {
+        throw new Error("Ticket not found!");
+      }
+
+      const userEditorId = editedTicket.editorId; // Annahme: Das editor-Attribut des Tickets enthält die userId
+
+      updateUserTicketId(userEditorId, ticketId); // Benutzerprofil aktualisieren
       fetchTickets(); // Tickets erneut abrufen, um die aktualisierten Daten anzuzeigen
     } catch (error) {
       toast.error("Ticket konnte nicht gelöscht werden!");
       console.error(error);
+    }
+  };
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setInputValues({
+      ...inputValues,
+      [name]: value,
+    });
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    const selectedUser = users.find((user) => user.id === benutzer);
+    try {
+      const dataToSend = {
+        ...inputValues, // Die bisherigen Eingabewerte
+        creator: creator,
+      };
+
+      const response = await fetch("http://localhost:5000/tickets", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(dataToSend),
+      });
+      if (!response.ok) {
+        throw new Error("Network response was not ok");
+      }
+      toast.success("Ticket created successfully");
+      setErstellen(false);
+      fetchTickets();
+    } catch (error) {
+      console.error("Error creating ticket:", error);
     }
   };
 
@@ -182,9 +297,75 @@ export const Ticket = () => {
         <button
           className="erstellen-btn"
           onClick={() => handelErstellen(erstellen)}>
-          Ticket erstellen
+          {erstellen ? "zurück" : "Ticket erstellen"}
         </button>
-        {erstellen && <TicketErstellen />}
+        {erstellen && (
+          <div
+            className="blocker"
+            onClick={(e) => {
+              e.stopPropagation();
+            }}>
+            <form className="edit-ticket-modal">
+              <div className="ticket-heading">
+                <input
+                  type="text"
+                  name="title"
+                  id="title"
+                  value={inputValues.title}
+                  onChange={handleChange}
+                />
+                <p id="ticketId"></p>
+                <p></p>
+              </div>
+              <div className="ticket-description">
+                <textarea
+                  name="desc"
+                  id="description"
+                  value={inputValues.desc}
+                  onChange={handleChange}
+                />
+              </div>
+              <div className="ticket-bottom">
+                <div className="ticket-bottom-item">
+                  <h4>Status</h4>
+                  <select
+                    name="status"
+                    value={inputValues.status}
+                    onChange={handleChange}>
+                    <option value="Fertig">Fertig</option>
+                    <option value="In Progress">In Progress</option>
+                    <option value="Nicht zugewiesen">Nicht zugewiesen</option>
+                  </select>
+                </div>
+                <div className="ticket-bottom-item">
+                  <h4>Fällig am:</h4>
+                  <input
+                    type="date"
+                    name="deadline"
+                    id="deadline"
+                    value={inputValues.deadline}
+                    onChange={handleChange}
+                  />
+                </div>
+              </div>
+              <div className="ticket-buttons">
+                <button
+                  type="submit"
+                  className="btn"
+                  onClick={(e) => handleSubmit(e)}>
+                  Erstelle Ticket
+                </button>
+                <button
+                  className="btn cancel-btn"
+                  onClick={() => {
+                    toast.warn("Ticket bearbeiten abgebrochen!");
+                  }}>
+                  Abbrechen
+                </button>
+              </div>
+            </form>
+          </div>
+        )}
       </div>
       <div className="ticket-container">
         {tickets?.map((ticket) => (
@@ -213,7 +394,6 @@ export const Ticket = () => {
                 onClick={() => handleTicketEdit(ticket.id)}>
                 Bearbeiten
               </button>
-
               <button
                 className="btn delete-btn"
                 onClick={() => handleDeleteTicket(ticket.id)}>
@@ -226,14 +406,13 @@ export const Ticket = () => {
                 value={benutzer}
                 onChange={(e) => setBenutzer(e.target.value)}
                 className="select-benutzer">
-                <option></option>
+                <option>Bitte auswählen</option>
                 {users?.map((user, index) => (
                   <option key={index} value={user.id}>
                     {user.fname}
                   </option>
                 ))}
               </select>
-
               <button
                 className="btn update-benutzer"
                 onClick={(e) => handleUpdateEditor(e, ticket.id)}>

@@ -1,32 +1,5 @@
 {
-  "tickets": [
-    {
-      "id": "d2cf",
-      "title": "Buuu",
-      "desc": "fafasfasfaesefase",
-      "status": "Nicht zugewiesen",
-      "deadline": "2024-02-29",
-      "creator": "",
-      "editor": "Michelle"
-    },
-    {
-      "title": "cock",
-      "desc": "123",
-      "status": "In Progress",
-      "deadline": "2024-02-21",
-      "creator": "",
-      "editor": ""
-    },
-    {
-      "id": "dfa7",
-      "title": "books",
-      "desc": "buchassda",
-      "status": "Nicht zugewiesen",
-      "deadline": "2024-02-23",
-      "creator": "",
-      "editor": "Michelle"
-    }
-  ],
+  "tickets": [],
   "users": [
     {
       "email": "danny@mail.com",
@@ -37,7 +10,7 @@
       "ticketId": [],
       "isadmin": true,
       "isloggedin": false,
-      "id": 1
+      "id": "1"
     },
     {
       "email": "michelle@mail.com",
@@ -48,7 +21,7 @@
       "ticketId": [],
       "isadmin": true,
       "isloggedin": false,
-      "id": 2
+      "id": "2"
     },
     {
       "email": "david@mail.com",
@@ -59,7 +32,7 @@
       "ticketId": [],
       "isadmin": true,
       "isloggedin": true,
-      "id": 3
+      "id": "3"
     }
   ]
 }
