@@ -1,7 +1,6 @@
 import { Route, Routes, Navigate } from "react-router-dom";
 import { useContext } from "react";
 import { LoggedinContext } from "./context/loggedinContext";
-import { ThemeContextProvider } from "./context/themeContext.js";
 import LoginAndRegister from "./components/LoginRegister/LoginAndRegister";
 import ErrorPage from "./pages/ErrorPage/ErrorPage";
 import HomePage from "./pages/HomePage/HomePage.jsx";
@@ -17,13 +16,8 @@ function App() {
   return (
     <div className="main">
 		{loggedIn &&
-				<Navbar />
+			<Navbar />
 		}
-		{/* {loggedIn &&
-			<ThemeContextProvider>
-				<Navbar />
-			</ThemeContextProvider>
-		} */}
 		<Routes>
 			<Route path="/" element={<LoginAndRegister />} />
 			<Route
