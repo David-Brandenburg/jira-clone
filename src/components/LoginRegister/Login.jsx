@@ -63,7 +63,7 @@ const Login = ({ setPage }) => {
           setTimeout(() => {
 			setLoggedIn(true);
             usenavigate("/home");
-			setLoggedInUser(findUser)
+			setLoggedInUser({avatar: findUser.avatar, userId: findUser.id})
           }, 6000);
         } else {
           toast.error("Wrong username or password!");
