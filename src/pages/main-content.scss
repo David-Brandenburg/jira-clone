@@ -1,11 +1,18 @@
 @import "../variables";
 
+.dark{
+	--color: #808080;
+}
+.light{
+	--color: #fff;
+}
+
 .error-page{
 	display: flex;
 	align-items: center;
 	justify-content: center;
 	flex-direction: column;
-	color: #808080;
+	color: var(--color);
 	.bi, h2{
 		font-size: clamp(40px, 7vw, 100px);
 		text-shadow: 2px 2px 5px rgba(0,0,0,1);

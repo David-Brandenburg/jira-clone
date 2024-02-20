@@ -1,7 +1,10 @@
 import { useNavigate } from "react-router-dom"
 import { ToastContainer, toast } from "react-toastify";
+import { useContext } from "react";
+import { ThemeContext } from "../../context/themeContext";
 
 const ErrorPage = () => {
+	const { theme } = useContext(ThemeContext);
 	const backHome = useNavigate();
 
 	const handleBackHome = () => {
@@ -12,7 +15,7 @@ const ErrorPage = () => {
 	}
 
 	return (
-		<div className="main-content error-page">
+		<div className={`main-content error-page ${theme}`}>
 			<ToastContainer />
 			<i className="bi bi-bug-fill"></i>
 			<h2>Error 404</h2>
