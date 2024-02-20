@@ -181,7 +181,7 @@ export const Ticket = () => {
         <button
           className="erstellen-btn"
           onClick={() => handelErstellen(erstellen)}>
-          Ticket erstellen
+          {erstellen ? "zurück" : "Ticket erstellen"}
         </button>
         {erstellen && <TicketErstellen />}
       </div>
