@@ -1,4 +1,4 @@
-import { useContext, useEffect, useState } from "react";
+import { useContext, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { ToastContainer, toast } from "react-toastify";
 import { LoggedinContext } from "../../context/loggedinContext";
@@ -10,23 +10,10 @@ import toggle_dark from "../../assets/night.png";
 import './Navbar.scss'
 
 const Navbar2 = () => {
-	const { loggedInUser, setLoggedIn, setLoggedInUser, setStayLoggedIn } = useContext(LoggedinContext);
+	const { loggedInUser, setLoggedIn, setLoggedInUser, setStayLoggedIn, isAdmin } = useContext(LoggedinContext);
 	const { theme, setTheme } = useContext(ThemeContext);
 	const [showMenu, setShowMenu] = useState(false);
-	const navigateBack = useNavigate();
-	const navigateProfile = useNavigate();
-
-	
-	useEffect(() => {
-		const body = document.querySelector("body");
-		if (theme === "light"){
-			body.classList.add("body-light")
-			body.classList.remove("body-dark")
-		} else {
-			body.classList.add("body-dark")
-			body.classList.remove("body-light")
-		}
-	}, [theme])
+	const navigate = useNavigate();
 
 	const toggleTheme = () => {
 		setTheme(theme === "dark" ? "light" : "dark")
@@ -57,7 +44,7 @@ const Navbar2 = () => {
 				setLoggedIn(false)
 				setStayLoggedIn(false)
 				setLoggedInUser(null)
-				navigateBack("/")
+				navigate("/")
 			}, 6000);
 		} catch (error) {
 			console.error(error)
@@ -93,8 +80,9 @@ const Navbar2 = () => {
 							</div>
 							<div className="profile-menu" style={{visibility: showMenu ? "visible" : "hidden"}}>
 								<p>Placeholder</p>
-								<p onClick={(() => {navigateProfile("/profile"); setShowMenu(false)})}>Profil</p>
-								<p onClick={(() => {logout(loggedInUser.id); setShowMenu(false)})}>Ausloggen</p>
+								<p onClick={(() => {navigate("/profile"); setShowMenu(false)})}>Profil</p>
+								{isAdmin === true && <p onClick={(() => {navigate("/admin"); setShowMenu(false)})}>Admin Page</p>}
+								<p onClick={(() => {logout(loggedInUser.userId); setShowMenu(false)})}>Ausloggen</p>
 							</div>
 						</div>
 					</div>

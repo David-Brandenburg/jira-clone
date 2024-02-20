@@ -6,7 +6,7 @@ import "react-toastify/dist/ReactToastify.css";
 
 const Login = ({ setPage }) => {
   const [loginData, setLoginData] = useState({ mail: "", pass: "" });
-  const { setLoggedIn, setStayLoggedIn, setLoggedInUser } = useContext(LoggedinContext);
+  const { setLoggedIn, setStayLoggedIn, setLoggedInUser, setIsAdmin } = useContext(LoggedinContext);
   const usenavigate = useNavigate();
 
   const handleSubmit = (e) => {
@@ -60,6 +60,11 @@ const Login = ({ setPage }) => {
             throw new Error("Failed to fetch/login", patch.status);
           }
           toast.success("Successfully logged in!");
+		  if (findUser.isadmin === true){
+			setIsAdmin(true)
+		  } else {
+			setIsAdmin(false)
+		  }
           setTimeout(() => {
 			setLoggedIn(true);
             usenavigate("/home");

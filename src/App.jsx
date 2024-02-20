@@ -7,12 +7,17 @@ import HomePage from "./pages/HomePage/HomePage.jsx";
 import Navbar from "./components/Navigationbar/Navbar.jsx";
 import { Sidebar } from "./components/Sidebar/Sidebar.jsx";
 import ProfilePage from "./pages/ProfilePage/ProfilePage.jsx";
+import AdminPage from "./pages/AdminPage/AdminPage.jsx";
 
 function App() {
-  const { loggedIn } = useContext(LoggedinContext);
+  const { loggedIn, isAdmin } = useContext(LoggedinContext);
 
   function PrivateRoute({ element, loggedIn }) {
     return loggedIn ? element : <Navigate to="/" />;
+  }
+
+  function AdminRoute({element, loggedIn, isAdmin}){
+	return loggedIn && isAdmin ? element : <ErrorPage />;
   }
 
   return (
@@ -25,11 +30,9 @@ function App() {
 		}
 		<Routes>
 			<Route path="/" element={<LoginAndRegister />} />
-			<Route
-				path="/home"
-				element={<PrivateRoute element={<HomePage />} loggedIn={loggedIn} />}
-			/>
-			<Route path="/profile" element={<ProfilePage />} loggedIn={loggedIn}/>
+			<Route path="/home" element={<PrivateRoute element={<HomePage />} loggedIn={loggedIn} />} />
+			<Route path="/profile" element={<PrivateRoute element={<ProfilePage />} loggedIn={loggedIn} />} />
+			<Route path="/admin" element={<AdminRoute element={<AdminPage />} loggedIn={loggedIn} isAdmin={isAdmin} />} />
 			<Route path="*" element={<ErrorPage />} />
 		</Routes>
     </div>
