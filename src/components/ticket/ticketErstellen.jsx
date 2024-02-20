@@ -1,9 +1,11 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 import "./ticketErstellen.scss";
 import { ToastContainer, toast } from "react-toastify";
+import { LoggedinContext } from "../../context/loggedinContext";
 import "react-toastify/dist/ReactToastify.css";
 
 export const TicketErstellen = () => {
+	const [creator, setCreator] = useState(null);
   const [inputValues, setInputValues] = useState({
     title: "",
     desc: "",
@@ -14,6 +16,9 @@ export const TicketErstellen = () => {
   });
   const [benutzer, setBenutzer] = useState("");
   const [users, setUsers] = useState(null);
+
+  const {loggedInUser} = useContext(LoggedinContext);
+
   const url2 = `http://localhost:5000/users`;
   const optionsGet = {
     method: "GET",
@@ -33,6 +38,20 @@ export const TicketErstellen = () => {
     }
   };
 
+	(async () => {
+		try {
+			const findCurrentUser = await fetch(`${url2}/${loggedInUser.userId}`, optionsGet)
+			if (!findCurrentUser.ok){
+				throw new Error("Failed to fetch, User not found!", findCurrentUser.status);
+			}
+			const currentUser = await findCurrentUser.json()
+			console.log(currentUser.fname)
+			setCreator(currentUser.fname)
+		} catch (error) {
+			console.error(error)
+		}
+	})()
+
   const handleChange = (e) => {
     const { name, value } = e.target;
     setInputValues({
@@ -50,6 +69,7 @@ export const TicketErstellen = () => {
       const dataToSend = {
         ...inputValues, // Die bisherigen Eingabewerte
         editor: editorContent, // Den Inhalt des Editors
+		creator: creator,
       };
 
       const response = await fetch("http://localhost:5000/tickets", {
