@@ -1,13 +1,15 @@
 import React, { useContext } from "react";
 import { ThemeContext } from "../../context/themeContext";
 import "./Sidebar.scss";
+import { useNavigate } from "react-router-dom";
 
 export const Sidebar = () => {
+	const backHome = useNavigate();
 	const {theme} = useContext(ThemeContext)
 
 	return (
 		<aside className={theme === "light" ? "light" : "dark"}>
-			<div className="aside-head-row">
+			<div className="aside-head-row" onClick={(() => {backHome("/home")})}>
 				<i className="bi bi-rocket-takeoff"></i>
 				<div className="Überschrift-text">
 					<h1>Clone Way</h1>
