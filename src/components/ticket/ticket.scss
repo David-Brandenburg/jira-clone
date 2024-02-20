@@ -1,0 +1,123 @@
+.ticket-container {
+  // margin: 50px;
+  width: fit-content;
+  height: fit-content;
+  display: flex;
+  gap: 20px;
+  flex-wrap: wrap;
+  .ticket {
+    width: 350px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    padding: 20px;
+    border-radius: 10px;
+    background-color: #ddd;
+    .ticket-heading {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .ticket-description {
+      height: 120px;
+      overflow-y: auto;
+      &::-webkit-scrollbar {
+        display: none;
+      }
+      p {
+        text-align: justify;
+        font-size: 14px;
+      }
+    }
+    .ticket-bottom {
+      display: flex;
+      justify-content: space-between;
+      height: fit-content;
+    }
+    .ticket-buttons {
+      display: flex;
+      height: fit-content;
+      justify-content: flex-end;
+    }
+  }
+}
+
+.blocker {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  left: 0;
+  background-color: #3333338a;
+  backdrop-filter: blur(3px);
+  .edit-ticket-modal {
+    width: 500px;
+    height: 500px;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    margin: auto;
+    background-color: #333;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    gap: 20px;
+    color: #fff;
+    border-radius: 10px;
+    box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.6);
+    input,
+    textarea,
+    option,
+    select {
+      background-color: #555;
+      color: #fff;
+      padding: 5px;
+    }
+    .ticket-heading {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      input {
+        font-size: 22px;
+      }
+    }
+    .ticket-description {
+      font-size: 14px;
+      height: fit-content;
+      textarea {
+        width: 100%;
+        resize: none;
+        height: 200px;
+        &::-webkit-scrollbar {
+          display: none;
+        }
+      }
+    }
+    .ticket-bottom {
+      display: flex;
+      justify-content: space-between;
+      height: fit-content;
+    }
+    .ticket-buttons {
+      display: flex;
+      height: fit-content;
+      justify-content: flex-end;
+      gap: 10px;
+    }
+  }
+}
+
+.btn {
+  padding: 5px 10px;
+  border-radius: 5px;
+  background-color: #bbb;
+  cursor: pointer;
+  box-shadow: 2px 2px 3px rgba(0, 0, 0, 0.3),
+    inset 2px 2px 3px rgba(255, 255, 255, 0.5);
+  &:active {
+    background-color: #ccc;
+  }
+}

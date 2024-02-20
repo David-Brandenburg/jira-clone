@@ -1,45 +1,47 @@
 @import "../../variables";
 
-.dark{
-	--bg-color: #444;
-	--color: #fff;
+.dark {
+  --bg-color: #444;
+  --color: #fff;
 }
-.light{
-	--bg-color: #fafcfe;
-	--color: #808080;
+.light {
+  --bg-color: #fafcfe;
+  --color: #808080;
 }
 
 aside {
-	height: calc(100dvh - 60px);
-	margin-top: 60px;
-	width: 400px;
-	background-color: var(--bg-color);
-	display: flex;
-	flex-direction: column;
-	color: var(--color);
-	padding: 0 50px;
-	gap: 20px;
-	box-shadow: 0px 0px 5px rgba(0,0,0,0.4);
-	hr{
-		border-top: 1px solid var(--color);
-	}
-	.aside-head-row{
-		display: flex;
-		margin-top: 20px;
-		align-items: center;
-		gap: 20px;
-		.bi{
-			font-size: 40px;
-		}
-	}
-	.aside-row{
-		display: flex;
-		flex-direction: column;
-		gap: 20px;
-		font-size: 20px;
-		.icon-text{
-			display: flex;
-			gap: 15px;
-		}
-	}
+  height: calc(100dvh - 60px);
+  margin-top: 60px;
+  width: 400px;
+  background-color: var(--bg-color);
+  display: flex;
+  flex-direction: column;
+  color: var(--color);
+  padding: 0 50px;
+  gap: 20px;
+  box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.4);
+  top: 0;
+  position: fixed;
+  hr {
+    border-top: 1px solid var(--color);
+  }
+  .aside-head-row {
+    display: flex;
+    margin-top: 20px;
+    align-items: center;
+    gap: 20px;
+    .bi {
+      font-size: 40px;
+    }
+  }
+  .aside-row {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    font-size: 20px;
+    .icon-text {
+      display: flex;
+      gap: 15px;
+    }
+  }
 }
