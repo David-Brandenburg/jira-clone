@@ -13,7 +13,7 @@
 }
 
 body{
-	height: 100dvh;
+	height: calc(100dvh - 60px);
 	background-color: $main-white;
 	#root{
 		height: inherit;

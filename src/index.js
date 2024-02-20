@@ -2,17 +2,20 @@ import React from "react";
 import ReactDOM from "react-dom/client";
 import { BrowserRouter as Router } from "react-router-dom";
 import { LoggedinContextProvider } from './context/loggedinContext.js';
+import { ThemeContextProvider } from "./context/themeContext.js";
 import App from "./App";
 import "./index.scss";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
 	<Router>
-		<LoggedinContextProvider>
-			<React.StrictMode>
-				<App />
-			</React.StrictMode>
-		</LoggedinContextProvider>
+		<ThemeContextProvider>
+			<LoggedinContextProvider>
+				<React.StrictMode>
+					<App />
+				</React.StrictMode>
+			</LoggedinContextProvider>
+		</ThemeContextProvider>
 	</Router>
 );
 

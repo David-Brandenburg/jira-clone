@@ -15,12 +15,15 @@ function App() {
   }
 
   return (
-    <>
+    <div className="main">
 		{loggedIn &&
+				<Navbar />
+		}
+		{/* {loggedIn &&
 			<ThemeContextProvider>
 				<Navbar />
 			</ThemeContextProvider>
-		}
+		} */}
 		<Routes>
 			<Route path="/" element={<LoginAndRegister />} />
 			<Route
@@ -29,7 +32,7 @@ function App() {
 			/>
 			<Route path="*" element={<ErrorPage />} />
 		</Routes>
-    </>
+    </div>
   );
 }
 
