@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import "./ticket.scss";
 import { ToastContainer, toast } from "react-toastify";
 import { TicketErstellen } from "./ticketErstellen";
@@ -9,7 +9,6 @@ export const Ticket = () => {
   const [editTicket, setEditTicket] = useState(null);
   const [erstellen, setErstellen] = useState(false);
   const [benutzer, setBenutzer] = useState("");
-  const [profile, setProfile] = useState("");
 
   const url = `http://localhost:5000/tickets`;
   const url2 = `http://localhost:5000/users`;
@@ -131,6 +130,7 @@ export const Ticket = () => {
 
   const handelErstellen = () => {
     setErstellen(!erstellen);
+    fetchTickets();
   };
 
   const handleUpdateEditor = async (e, ticketId) => {
@@ -158,6 +158,20 @@ export const Ticket = () => {
         toast.error("Editor konnte nicht aktualisiert werden!");
         console.error(error);
       }
+    }
+  };
+
+  const handleDeleteTicket = async (ticketId) => {
+    try {
+      const response = await fetch(`${url}/${ticketId}`, { method: "DELETE" });
+      if (!response.ok) {
+        throw new Error("Failed to delete ticket!", response.status);
+      }
+      toast.success("Ticket erfolgreich gelöscht!");
+      fetchTickets(); // Tickets erneut abrufen, um die aktualisierten Daten anzuzeigen
+    } catch (error) {
+      toast.error("Ticket konnte nicht gelöscht werden!");
+      console.error(error);
     }
   };
 
@@ -191,6 +205,11 @@ export const Ticket = () => {
                 className="btn edit-btn"
                 onClick={() => handleTicketEdit(ticket.id)}>
                 Bearbeiten
+              </button>
+              <button
+                className="btn delete-btn"
+                onClick={() => handleDeleteTicket(ticket.id)}>
+                Löschen
               </button>
             </div>
             <h2>Benutzer zuordnen:</h2>

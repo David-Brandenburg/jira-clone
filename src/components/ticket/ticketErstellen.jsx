@@ -112,6 +112,7 @@ export const TicketErstellen = () => {
           <select
             value={benutzer}
             onChange={(e) => setBenutzer(e.target.value)}>
+            <option></option>
             {users?.map((user, index) => (
               <option key={index} value={user.id}>
                 {user.fname}
