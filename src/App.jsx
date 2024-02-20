@@ -5,6 +5,7 @@ import LoginAndRegister from "./components/LoginRegister/LoginAndRegister";
 import ErrorPage from "./pages/ErrorPage/ErrorPage";
 import HomePage from "./pages/HomePage/HomePage.jsx";
 import Navbar from "./components/Navigationbar/Navbar.jsx";
+import { Sidebar } from "./components/Sidebar/Sidebar.jsx";
 
 function App() {
   const { loggedIn } = useContext(LoggedinContext);
@@ -16,7 +17,10 @@ function App() {
   return (
     <div className="main">
 		{loggedIn &&
-			<Navbar />
+			<>
+				<Navbar />
+				<Sidebar />
+			</>
 		}
 		<Routes>
 			<Route path="/" element={<LoginAndRegister />} />

@@ -1,5 +1,4 @@
 import React, { useContext } from "react";
-import { Sidebar } from "../../components/Sidebar/Sidebar";
 import { LoggedinContext } from "../../context/loggedinContext";
 
 const HomePage = () => {
@@ -8,9 +7,8 @@ const HomePage = () => {
   console.log(loggedInUser)
 
   return (
-    <>
-      <Sidebar />
-    </>
+    <div className="main-content">
+    </div>
   );
 };
 
