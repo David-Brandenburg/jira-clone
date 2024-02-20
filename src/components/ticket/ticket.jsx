@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import "./ticket.scss";
 import { ToastContainer, toast } from "react-toastify";
 import { TicketErstellen } from "./ticketErstellen";
@@ -181,7 +182,7 @@ export const Ticket = () => {
         <button
           className="erstellen-btn"
           onClick={() => handelErstellen(erstellen)}>
-          {erstellen ? "zurück" : "Ticket erstellen"}
+          Ticket erstellen
         </button>
         {erstellen && <TicketErstellen />}
       </div>
@@ -212,6 +213,7 @@ export const Ticket = () => {
                 onClick={() => handleTicketEdit(ticket.id)}>
                 Bearbeiten
               </button>
+
               <button
                 className="btn delete-btn"
                 onClick={() => handleDeleteTicket(ticket.id)}>
@@ -224,13 +226,14 @@ export const Ticket = () => {
                 value={benutzer}
                 onChange={(e) => setBenutzer(e.target.value)}
                 className="select-benutzer">
-                <option>Bitte auswählen</option>
+                <option></option>
                 {users?.map((user, index) => (
                   <option key={index} value={user.id}>
                     {user.fname}
                   </option>
                 ))}
               </select>
+
               <button
                 className="btn update-benutzer"
                 onClick={(e) => handleUpdateEditor(e, ticket.id)}>
