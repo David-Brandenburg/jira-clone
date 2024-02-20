@@ -14,6 +14,7 @@ const Navbar2 = () => {
 	const { theme, setTheme } = useContext(ThemeContext);
 	const [showMenu, setShowMenu] = useState(false);
 	const navigateBack = useNavigate();
+	const navigateProfile = useNavigate();
 
 	
 	useEffect(() => {
@@ -92,7 +93,7 @@ const Navbar2 = () => {
 							</div>
 							<div className="profile-menu" style={{visibility: showMenu ? "visible" : "hidden"}}>
 								<p>Placeholder</p>
-								<p>Profil</p>
+								<p onClick={(() => {navigateProfile("/profile"); setShowMenu(false)})}>Profil</p>
 								<p onClick={(() => {logout(loggedInUser.id); setShowMenu(false)})}>Ausloggen</p>
 							</div>
 						</div>

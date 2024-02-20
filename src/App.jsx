@@ -6,6 +6,7 @@ import ErrorPage from "./pages/ErrorPage/ErrorPage";
 import HomePage from "./pages/HomePage/HomePage.jsx";
 import Navbar from "./components/Navigationbar/Navbar.jsx";
 import { Sidebar } from "./components/Sidebar/Sidebar.jsx";
+import ProfilePage from "./pages/ProfilePage/ProfilePage.jsx";
 
 function App() {
   const { loggedIn } = useContext(LoggedinContext);
@@ -28,6 +29,7 @@ function App() {
 				path="/home"
 				element={<PrivateRoute element={<HomePage />} loggedIn={loggedIn} />}
 			/>
+			<Route path="/profile" element={<ProfilePage />} loggedIn={loggedIn}/>
 			<Route path="*" element={<ErrorPage />} />
 		</Routes>
     </div>

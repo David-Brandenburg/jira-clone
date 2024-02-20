@@ -7,7 +7,7 @@
       "status": "In Progress",
       "deadline": "2024-02-21",
       "creator": "",
-      "editor": ""
+      "editor": "Danny"
     }
   ],
   "users": [
@@ -17,7 +17,9 @@
       "lname": "Böhm",
       "password": "test1234",
       "avatar": "https://robohash.org/12313asda123155sdda?set=set4",
-      "ticketId": [],
+      "ticketId": [
+        "c0d1"
+      ],
       "isadmin": true,
       "isloggedin": true,
       "id": "1"
