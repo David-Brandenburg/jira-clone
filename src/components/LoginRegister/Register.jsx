@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { generateRandomString } from '../..';
+import { generateRandomAvatar } from '../..';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
@@ -16,8 +16,7 @@ const Register = ({setPage}) => {
     }
     
     const register = async (regdata) => {
-        const defaultPicValue = generateRandomString();
-        const defaultPic = `https://robohash.org/${defaultPicValue}?set=set4`;
+        const defaultPic = generateRandomAvatar();
 
         const url = "http://localhost:5000/users"
         const optionsGet = {

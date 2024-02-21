@@ -20,7 +20,7 @@ root.render(
 );
 
 // for randomProfileImages on RoboHash
-function generateRandomString() {
+function generateRandomAvatar() {
 	const characters = 'abcdefghijklmnopqrstuvwxyz0123456789';
 	const minLength = 4;
 	const maxLength = 16;
@@ -30,7 +30,9 @@ function generateRandomString() {
 		const randomIndex = Math.floor(Math.random() * characters.length);
 		result += characters.charAt(randomIndex);
 	};
-	return result;
+	const defaultPic = `https://robohash.org/${result}?set=set4`;
+	return defaultPic;
 };
 
-export {generateRandomString}
+
+export {generateRandomAvatar}
