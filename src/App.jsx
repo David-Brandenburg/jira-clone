@@ -16,25 +16,42 @@ function App() {
     return loggedIn ? element : <Navigate to="/" />;
   }
 
-  function AdminRoute({element, loggedIn, isAdmin}){
-	return loggedIn && isAdmin ? element : <ErrorPage />;
+  function AdminRoute({ element, loggedIn, isAdmin }) {
+    return loggedIn && isAdmin ? element : <ErrorPage />;
   }
 
   return (
     <div className="main">
-		{loggedIn &&
-			<>
-				<Navbar />
-				<Sidebar />
-			</>
-		}
-		<Routes>
-			<Route path="/" element={<LoginAndRegister />} />
-			<Route path="/home" element={<PrivateRoute element={<HomePage />} loggedIn={loggedIn} />} />
-			<Route path="/profile" element={<PrivateRoute element={<ProfilePage />} loggedIn={loggedIn} />} />
-			<Route path="/admin" element={<AdminRoute element={<AdminPage />} loggedIn={loggedIn} isAdmin={isAdmin} />} />
-			<Route path="*" element={<ErrorPage />} />
-		</Routes>
+      {loggedIn && (
+        <>
+          <Navbar />
+          <Sidebar />
+        </>
+      )}
+      <Routes>
+        <Route path="/" element={<LoginAndRegister />} />
+        <Route
+          path="/home"
+          element={<PrivateRoute element={<HomePage />} loggedIn={loggedIn} />}
+        />
+        <Route
+          path="/profile"
+          element={
+            <PrivateRoute element={<ProfilePage />} loggedIn={loggedIn} />
+          }
+        />
+        <Route
+          path="/admin"
+          element={
+            <AdminRoute
+              element={<AdminPage />}
+              loggedIn={loggedIn}
+              isAdmin={isAdmin}
+            />
+          }
+        />
+        <Route path="*" element={<ErrorPage />} />
+      </Routes>
     </div>
   );
 }

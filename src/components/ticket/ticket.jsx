@@ -363,8 +363,8 @@ export const Ticket = () => {
           <div className="ticket" key={ticket.id}>
             <div className="ticket-heading">
               <h2>{ticket.title}</h2>
-              <p>{ticket.creator}</p>
-              <p>{ticket.editor}</p>
+              <p>Creator: {ticket.creator}</p>
+              <p>Editor: {ticket.editor}</p>
             </div>
             <div className="ticket-description">
               <p>{ticket.desc}</p>

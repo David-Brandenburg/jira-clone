@@ -30,8 +30,8 @@ aside {
     margin-top: 20px;
     align-items: center;
     gap: 20px;
-	user-select: none;
-	cursor: pointer;
+    user-select: none;
+    cursor: pointer;
     .bi {
       font-size: 40px;
     }
@@ -45,5 +45,11 @@ aside {
       display: flex;
       gap: 15px;
     }
+  }
+  .online {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
   }
 }
