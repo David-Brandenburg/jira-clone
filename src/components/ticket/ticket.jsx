@@ -255,8 +255,6 @@ export const Ticket = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
-    const selectedUser = users.find((user) => user.id === benutzer);
     try {
       const dataToSend = {
         ...inputValues, // Die bisherigen Eingabewerte
