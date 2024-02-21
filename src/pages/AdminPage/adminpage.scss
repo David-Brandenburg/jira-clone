@@ -192,6 +192,7 @@
 		left: 0;
 		background-color: #3333338a;
 		backdrop-filter: blur(3px);
+		z-index: 9999;
 		.addEntryModal{
 			width: 500px;
 			height: 500px;
@@ -205,11 +206,11 @@
 			padding: 20px;
 			display: flex;
 			flex-direction: column;
-			// justify-content: space-between;
 			gap: 10px;
 			color: #fff;
 			border-radius: 10px;
 			box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.6);
+			user-select: none;
 			h2{
 				text-align: center;
 			}
@@ -231,6 +232,17 @@
 				flex-direction: row-reverse;
 				justify-content: start;
 				gap: 5px;
+			}
+			.input-btn-row{
+				display: flex;
+				height: 100%;
+				width: 100%;
+				gap: 10px;
+				justify-content: flex-end;
+				align-items: flex-end;
+				.btn{
+					height: fit-content;
+				}
 			}
 		}
 	}
