@@ -1,5 +1,16 @@
 {
-  "tickets": [],
+  "tickets": [
+    {
+      "id": "260e",
+      "title": "Player get stuck",
+      "desc": "By the red building, u can get stuck in the corner!",
+      "status": "In Progress",
+      "deadline": "2024-02-28",
+      "creator": "David",
+      "editor": "Danny",
+      "editorId": "1"
+    }
+  ],
   "users": [
     {
       "email": "danny@mail.com",
@@ -7,7 +18,9 @@
       "lname": "Böhm",
       "password": "test1234",
       "avatar": "https://robohash.org/12313asda123155sdda?set=set4",
-      "ticketId": [],
+      "ticketId": [
+        "260e"
+      ],
       "isadmin": true,
       "isloggedin": false,
       "id": "1"
