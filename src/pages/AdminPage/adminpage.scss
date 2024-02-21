@@ -1,0 +1,237 @@
+@import "../../variables";
+
+.admin-page{
+	.dark{
+		--bg-color: #555;
+		--color: #fff;
+		--color2: #000;
+		--box-shadow: 0px 3px 5px rgba(0,0,0,0.2);
+		--tr-bg-color: #666;
+	}
+	.light{
+		--bg-color: #fff;
+		--color: #000;
+		--color2: #fff;
+		--box-shadow: 0px 3px 5px rgba(0,0,0,0.1);
+		--tr-bg-color: #f2f2f2;
+	}
+	.admin-wrapper{
+		display: flex;
+		flex-direction: column;
+		gap: 20px;
+		height: 100%;
+		.admin-headnav{
+			display: flex;
+			justify-content: space-between;
+			align-items: center;
+			height: 50px;
+			background-color: var(--bg-color);
+			color: var(--color);
+			box-shadow: var(--box-shadow);
+			padding: 20px;
+			user-select: none;
+			ul{
+				display: flex;
+				gap: 20px;
+				li{
+					cursor: pointer;
+					border-bottom: 1px solid transparent;
+					padding: 0 5px;
+					&:hover{
+						border-color: var(--color);
+					}
+				}
+				.active{
+					border-bottom: 1px solid $accent-color;
+					color: $accent-color;
+				}
+			}
+			.addEntryBtn{
+				font-size: 16px;
+				cursor: pointer;
+				position: relative;
+				font-size: 20px;
+				&:hover{
+					::after{
+						content: "Add Entry";
+						position: absolute;
+						width: 100px;
+						right: -20px;
+						top: 5px;
+						font-style: normal;
+						font-size: 12px;
+						text-shadow: 3px 3px 5px rgba(0,0,0,0.5);
+					}
+				}
+			}
+		}
+		.admin-content{
+			background-color: var(--bg-color);
+			color: var(--color);
+			box-shadow: var(--box-shadow);
+			height: inherit;
+			padding: 20px;
+			.avatar{
+				width: 25px;
+			}
+			table{
+				border-collapse: collapse;
+				display: flex;
+				flex-direction: column;
+				user-select: none;
+			}
+			td{
+				&:hover{
+					background-color: $accent-color;
+					color: var(--color2);
+				}
+			}
+			.userTable{
+				thead{
+					tr{
+						border-bottom: 1px solid var(--color);
+						height: 50px;
+						th{
+							border-right: 1px solid var(--color);
+							&:first-child{
+								min-width: 200px;
+							}
+							&:last-child{
+								width: 50px;
+								border: none;
+							}
+							&:nth-child(4){
+								width: 100px;
+							}
+							&:nth-child(5){
+								width: 200px;
+							}
+							width: 150px;
+						}
+					}
+				}
+				tbody{
+					tr{
+						td{
+							border-right: 1px solid var(--color);
+							text-align: center;
+							height: 40px;
+							&:first-child{
+								min-width: 200px;
+							}
+							&:last-child{
+								width: 50px;
+								border: none;
+							}
+							&:nth-child(4){
+								width: 100px;
+							}
+							&:nth-child(5){
+								width: 200px;
+							}
+							width: 150px;
+						}
+						&:nth-child(odd){
+							background-color: var(--tr-bg-color);
+						}
+					}
+				}
+			}
+			.ticketTable{
+				thead{
+					tr{
+						border-bottom: 1px solid var(--color);
+						height: 50px;
+						th{
+							border-right: 1px solid var(--color);
+							&:last-child{
+								width: 100px;
+								border: none;
+							}
+							&:nth-child(3){
+								width: 150px;
+							}
+							&:nth-child(4){
+								width: 100px;
+							}
+							width: 200px;
+						}
+					}
+				}
+				tbody{
+					tr{
+						height: 40px;
+						td{
+							border-right: 1px solid var(--color);
+							text-align: center;
+							&:last-child{
+								width: 100px;
+								border: none;
+							}
+							&:nth-child(3){
+								width: 150px;
+							}
+							&:nth-child(4){
+								width: 100px;
+							}
+							width: 200px;
+						}
+						&:nth-child(odd){
+							background-color: var(--tr-bg-color);
+						}
+					}
+				}
+			}
+		}
+	}
+	.addEntryModal-blocker{
+		position: fixed;
+		top: 0;
+		bottom: 0;
+		right: 0;
+		left: 0;
+		background-color: #3333338a;
+		backdrop-filter: blur(3px);
+		.addEntryModal{
+			width: 500px;
+			height: 500px;
+			position: absolute;
+			top: 0;
+			bottom: 0;
+			left: 0;
+			right: 0;
+			margin: auto;
+			background-color: #333;
+			padding: 20px;
+			display: flex;
+			flex-direction: column;
+			// justify-content: space-between;
+			gap: 10px;
+			color: #fff;
+			border-radius: 10px;
+			box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.6);
+			h2{
+				text-align: center;
+			}
+			.input-row{
+				display: flex;
+				flex-direction: column;
+				gap: 5px;
+				input{
+					color: var(--color);
+					width: 50%;
+					padding: 6px;
+					background-color: transparent;
+					box-shadow: inset 3px 3px 5px rgba(0, 0, 0, 0.6), inset -1px -1px 3px rgba(255, 255, 255, 0.3);
+				}
+			}
+			.input-admin-row{
+				display: flex;
+				align-items: center;
+				flex-direction: row-reverse;
+				justify-content: start;
+				gap: 5px;
+			}
+		}
+	}
+}

@@ -1,9 +1,17 @@
 {
   "tickets": [
     {
-      "id": "260e",
-      "title": "Player get stuck",
-      "desc": "By the red building, u can get stuck in the corner!",
+      "title": "Buuu",
+      "desc": "fafasfasfaesefase",
+      "status": "Nicht zugewiesen",
+      "deadline": "2024-02-29",
+      "creator": "",
+      "editor": "Michelle",
+      "id": "d2cf"
+    },
+    {
+      "title": "cock",
+      "desc": "123",
       "status": "In Progress",
       "deadline": "2024-02-28",
       "creator": "David",
@@ -18,12 +26,10 @@
       "lname": "Böhm",
       "password": "test1234",
       "avatar": "https://robohash.org/12313asda123155sdda?set=set4",
-      "ticketId": [
-        "260e"
-      ],
+      "ticketId": ["260e"],
       "isadmin": true,
-      "isloggedin": false,
-      "id": "1"
+      "isloggedin": true,
+      "id": 1
     },
     {
       "email": "michelle@mail.com",
@@ -42,10 +48,21 @@
       "lname": "Brandenburg",
       "password": "test1234",
       "avatar": "https://robohash.org/da1234dsa?set=set4",
-      "ticketId": [],
+      "ticketId": ["abc", "cda"],
       "isadmin": true,
       "isloggedin": true,
-      "id": "3"
+      "id": 3
+    },
+    {
+      "email": "test@mail.com",
+      "fname": "",
+      "lname": "",
+      "password": "12345678",
+      "avatar": "https://robohash.org/2zzk?set=set4",
+      "ticketId": [],
+      "isadmin": false,
+      "isloggedin": false,
+      "id": 4
     }
   ]
 }
