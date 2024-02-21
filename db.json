@@ -1,22 +1,14 @@
 {
   "tickets": [
     {
-      "title": "Buuu",
-      "desc": "fafasfasfaesefase",
-      "status": "Nicht zugewiesen",
-      "deadline": "2024-02-29",
-      "creator": "",
-      "editor": "Michelle",
-      "id": "d2cf"
-    },
-    {
-      "title": "cock",
-      "desc": "123",
+      "id": "1b49",
+      "title": "player get stuck",
+      "desc": "By the red building in the left corner of the map, u can get stuck by the door!",
       "status": "In Progress",
       "deadline": "2024-02-28",
       "creator": "David",
-      "editor": "Danny",
-      "editorId": "1"
+      "editor": "Michelle",
+      "editorId": "2"
     }
   ],
   "users": [
@@ -26,10 +18,10 @@
       "lname": "Böhm",
       "password": "test1234",
       "avatar": "https://robohash.org/12313asda123155sdda?set=set4",
-      "ticketId": ["260e"],
+      "ticketId": [],
       "isadmin": true,
       "isloggedin": true,
-      "id": 1
+      "id": "1"
     },
     {
       "email": "michelle@mail.com",
@@ -37,7 +29,9 @@
       "lname": "Sträßer",
       "password": "test1234",
       "avatar": "https://robohash.org/asd213sd?set=set4",
-      "ticketId": [],
+      "ticketId": [
+        "1b49"
+      ],
       "isadmin": true,
       "isloggedin": false,
       "id": "2"
@@ -48,10 +42,10 @@
       "lname": "Brandenburg",
       "password": "test1234",
       "avatar": "https://robohash.org/da1234dsa?set=set4",
-      "ticketId": ["abc", "cda"],
+      "ticketId": [],
       "isadmin": true,
       "isloggedin": true,
-      "id": 3
+      "id": "3"
     },
     {
       "email": "test@mail.com",
@@ -62,7 +56,7 @@
       "ticketId": [],
       "isadmin": false,
       "isloggedin": false,
-      "id": 4
+      "id": "4"
     }
   ]
 }

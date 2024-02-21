@@ -5,8 +5,6 @@ import "../main-content.scss";
 
 const HomePage = () => {
   const { loggedIn, loggedInUser } = useContext(LoggedinContext);
-  console.log(loggedIn);
-  console.log(loggedInUser);
 
   return (
     <div className="main-content">

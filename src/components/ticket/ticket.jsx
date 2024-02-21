@@ -35,7 +35,7 @@ export const Ticket = () => {
         throw new Error("Failed to fetch!", response.status);
       }
       const fetchedTickets = await response.json();
-      console.log("fetchedtickets:", fetchedTickets);
+
       setTickets(fetchedTickets);
     } catch (error) {
       console.error(error);
@@ -49,7 +49,7 @@ export const Ticket = () => {
         throw new Error("Failed to fetch!", response.status);
       }
       const fetchedUsers = await response.json();
-      console.log("fetchedusers:", fetchedUsers);
+
       setUsers(fetchedUsers);
     } catch (error) {
       console.error(error);
@@ -69,7 +69,6 @@ export const Ticket = () => {
         );
       }
       const currentUser = await findCurrentUser.json();
-      console.log(currentUser.fname);
       setCreator(currentUser.fname);
     } catch (error) {
       console.error(error);
@@ -195,15 +194,10 @@ export const Ticket = () => {
 
   const updateUserTicketId = async (userEditorId, ticketId) => {
     try {
-      console.log("User ID:", userEditorId);
-      console.log("Ticket ID to remove:", ticketId);
-
       const userToUpdate = users.find((user) => user.id === userEditorId);
       if (!userToUpdate) {
         throw new Error("User not found!");
       }
-
-      console.log("User to update:", userToUpdate);
 
       const optionsPatch = {
         method: "PATCH",
@@ -223,8 +217,6 @@ export const Ticket = () => {
       if (!updateUserResponse.ok) {
         throw new Error("Network response was not ok");
       }
-
-      console.log("User updated successfully!");
     } catch (error) {
       console.error(error);
     }
@@ -239,7 +231,6 @@ export const Ticket = () => {
       toast.success("Ticket erfolgreich gelöscht!");
 
       const editedTicket = tickets.find((ticket) => ticket.id === ticketId);
-      console.log(editedTicket);
       if (!editedTicket) {
         throw new Error("Ticket not found!");
       }
