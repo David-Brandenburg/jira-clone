@@ -1,13 +1,16 @@
 import { useState, useContext } from "react"
 import { generateRandomAvatar } from '../..';
 import { ThemeContext } from "../../context/themeContext";
+import { LoggedinContext } from "../../context/loggedinContext";
 import "./adminpage.scss"
 
 const AdminPage = () => {
 	const [data, setData] = useState(null);
 	const [activeTab, setActiveTab] = useState(null);
 	const [openModal, setOpenModal] = useState(false);
+	const [currentUser, setCurrentUser] = useState(null);
 	const { theme } = useContext(ThemeContext);
+	const {loggedInUser} = useContext(LoggedinContext);
 	const dataBase = ["Users", "Tickets", "Placeholder", "Placeholder"];
 	const url = "http://localhost:5000/"
 	const options = {
@@ -29,8 +32,21 @@ const AdminPage = () => {
 		};
 	};
 
+	(async () => {
+		try {
+			const resp = await fetch(`${url}users/${loggedInUser.userId}`)
+			if (!resp.ok){
+				throw new Error("Failed to fetch!", resp.status)
+			}
+			const user = await resp.json()
+			const userfname = user.fname;
+			setCurrentUser(userfname)
+		} catch (error) {
+			console.error(error)
+		}
+	})()
+
 	const handleOpenAddEntryModal = (parameter) => {
-		console.log(parameter)
 		if(!parameter){
 			return
 		}
@@ -51,7 +67,22 @@ const AdminPage = () => {
 		})
 	}
 
-	console.log(data)
+	const handleSubmit = async (e) => {
+		e.preventDefault();
+		const inputs = e.target.querySelectorAll("input:not([type='checkbox'])");
+		const inputCheckbox = e.target.querySelector("input[type='checkbox']")
+
+		if (inputCheckbox?.checked){
+			console.log("true", inputCheckbox?.name)
+		} else {
+			console.log("false", inputCheckbox?.name)
+		}
+
+		inputs.forEach(input => {
+			console.log("values", input.value)
+		})
+	}
+
 	return (
 		<div className="main-content admin-page">
 			<div className={`admin-wrapper ${theme}`}>
@@ -123,7 +154,7 @@ const AdminPage = () => {
 			</div>
 			{openModal &&
 				<div className="addEntryModal-blocker" onClick={(e) => {e.stopPropagation()}}>
-					<form className="addEntryModal">
+					<form className="addEntryModal" onSubmit={((e) => {handleSubmit(e)})}>
 						{activeTab === "users" && (
 							<>
 								<h2>Add User</h2>
@@ -149,9 +180,30 @@ const AdminPage = () => {
 								</div>
 							</>
 						)}
+						{activeTab === "tickets" && (
+							<>
+								<h2>Add Ticket</h2>
+								<div className="input-row">
+									<label htmlFor="title">Title</label>
+									<input type="text" name="title" id="title" />
+								</div>
+								<div className="input-row">
+									<label htmlFor="creator">Creator</label>
+									<input type="text" name="creator" id="creator" defaultValue={currentUser} />
+								</div>
+								<div className="input-row">
+									<label htmlFor="email">Editor</label>
+									<input type="email" name="email" id="email" />
+								</div>
+								<div className="input-row">
+									<label htmlFor="password">Password</label>
+									<input type="password" name="password" id="password" />
+								</div>
+							</>
+						)}
 						<div className="input-btn-row">
-							<button>Add</button>
-							<button onClick={(() => {setOpenModal(false)})}>Cancel</button>
+							<button className="btn">Add {activeTab.charAt(0).toUpperCase()+activeTab.slice(1, -1)}</button>
+							<button className="btn" onClick={(() => {setOpenModal(false)})}>Cancel</button>
 						</div>
 					</form>
 				</div>
