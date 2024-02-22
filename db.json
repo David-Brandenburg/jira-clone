@@ -69,6 +69,16 @@
       "editor": "David",
       "editorId": "3",
       "id": "ofcNxM9"
+    },
+    {
+      "title": "test",
+      "desc": "123",
+      "status": "In Progress",
+      "deadline": "2024-02-20",
+      "creator": "Danny",
+      "editor": "Danny",
+      "editorId": "1",
+      "id": "3H5CdXY"
     }
   ],
   "users": [
@@ -77,8 +87,11 @@
       "fname": "Danny",
       "lname": "Böhm",
       "password": "test1234",
-      "avatar": "https://robohash.org/12313asda123155sdda?set=set4",
-      "ticketId": [],
+      "avatar": "https://robohash.org/cmgnasz1?set=set4",
+      "ticketId": [
+        "123",
+        "321"
+      ],
       "isadmin": true,
       "isloggedin": true,
       "id": "1"
