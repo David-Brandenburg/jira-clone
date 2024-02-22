@@ -75,7 +75,11 @@ export const Sidebar = () => {
           <i className="bi bi-list-columns-reverse"></i>
           <p>Backlog</p>
         </div>
-        <div className="icon-text">
+        <div
+          className="icon-text kanban"
+          onClick={() => {
+            backHome("/KanBanBoard");
+          }}>
           <i className="bi bi-border-all"></i>
           <p>Board</p>
         </div>

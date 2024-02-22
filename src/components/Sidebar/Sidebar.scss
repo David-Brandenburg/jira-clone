@@ -44,6 +44,14 @@ aside {
     .icon-text {
       display: flex;
       gap: 15px;
+      padding: 10px;
+    }
+    .kanban {
+      &:hover {
+        cursor: pointer;
+        background-color: #bfd9ff;
+        color: #0b55c5;
+      }
     }
   }
   .online {

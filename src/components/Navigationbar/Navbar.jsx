@@ -75,12 +75,7 @@ const Navbar2 = () => {
               <li>Your Work</li>
               <li>Projects</li>
               <li>Filters</li>
-              <li
-                onClick={() => {
-                  navigate("/KanBanBoard");
-                }}>
-                Dashboards
-              </li>
+              <li>Dashboards</li>
               <li>Teams</li>
               <li>Plans</li>
               <li>Apps</li>
