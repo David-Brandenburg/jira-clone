@@ -1,14 +1,74 @@
 {
   "tickets": [
     {
-      "id": "1b49",
-      "title": "player get stuck",
-      "desc": "By the red building in the left corner of the map, u can get stuck by the door!",
+      "title": "Buuu",
+      "desc": "fafasfasfaesefase",
+      "status": "Nicht zugewiesen",
+      "deadline": "2024-02-29",
+      "creator": "",
+      "editor": "Michelle",
+      "editorId": "2",
+      "id": "d2cf"
+    },
+    {
+      "title": "cock",
+      "desc": "123",
       "status": "In Progress",
       "deadline": "2024-02-28",
       "creator": "David",
       "editor": "Michelle",
-      "editorId": "2"
+      "editorId": "2",
+      "id": "uH2zfQ8"
+    },
+    {
+      "title": "test",
+      "desc": "123",
+      "status": "In Progress",
+      "deadline": "2024-02-19",
+      "creator": "Danny",
+      "editor": "Michelle",
+      "editorId": "2",
+      "id": "AXd88c5"
+    },
+    {
+      "title": "test123",
+      "desc": "mein cock tut weh",
+      "status": "In Progress",
+      "deadline": "2024-02-24",
+      "creator": "Danny",
+      "editor": "David",
+      "editorId": "3",
+      "id": "3J6gWG4"
+    },
+    {
+      "title": "test123",
+      "desc": "mein cock tut weh",
+      "status": "In Progress",
+      "deadline": "2024-02-24",
+      "creator": "Danny",
+      "editor": "David",
+      "editorId": "3",
+      "id": "P1oXUVz"
+    },
+    {
+      "title": "test123",
+      "desc": "mein cock tut weh",
+      "status": "In Progress",
+      "deadline": "2024-02-24",
+      "creator": "Danny",
+      "editor": "David",
+      "editorId": "3",
+      "id": "qmAmEZn"
+    },
+    {
+      "title": "test123",
+      "desc": "mein cock tut weh",
+      "status": "In Progress",
+      "deadline": "2024-02-24",
+      "creator": "Danny",
+      "editor": "David",
+      "editorId": "3",
+      "id": "ofcNxM9"
     }
   ],
   "users": [
@@ -57,6 +117,39 @@
       "isadmin": false,
       "isloggedin": false,
       "id": "4"
+    },
+    {
+      "email": "Zwegat69@cock.com",
+      "fname": "Peter",
+      "lname": "Zwegat",
+      "password": "hugecock123",
+      "avatar": "/static/media/defaultProfilepic.b5d0704057147e38225a.webp",
+      "ticketId": [],
+      "isadmin": false,
+      "isloggedin": false,
+      "id": "5"
+    },
+    {
+      "email": "cock123@web.de",
+      "fname": "CumEater",
+      "lname": "Cock",
+      "password": "12345",
+      "avatar": "https://robohash.org/ijnmlgjl?set=set4",
+      "ticketId": [],
+      "isadmin": true,
+      "isloggedin": false,
+      "id": "6"
+    },
+    {
+      "email": "last1@mail.com",
+      "fname": "test69",
+      "lname": "69last",
+      "password": "123",
+      "avatar": "https://robohash.org/lz6368t?set=set4",
+      "ticketId": [],
+      "isadmin": false,
+      "isloggedin": false,
+      "id": "7"
     }
   ]
 }
