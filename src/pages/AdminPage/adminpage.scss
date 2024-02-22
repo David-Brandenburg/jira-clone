@@ -134,6 +134,9 @@
 						&:nth-child(odd){
 							background-color: var(--tr-bg-color);
 						}
+						&:hover{
+							background-color: $accent-hover-color;
+						}
 					}
 				}
 			}
@@ -145,13 +148,13 @@
 						th{
 							border-right: 1px solid var(--color);
 							&:last-child{
-								width: 100px;
+								width: 140px;
 								border: none;
 							}
 							&:nth-child(3){
 								width: 150px;
 							}
-							&:nth-child(4){
+							&:nth-child(4), &:nth-child(6), &:nth-child(7){
 								width: 100px;
 							}
 							width: 200px;
@@ -165,19 +168,22 @@
 							border-right: 1px solid var(--color);
 							text-align: center;
 							&:last-child{
-								width: 100px;
+								width: 140px;
 								border: none;
 							}
 							&:nth-child(3){
 								width: 150px;
 							}
-							&:nth-child(4){
+							&:nth-child(4), &:nth-child(6), &:nth-child(7){
 								width: 100px;
 							}
 							width: 200px;
 						}
 						&:nth-child(odd){
 							background-color: var(--tr-bg-color);
+						}
+						&:hover{
+							background-color: $accent-hover-color;
 						}
 					}
 				}
@@ -192,7 +198,7 @@
 		left: 0;
 		background-color: #3333338a;
 		backdrop-filter: blur(3px);
-		z-index: 9999;
+		z-index: 9998;
 		.addEntryModal{
 			width: 500px;
 			height: 500px;
@@ -204,36 +210,71 @@
 			margin: auto;
 			background-color: #333;
 			padding: 20px;
-			display: flex;
-			flex-direction: column;
-			gap: 10px;
+			// gap: 10px;
 			color: #fff;
 			border-radius: 10px;
 			box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.6);
 			user-select: none;
+			display: grid;
+			grid-template-columns: 1fr 1fr;
+			grid-template-rows: 40px 1fr 50px;
+			grid-template-areas:
+			"head head"
+			"body body"
+			"btn btn";
+
 			h2{
+				grid-area: head;
 				text-align: center;
 			}
-			.input-row{
+			.input-body{
+				grid-area: body;
 				display: flex;
-				flex-direction: column;
-				gap: 5px;
-				input{
-					color: var(--color);
+				gap: 20px;
+				.input-left, .input-right{
 					width: 50%;
-					padding: 6px;
-					background-color: transparent;
-					box-shadow: inset 3px 3px 5px rgba(0, 0, 0, 0.6), inset -1px -1px 3px rgba(255, 255, 255, 0.3);
+					display: flex;
+					flex-direction: column;
+					gap: 10px;
+				}
+				.input-row{
+					display: flex;
+					flex-direction: column;
+					gap: 5px;
+					textarea{
+						height: 10lh;
+						&::-webkit-scrollbar{
+							display: none;
+						}
+					}
+					input, textarea, select{
+						color: var(--color);
+						resize: none;
+						width: 100%;
+						padding: 6px;
+						background-color: transparent;
+						box-shadow: inset 3px 3px 5px rgba(0, 0, 0, 0.6), inset -1px -1px 3px rgba(255, 255, 255, 0.3);
+					}
+					option{
+						background-color: #333;
+					}
+					img{
+						width: 75%;
+						align-self: center;
+						justify-self: center;
+						margin-bottom: 17px;
+					}
+				}
+				.input-admin-row{
+					display: flex;
+					align-items: center;
+					flex-direction: row-reverse;
+					justify-content: start;
+					gap: 5px;
 				}
 			}
-			.input-admin-row{
-				display: flex;
-				align-items: center;
-				flex-direction: row-reverse;
-				justify-content: start;
-				gap: 5px;
-			}
 			.input-btn-row{
+				grid-area: btn;
 				display: flex;
 				height: 100%;
 				width: 100%;
