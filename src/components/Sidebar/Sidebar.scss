@@ -12,7 +12,7 @@
 aside {
   height: calc(100dvh - 60px);
   margin-top: 60px;
-  width: 400px;
+  min-width: 400px;
   background-color: var(--bg-color);
   display: flex;
   flex-direction: column;
@@ -40,7 +40,7 @@ aside {
     display: flex;
     flex-direction: column;
     gap: 20px;
-    font-size: 20px;
+    font-size: 16px;
     .icon-text {
       display: flex;
       gap: 15px;

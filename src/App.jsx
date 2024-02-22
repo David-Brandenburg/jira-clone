@@ -8,6 +8,7 @@ import Navbar from "./components/Navigationbar/Navbar.jsx";
 import { Sidebar } from "./components/Sidebar/Sidebar.jsx";
 import ProfilePage from "./pages/ProfilePage/ProfilePage.jsx";
 import AdminPage from "./pages/AdminPage/AdminPage.jsx";
+import { KanBanBoard } from "./pages/KanBanPage/KanBanBoard.jsx";
 
 function App() {
   const { loggedIn, isAdmin } = useContext(LoggedinContext);
@@ -51,6 +52,12 @@ function App() {
           }
         />
         <Route path="*" element={<ErrorPage />} />
+        <Route
+          path="/kanBanBoard"
+          element={
+            <PrivateRoute element={<KanBanBoard />} loggedIn={loggedIn} />
+          }
+        />
       </Routes>
     </div>
   );

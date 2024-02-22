@@ -21,6 +21,7 @@ export const Ticket = () => {
   });
 
   const { loggedInUser } = useContext(LoggedinContext);
+  const [showEditor, setShowEditor] = useState(false);
 
   const url = `http://localhost:5000/tickets`;
   const url2 = `http://localhost:5000/users`;
@@ -176,6 +177,7 @@ export const Ticket = () => {
         body: JSON.stringify({
           editor: selectedUser.fname,
           editorId: selectedUser.id,
+          editorAvatar: selectedUser.avatar,
         }),
       };
       try {
@@ -279,6 +281,14 @@ export const Ticket = () => {
     }
   };
 
+  const handleMouseEnter = () => {
+    setShowEditor(true);
+  };
+
+  const handleMouseLeave = () => {
+    setShowEditor(false);
+  };
+
   return (
     <div className="main">
       <ToastContainer />
@@ -321,9 +331,11 @@ export const Ticket = () => {
                     name="status"
                     value={inputValues.status}
                     onChange={handleChange}>
-                    <option value="Fertig">Fertig</option>
-                    <option value="In Progress">In Progress</option>
-                    <option value="Nicht zugewiesen">Nicht zugewiesen</option>
+                    <option>Bitte auswählen</option>
+                    <option value="TO DO">TO DO</option>
+                    <option value="IN PROGRESS">IN PROGRESS</option>
+                    <option value="IN REVIEW">IN REVIEW</option>
+                    <option value="DONE">DONE</option>
                   </select>
                 </div>
                 <div className="ticket-bottom-item">
@@ -362,7 +374,13 @@ export const Ticket = () => {
             <div className="ticket-heading">
               <h2>{ticket.title}</h2>
               <p>Creator: {ticket.creator}</p>
-              <p>Editor: {ticket.editor}</p>
+              <div
+                className="ticket-editor-pic"
+                onMouseEnter={handleMouseEnter}
+                onMouseLeave={handleMouseLeave}>
+                <img src={ticket.editorAvatar} alt="Editor Avatar" />
+                {showEditor && <div className="tooltip">{ticket.editor}</div>}
+              </div>
             </div>
             <div className="ticket-description">
               <p>{ticket.desc}</p>
@@ -442,10 +460,15 @@ export const Ticket = () => {
             <div className="ticket-bottom">
               <div className="ticket-bottom-item">
                 <h4>Status</h4>
-                <select name="status" defaultValue={editTicket.status}>
-                  <option value="Fertig">Fertig</option>
-                  <option value="In Progress">In Progress</option>
-                  <option value="Nicht zugewiesen">Nicht zugewiesen</option>
+                <select
+                  name="status"
+                  value={inputValues.status}
+                  onChange={handleChange}>
+                  <option>Bitte auswählen</option>
+                  <option value="TO DO">TO DO</option>
+                  <option value="IN PROGRESS">IN PROGRESS</option>
+                  <option value="IN REVIEW">IN REVIEW</option>
+                  <option value="DONE">DONE</option>
                 </select>
               </div>
               <div className="ticket-bottom-item">

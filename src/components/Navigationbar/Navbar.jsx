@@ -7,89 +7,129 @@ import search_icon_light from "../../assets/search-w.png";
 import search_icon_dark from "../../assets/search-b.png";
 import toggle_light from "../../assets/day.png";
 import toggle_dark from "../../assets/night.png";
-import './Navbar.scss'
+import "./Navbar.scss";
 
 const Navbar2 = () => {
-	const { loggedInUser, setLoggedIn, setLoggedInUser, setStayLoggedIn, isAdmin } = useContext(LoggedinContext);
-	const { theme, setTheme } = useContext(ThemeContext);
-	const [showMenu, setShowMenu] = useState(false);
-	const navigate = useNavigate();
+  const {
+    loggedInUser,
+    setLoggedIn,
+    setLoggedInUser,
+    setStayLoggedIn,
+    isAdmin,
+  } = useContext(LoggedinContext);
+  const { theme, setTheme } = useContext(ThemeContext);
+  const [showMenu, setShowMenu] = useState(false);
+  const navigate = useNavigate();
 
-	const toggleTheme = () => {
-		setTheme(theme === "dark" ? "light" : "dark")
-	}
+  const toggleTheme = () => {
+    setTheme(theme === "dark" ? "light" : "dark");
+  };
 
-	const toggleProfileMenu = () => {
-		setShowMenu(prev => !prev)
-	}
+  const toggleProfileMenu = () => {
+    setShowMenu((prev) => !prev);
+  };
 
-	const logout = async (loggedInUserId) => {
-		const url = `http://localhost:5000/users/${loggedInUserId}`
-		const options = {
-			method: "PATCH",
-			headers: {
-				"Content-Type": "application/json",
-				},
-			body: JSON.stringify({
-				isloggedin: false,
-			}),
-		}
-		try {
-			const response = await fetch(url, options);
-			if (!response.ok){
-				throw new Error("Failed to fetch", response.status)
-			}
-			toast.success("You're getting logged out!")
-			setTimeout(() => {
-				setLoggedIn(false)
-				setStayLoggedIn(false)
-				setLoggedInUser(null)
-				navigate("/")
-			}, 6000);
-		} catch (error) {
-			console.error(error)
-		}
-		console.log("Logout", url)
-	}
+  const logout = async (loggedInUserId) => {
+    const url = `http://localhost:5000/users/${loggedInUserId}`;
+    const options = {
+      method: "PATCH",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        isloggedin: false,
+      }),
+    };
+    try {
+      const response = await fetch(url, options);
+      if (!response.ok) {
+        throw new Error("Failed to fetch", response.status);
+      }
+      toast.success("You're getting logged out!");
+      setTimeout(() => {
+        setLoggedIn(false);
+        setStayLoggedIn(false);
+        setLoggedInUser(null);
+        navigate("/");
+      }, 6000);
+    } catch (error) {
+      console.error(error);
+    }
+    console.log("Logout", url);
+  };
 
-	return (
-		<>
-			<ToastContainer />
-			<nav>
-				<div className={`nav-wrapper ${theme}`}>
-					<div className="toggle-wrapper">
-						<img src={theme === "light" ? toggle_dark : toggle_light} alt="" onClick={toggleTheme}/>
-					</div>
-					<div className="item-wrapper">
-						<ul className="nav-links">
-							<li>Your Work</li>
-							<li>Projects</li>
-							<li>Filters</li>
-							<li>Dashboards</li>
-							<li>Teams</li>
-							<li>Plans</li>
-							<li>Apps</li>
-						</ul>
-						<div className="search-wrapper">
-							<input type="text" name="search" id="search" />
-							<img src={theme === "light" ? search_icon_dark : search_icon_light } alt="" />
-						</div>
-						<div className="profile-wrapper">
-							<div className="profile-avatar" onClick={toggleProfileMenu}>
-								<img src={loggedInUser?.avatar} alt=""/>
-							</div>
-							<div className="profile-menu" style={{visibility: showMenu ? "visible" : "hidden"}}>
-								<p>Placeholder</p>
-								<p onClick={(() => {navigate("/profile"); setShowMenu(false)})}>Profil</p>
-								{isAdmin === true && <p onClick={(() => {navigate("/admin"); setShowMenu(false)})}>Admin Page</p>}
-								<p onClick={(() => {logout(loggedInUser.userId); setShowMenu(false)})}>Ausloggen</p>
-							</div>
-						</div>
-					</div>
-				</div>
-			</nav>
-		</>
-	)
-}
+  return (
+    <>
+      <ToastContainer />
+      <nav>
+        <div className={`nav-wrapper ${theme}`}>
+          <div className="toggle-wrapper">
+            <img
+              src={theme === "light" ? toggle_dark : toggle_light}
+              alt=""
+              onClick={toggleTheme}
+            />
+          </div>
+          <div className="item-wrapper">
+            <ul className="nav-links">
+              <li>Your Work</li>
+              <li>Projects</li>
+              <li>Filters</li>
+              <li
+                onClick={() => {
+                  navigate("/KanBanBoard");
+                }}>
+                Dashboards
+              </li>
+              <li>Teams</li>
+              <li>Plans</li>
+              <li>Apps</li>
+            </ul>
+            <div className="search-wrapper">
+              <input type="text" name="search" id="search" />
+              <img
+                src={theme === "light" ? search_icon_dark : search_icon_light}
+                alt=""
+              />
+            </div>
+            <div className="profile-wrapper">
+              <div className="profile-avatar" onClick={toggleProfileMenu}>
+                <img src={loggedInUser?.avatar} alt="" />
+              </div>
+              <div
+                className="profile-menu"
+                style={{ visibility: showMenu ? "visible" : "hidden" }}>
+                <p>Placeholder</p>
+                <p
+                  onClick={() => {
+                    navigate("/profile");
+                    setShowMenu(false);
+                  }}>
+                  Profil
+                </p>
+                {isAdmin === true && (
+                  <p
+                    onClick={() => {
+                      navigate("/admin");
+                      setShowMenu(false);
+                    }}>
+                    Admin Page
+                  </p>
+                )}
+                <p
+                  onClick={() => {
+                    logout(loggedInUser.userId);
+                    setShowMenu(false);
+                  }}>
+                  Ausloggen
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </nav>
+    </>
+  );
+};
 
-export default Navbar2
+export default Navbar2;
