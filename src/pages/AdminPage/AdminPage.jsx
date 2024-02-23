@@ -15,9 +15,12 @@ const AdminPage = () => {
   const [openModal, setOpenModal] = useState(false);
   const [currentUser, setCurrentUser] = useState(null);
   const [selectedEditor, setSelectedEditor] = useState({ name: "", id: "" });
+
   const { theme } = useContext(ThemeContext);
   const { loggedInUser } = useContext(LoggedinContext);
+
   const dataBase = ["Users", "Tickets", "Placeholder", "Placeholder"];
+
   const url = "http://localhost:5000/";
   const options = {
     method: "GET",
@@ -180,6 +183,7 @@ const AdminPage = () => {
         toast.success("New ticket added!");
         setOpenModal(false);
         setDataToSave({});
+		fetchData("tickets")
       }
     } catch (error) {
       console.error(error);
@@ -190,6 +194,16 @@ const AdminPage = () => {
     e.preventDefault();
     const newVal = generateRandomAvatar();
     setAvatar(newVal);
+  };
+
+  const handleEditTicket = (e, ticketId) => {
+	e.preventDefault();
+	console.log(ticketId);
+  };
+
+  const handleDeleteTicket = (e, ticketId) => {
+	e.preventDefault();
+	console.log(ticketId);
   };
 
   return (
@@ -266,7 +280,7 @@ const AdminPage = () => {
                     (key, index) =>
                       key !== "desc" && <th key={index}>{key.toUpperCase()}</th>
                   )}
-                  <th>Edit / Delete</th>
+                  <th>Edit | Delete</th>
                 </tr>
               </thead>
               <tbody>
@@ -277,8 +291,7 @@ const AdminPage = () => {
                         key !== "desc" && <td key={index}>{value}</td>
                     )}
                     <td>
-                      <i className="bi bi-pencil-square"></i>&nbsp;&nbsp; |
-                      &nbsp;&nbsp;<i className="bi bi-trash"></i>
+						<i className="bi bi-pencil-square" onClick={((e) => handleEditTicket(e, item.id))} ></i>&nbsp;&nbsp; | &nbsp;&nbsp;<i className="bi bi-trash" onClick={((e) => handleDeleteTicket(e, item.id))}></i>
                     </td>
                   </tr>
                 ))}
