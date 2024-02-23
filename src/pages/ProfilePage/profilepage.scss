@@ -180,16 +180,50 @@
 				align-items: flex-end;
 				justify-content: space-between;
 				width: 50%;
-				.avatar-wrapper{
+				.avatar-content{
 					display: flex;
 					flex-direction: column;
 					gap: 20px;
-					width: 50%;
-					img{
-						width: 100%;
+					width: 100%;
+					align-items: flex-end;
+					hr{
+						border-top: 1px solid var(--color);
+						min-width: 75%;
+						width: 20%;
 					}
-					.change-av-btn{
-						width: 100%;
+					.avatar-row{
+						display: flex;
+						gap: 10px;
+						border-radius: 50%;
+						.avatar-box{
+							display: flex;
+							flex-direction: column;
+							justify-content: flex-end;
+							align-items: center;
+							gap: 10px;
+							h4{
+								width: fit-content;
+							}
+							.avatar-wrapper{
+								border: 1px solid var(--color);
+								overflow: hidden;
+								padding: 10px;
+								background-color: var(--bg-switch);
+								img{
+									width: 200px;
+									filter: drop-shadow(3px 3px 5px rgba(0,0,0,0.5));
+								}
+							}
+						}
+					}
+					.btn-row{
+						display: flex;
+						gap: 10px;
+						align-items: center;
+						justify-content: center;
+						.btn{
+							width: fit-content;
+						}
 					}
 				}
 	

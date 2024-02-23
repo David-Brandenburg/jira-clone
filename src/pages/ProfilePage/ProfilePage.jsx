@@ -10,7 +10,8 @@ const ProfilePage = () => {
 	const [userData, setUserData] = useState({});
 	const [editProfile, setEditProfile] = useState(false);
 	const [emailHasChanged, setEmailHasChanged] = useState(false);
-	const [avatar, setAvatar] = useState("");
+	const [currentAvatar, setCurrentAvatar] = useState(null);
+	const [newAvatar, setNewAvatar] = useState(null);
 	const [tickets, setTickets] = useState([]);
 	const [fname, setFName] = useState("");
 	const [lname, setLName] = useState("");
@@ -34,8 +35,12 @@ const ProfilePage = () => {
 	};
 
 	const changeAvatar = () => {
-		setAvatar(generateRandomAvatar())
+		setNewAvatar(generateRandomAvatar())
 	};
+
+	const restoreAvatar = () => {
+		setNewAvatar(currentAvatar)
+	}
 
 	const handleCurrentPasswordInput = (e) => {
 		setCurrentInputPassword(e.target.value);
@@ -61,7 +66,7 @@ const ProfilePage = () => {
 				email: email,
 				fname: fname,
 				lname: lname,
-				avatar: avatar,
+				avatar: newAvatar || currentAvatar,
 				password: newPassword || currentPassword,
 			}),
 		}
@@ -86,7 +91,7 @@ const ProfilePage = () => {
 					fetchUser();
 					setEditProfile(false);
 					setTimeout(() => {
-						setLoggedInUser({avatar: avatar, userId: userId});
+						setLoggedInUser({avatar: newAvatar || currentAvatar, userId: userId});
 					}, 3000);
 					toast.success("Successfully updated changes!", {autoClose: 3000});
 				} else if (newPassword && currentInputPassword){
@@ -100,7 +105,7 @@ const ProfilePage = () => {
 						fetchUser();
 						setEditProfile(false);
 						setTimeout(() => {
-							setLoggedInUser({avatar: avatar, userId: userId});
+							setLoggedInUser({avatar: newAvatar || currentAvatar, userId: userId});
 						}, 3000);
 						clearPasswordInputs();
 						toast.success("Successfully updated changes!", {autoClose: 3000});
@@ -123,7 +128,8 @@ const ProfilePage = () => {
 			const user = await resp.json();
 			setUserData(user);
 			setTickets(user.ticketId);
-			setAvatar(user.avatar);
+			setCurrentAvatar(user.avatar);
+			setNewAvatar(user.avatar);
 			setEmail(user.email);
 			setFName(user.fname);
 			setLName(user.lname);
@@ -192,7 +198,7 @@ const ProfilePage = () => {
 		if (currentInputPassword) {
 			if (currentInputPassword !== currentPassword) {
 				passwordInputs[0].style.outline = nope;
-				setErrorMsg("Wrong password");
+				setErrorMsg("Wrong password!");
 			} else {
 				passwordInputs[0].style.outline = yes;
 				setErrorMsg(defaultError);
@@ -202,12 +208,12 @@ const ProfilePage = () => {
 			setErrorMsg(defaultError);
 		}
 		if (newPassword && !currentInputPassword) {
-			setErrorMsg("You have to enter your old password");
+			setErrorMsg("You have to enter your old password!");
 		} else if (newPassword){
 			if (newPassword === currentInputPassword) {
 				passwordInputs.forEach(input => {
 					input.style.outline = nope;
-					setErrorMsg("You can't use an old password");
+					setErrorMsg("You can't use an old password!");
 				});
 			} else if (newPassword !== currentInputPassword && newPassword.length >= 6){
 				passwordInputs[1].style.outline = yes;
@@ -264,7 +270,6 @@ const ProfilePage = () => {
 						<hr />
 						<div className="user-info-row user-pw-row">
 							<h3>Change Password</h3>
-							<small style={{color: "red"}}>{errormsg}</small>
 							<label htmlFor="oldPassword">
 								<p>Enter current password</p>
 								<input type="password" name="oldPassword" id="oldPassword" onChange={handleCurrentPasswordInput} defaultValue={currentInputPassword}/>
@@ -273,12 +278,31 @@ const ProfilePage = () => {
 								<p>Enter new password</p>
 								<input type="password" name="newPassword" id="newPassword" onChange={((e) => {setNewPassword(e.target.value)})}/>
 							</label>
+							<small style={{color: "red"}}>{errormsg}</small>
 						</div>
 					</div>
 					<div className="profile-content-right">
-						<div className="avatar-wrapper">
-							<img src={avatar} alt="" />
-							<button className="btn change-av-btn" onClick={changeAvatar}>Change Avatar</button>
+						<div className="avatar-content">
+							<h3>Avatar</h3>
+							<hr />
+							<div className="avatar-row">
+								<div className="avatar-box">
+									<div className="avatar-wrapper">
+										<img src={currentAvatar} alt="" />
+									</div>
+									<h4>Current Avatar</h4>
+								</div>
+								<div className="avatar-box">
+									<div className="avatar-wrapper">
+										<img src={newAvatar} alt="" />
+									</div>
+									<h4>Preview new Avatar</h4>
+								</div>
+							</div>
+							<div className="btn-row">
+								<button className="btn restore-av-btn" onClick={restoreAvatar}>Restore Avatar</button>
+								<button className="btn change-av-btn" onClick={changeAvatar}>Change Avatar</button>
+							</div>
 						</div>
 						<div className="btn-wrapper">
 							<button className="btn" id="saveBtn" onClick={handlePatchUser}>Save Changes</button>
