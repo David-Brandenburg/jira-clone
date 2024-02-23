@@ -1,96 +1,199 @@
 .profile-content{
-	display: flex;
-	flex-direction: column;
-	gap: 20px;
-	user-select: none;
 	.dark{
-		--bg-color: #444;
+		--bg-color: linear-gradient(to top, #0a0a0a, #000);
 		--color: #fff;
 		--color2: #ddd;
 		--color-disabled: #666;
+		--textShadow: 3px 3px 5px rgba(0,0,0,1);
+		--bg-switch: #222;
+		--bg-linear-switch: linear-gradient(90deg, #70acff, #3b8dff);
+		--bg-switch-toggler: linear-gradient(45deg, #333, #000);
+		--input-shadow: inset 1px 1px 5px rgba(31, 31, 31, 0.3), inset -1px -1px 3px rgba(65, 65, 65, 0.3);
 	}
 	.light{
 		--bg-color: #fff;
 		--color: #000;
 		--color2: #111;
 		--color-disabled: #ccc;
+		--textShadow: 3px 3px 5px rgba(0,0,0,.3);
+		--bg-switch: #d7d7d7;
+		--bg-linear-switch: linear-gradient(90deg, #70acff, #3b8dff);
+		// --bg-linear-switch: linear-gradient(90deg, #f19af3, #f099b5);
+		--bg-switch-toggler: linear-gradient(45deg, #dedede, #ffffff);
+		--input-shadow: inset 1px 1px 5px rgba(0,0,0,.3), inset -1px -1px 3px rgba(255,255,255,0.5);
 	}
 
-	.profile-header{
-		height: 50px;
-		width: 100%;
-		background-color: var(--bg-color);
-		color: var(--color);
-		box-shadow: 0px 3px 5px rgba(0,0,0,0.1);
+	.profile-wrapper{
 		display: flex;
-		align-items: center;
-		justify-content: space-between;
-		padding: 0 20px;
-	}
-	.profile-content-wrapper{
-		display: flex;
-		width: 100%;
+		flex-direction: column;
+		gap: 20px;
 		height: 100%;
-		background-color: var(--bg-color);
-		color: var(--color);
-		box-shadow: 0px 3px 5px rgba(0,0,0,0.1);
-		padding: 20px;
-		.profile-content-left{
+		user-select: none;
+		.profile-header{
+			height: 50px;
+			width: 100%;
+			background: var(--bg-color);
+			color: var(--color);
+			box-shadow: 0px 3px 5px rgba(0,0,0,0.1);
 			display: flex;
-			flex-direction: column;
-			gap: 20px;
-			width: 50%;
-			hr{
-				border-top: 1px solid var(--color);
-				min-width: 15%;
-				width: 20%;
-			}
-			.user-info-row{
-				display: flex;
-				flex-direction: column;
-				gap: 5px;
-				p{
-					color: var(--color2);
-				}
-				input{
-					width: 50%;
-					background-color: transparent;
-					color: var(--color);
-					padding: 6px;
-					box-shadow: inset 2px 2px 5px rgba(0,0,0,0.5), inset -1px -1px 3px rgba(255,255,255,0.5);
-					&:disabled{
-						color: var(--color-disabled);
+			align-items: center;
+			justify-content: space-between;
+			padding: 20px;
+			.check{
+				position: relative;
+				background: var(--bg-linear-switch);
+				line-height: 0;
+				font-size: 25px;
+				&:hover{
+					&::after{
+						position: absolute;
+						content: "Edit Profile";
+						width: 100px;
+						font-size: 12px;
+						text-shadow: var(--textShadow);
+						top: 13px;
+						right: 20px;
 					}
 				}
 			}
-			.user-pw-row{
-				gap:10px;
-				label{
-					display: flex;
-					flex-direction: column;
-					gap: 5px;
-				}
+			.check input[type="checkbox"],
+			.check label,
+			.check label::before,
+			.check label::after {
+				appearance: none;
+				display: inline-block;
+				font-size: inherit;
+				border-radius: 1em;
+				border: 0;
+				transition: .35s ease-in-out;
+				box-sizing: border-box;
+				cursor: pointer;
+			}
+
+			.check {
+				display: inline-block;
+				border-radius: 50px;
+				transition: .35s ease-in-out;
+				cursor: pointer;
+			}
+
+			.check label {
+				width: 2.2em;
+				height: 1em;
+				background: var(--bg-switch);
+				overflow: hidden;
+			}
+
+			.check input[type="checkbox"] {
+				position: absolute;
+				z-index: 1;
+				width: .8em;
+				height: .8em;
+				top: .1em;
+				left: .1em;
+				background: var(--bg-switch-toggler);
+				box-shadow: 0 6px 7px rgba(0,0,0,0.3);
+			}
+
+			.check input[type="checkbox"]:checked {
+				left: 1.3em;
+			}
+
+			.check input[type="checkbox"]:checked + label {
+				background: transparent;
+			}
+
+			.check label::after {
+				content: "";
+				top: .65em;
+				left: .6em;
+				height: .1em;
+				width: .35em;
+				font-size: .2em;
+				transform-origin: 0 0 -.4em;
+			}
+
+			.check input[type="checkbox"]:checked + label::before,
+			.check input[type="checkbox"]:checked + label::after {
+				left: 2.55em;
+				top: .4em;
+				line-height: .1em;
+				transform: rotateY(360deg);
+			}
+
+			.check input[type="checkbox"]:checked + label::after {
+				height: .16em;
+				top: .55em;
+				left: 2.6em;
+				font-size: .6em;
+				line-height: 0;
 			}
 		}
-		.profile-content-right{
+		.profile-content-wrapper{
 			display: flex;
-			flex-direction: column;
-			align-items: flex-end;
-			justify-content: space-between;
-			width: 50%;
-			.avatar-wrapper{
+			width: 100%;
+			height: 100%;
+			background: var(--bg-color);
+			color: var(--color);
+			box-shadow: 0px 3px 5px rgba(0,0,0,0.1);
+			padding: 20px;
+			.profile-content-left{
 				display: flex;
 				flex-direction: column;
 				gap: 20px;
 				width: 50%;
-				img{
-					width: 100%;
+				hr{
+					border-top: 1px solid var(--color);
+					min-width: 15%;
+					width: 20%;
 				}
-				.change-av-btn{
-					width: 100%;
+				.user-info-row{
+					display: flex;
+					flex-direction: column;
+					gap: 5px;
+					p{
+						color: var(--color2);
+					}
+					input{
+						width: 250px;
+						background-color: transparent;
+						color: var(--color);
+						padding: 6px;
+						box-shadow: var(--input-shadow);
+						&:disabled{
+							color: var(--color-disabled);
+						}
+					}
+				}
+				.user-pw-row{
+					gap:10px;
+					label{
+						display: flex;
+						flex-direction: column;
+						gap: 5px;
+					}
 				}
 			}
-
+			.profile-content-right{
+				display: flex;
+				flex-direction: column;
+				align-items: flex-end;
+				justify-content: space-between;
+				width: 50%;
+				.avatar-wrapper{
+					display: flex;
+					flex-direction: column;
+					gap: 20px;
+					width: 50%;
+					img{
+						width: 100%;
+					}
+					.change-av-btn{
+						width: 100%;
+					}
+				}
+	
+			}
 		}
 	}
 }

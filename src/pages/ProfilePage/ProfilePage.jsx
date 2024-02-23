@@ -20,9 +20,9 @@ const ProfilePage = () => {
 	const [newPassword, setNewPassword] = useState(null);
 	const [errormsg, setErrorMsg] = useState(defaultError)
 	
-	const { loggedInUser } = useContext(LoggedinContext);
-	const userId = loggedInUser.userId;
+	const { loggedInUser, setLoggedInUser } = useContext(LoggedinContext);
 	const { theme } = useContext(ThemeContext);
+	const userId = loggedInUser.userId;
 
 	const url = "http://localhost:5000/users/";
 	const options = {
@@ -31,15 +31,24 @@ const ProfilePage = () => {
 
 	const handleEditProfile = () => {
 		setEditProfile(prev => !prev)
-	}
+	};
 
 	const changeAvatar = () => {
 		setAvatar(generateRandomAvatar())
-	}
+	};
 
 	const handleCurrentPasswordInput = (e) => {
-		// e.preventDefault();
 		setCurrentInputPassword(e.target.value);
+	};
+
+	function clearPasswordInputs() {
+		const passwordInputs = document.querySelectorAll("input[type='password']");
+		passwordInputs.forEach(input => {
+			input.value = null;
+			input.style.outline = "none";
+		});
+		setCurrentInputPassword(null);
+		setNewPassword(null)
 	}
 
 	const handlePatchUser = async () => {
@@ -64,40 +73,91 @@ const ProfilePage = () => {
 			const users = await response.json();
 			const checkMail = users.find(user => user.email === email);
 			if (checkMail && emailHasChanged) {
-				toast.warn("E-Mail already in use!");
+				toast.warn("E-Mail already in use!", {autoClose: 3000});
 				throw new Error("E-Mail already in use!");
 			} else {
 				if (newPassword === currentPassword) {
-					toast.warn("You can't use an old password")
+					toast.warn("You can't use an old password", {autoClose: 3000})
 				} else if (!newPassword && !currentInputPassword){
 					const resp = await fetch(`${url}${userId}`, optionsPatch);
 					if (!resp.ok){
 						throw new Error("Failed to fetch!", resp.status);
 					}
-					toast.success("Successfully updated changes!");
+					fetchUser();
+					setEditProfile(false);
+					setTimeout(() => {
+						setLoggedInUser({avatar: avatar, userId: userId});
+					}, 3000);
+					toast.success("Successfully updated changes!", {autoClose: 3000});
 				} else if (newPassword && currentInputPassword){
 					if (currentInputPassword !== currentPassword){
-						toast.error("Wrong old password!")
+						toast.error("Wrong old password!", {autoClose: 3000})
 					} else {
 						const resp = await fetch(`${url}${userId}`, optionsPatch);
 						if (!resp.ok){
 							throw new Error("Failed to fetch!", resp.status);
 						}
-						toast.success("Successfully updated changes!");
+						fetchUser();
+						setEditProfile(false);
+						setTimeout(() => {
+							setLoggedInUser({avatar: avatar, userId: userId});
+						}, 3000);
+						clearPasswordInputs();
+						toast.success("Successfully updated changes!", {autoClose: 3000});
 					}
 				} else {
-					toast.warn("You have to enter both password fields!")
+					toast.warn("You have to enter both password fields!", {autoClose: 3000})
 				}
 			}
 		} catch (error) {
 			console.error(error);
-		}
+		};
+	};
 
-	}
+	const fetchUser = async () => {
+		try {
+			const resp = await fetch(`${url}${userId}`, options);
+			if (!resp.ok){
+				throw new Error("Failed to fetch!", resp.status);
+			};
+			const user = await resp.json();
+			setUserData(user);
+			setTickets(user.ticketId);
+			setAvatar(user.avatar);
+			setEmail(user.email);
+			setFName(user.fname);
+			setLName(user.lname);
+			setCurrentPassword(user.password);
+		} catch (error) {
+			console.error(error);
+		}
+	};
+
+	useEffect(() => {
+		// (async () => {
+		// 	try {
+		// 		const resp = await fetch(`${url}${userId}`, options);
+		// 		if (!resp.ok){
+		// 			throw new Error("Failed to fetch!", resp.status);
+		// 		};
+		// 		const user = await resp.json();
+		// 		setUserData(user);
+		// 		setTickets(user.ticketId);
+		// 		setAvatar(user.avatar);
+		// 		setEmail(user.email);
+		// 		setFName(user.fname);
+		// 		setLName(user.lname);
+		// 		setCurrentPassword(user.password);
+		// 	} catch (error) {
+		// 		console.error(error);
+		// 	};
+		// })()
+		fetchUser();
+	}, []);
 	
 	useEffect(() => {
 		const btns = document.querySelectorAll(".btn");
-		const inputs = document.querySelectorAll("input:not([type='checkbox'])");
+		const inputs = document.querySelectorAll("input:not([type='checkbox']):not(#search)");
 		const checkBox = document.getElementById("editprofile");
 		if (editProfile){
 			checkBox.checked = true;
@@ -116,28 +176,7 @@ const ProfilePage = () => {
 				input.disabled = true;
 			})
 		}
-	}, [editProfile])
-
-	useEffect(() => {
-		(async () => {
-			try {
-				const resp = await fetch(`${url}${userId}`, options);
-				if (!resp.ok){
-					throw new Error("Failed to fetch!", resp.status);
-				};
-				const user = await resp.json();
-				setUserData(user);
-				setTickets(user.ticketId);
-				setAvatar(user.avatar);
-				setEmail(user.email);
-				setFName(user.fname);
-				setLName(user.lname);
-				setCurrentPassword(user.password);
-			} catch (error) {
-				console.error(error);
-			};
-		})()
-	}, []);
+	}, [editProfile]);
 
 	useEffect(() => {
 		// kann man leer lassen, oder etwas ausführen sobald sich userData verändert - hier leer damit es immer aktuell ist.
@@ -176,69 +215,74 @@ const ProfilePage = () => {
 		} else {
 			passwordInputs[1].style.outline = "none";
 		};
-	}, [currentInputPassword, newPassword])
+	}, [currentInputPassword, newPassword, currentPassword, defaultError]);
 
 	return (
 		<div className={`main-content profile-content`}>
 			<ToastContainer />
-			<div className={`profile-header ${theme}`}>
-				<div className="dummyBox"></div>
-				<h2>{`${fname}'s Profile`}</h2>
-				<input type="checkbox" name="editprofile" id="editprofile" onChange={handleEditProfile} />
-			</div>
-			<div className={`profile-content-wrapper ${theme}`}>
-				<div className="profile-content-left">
-					<div className="user-info-row">
-						<h3>UserID: <span style={{color: "#3b8dff", fontWeight: "normal"}}>{userData.id}</span></h3>
-					</div>
-					<hr style={{width: "75%"}}/>
-					<div className="user-info-row">
-						<h3>Firstname</h3>
-						<input type="text" name="fname" id="fname" defaultValue={userData.fname} onChange={((e) => setFName(e.target.value))}/>
-					</div>
-					<hr />
-					<div className="user-info-row">
-						<h3>Lastname</h3>
-						<input type="text" name="lname" id="lname" defaultValue={userData.lname} onChange={((e) => setLName(e.target.value))}/>
-					</div>
-					<hr />
-					<div className="user-info-row">
-						<h3>E-Mail</h3>
-						<input type="email" name="email" id="email" defaultValue={userData.email} onChange={((e) => {setEmail(e.target.value); setEmailHasChanged(true)})}/>
-					</div>
-					<hr />
-					<div className="user-info-row">
-						<h3>Your Ticket Id's</h3>
-						<p>
-							{tickets.length === 0
-								? "N/A"
-								: tickets.length < 2
-								? (<span>{tickets}</span>)
-								: (<span>{tickets.join(", ")}</span>)
-							}
-						</p>
-					</div>
-					<hr />
-					<div className="user-info-row user-pw-row">
-						<h3>Change Password</h3>
-						<small style={{color: "red"}}>{errormsg}</small>
-						<label htmlFor="oldPassword">
-							<p>Enter current password</p>
-							<input type="password" name="oldPassword" id="oldPassword" onChange={handleCurrentPasswordInput} defaultValue={currentInputPassword}/>
-						</label>
-						<label htmlFor="newPassword">
-							<p>Enter new password</p>
-							<input type="password" name="newPassword" id="newPassword" onChange={((e) => {setNewPassword(e.target.value)})}/>
-						</label>
+			<div className="profile-wrapper">
+				<div className={`profile-header ${theme}`}>
+					<div className="dummyBox"></div>
+					<h2>{`${fname}'s Profile`}</h2>
+					<div className="check">
+						<input type="checkbox" name="editprofile" id="editprofile" onChange={handleEditProfile} />
+						<label htmlFor="editprofile"></label>
 					</div>
 				</div>
-				<div className="profile-content-right">
-					<div className="avatar-wrapper">
-						<img src={avatar} alt="" />
-						<button className="btn change-av-btn" onClick={changeAvatar}>Change Avatar</button>
+				<div className={`profile-content-wrapper ${theme}`}>
+					<div className="profile-content-left">
+						<div className="user-info-row">
+							<h3>UserID: <span style={{color: "#3b8dff", fontWeight: "normal"}}>{userData.id}</span></h3>
+						</div>
+						<hr style={{width: "75%"}}/>
+						<div className="user-info-row">
+							<h3>Firstname</h3>
+							<input type="text" name="fname" id="fname" defaultValue={userData.fname} onChange={((e) => setFName(e.target.value))}/>
+						</div>
+						<hr />
+						<div className="user-info-row">
+							<h3>Lastname</h3>
+							<input type="text" name="lname" id="lname" defaultValue={userData.lname} onChange={((e) => setLName(e.target.value))}/>
+						</div>
+						<hr />
+						<div className="user-info-row">
+							<h3>E-Mail</h3>
+							<input type="email" name="email" id="email" defaultValue={userData.email} onChange={((e) => {setEmail(e.target.value); setEmailHasChanged(true)})}/>
+						</div>
+						<hr />
+						<div className="user-info-row">
+							<h3>Your Ticket Id's</h3>
+							<p>
+								{tickets.length === 0
+									? "N/A"
+									: tickets.length < 2
+									? (<span>{tickets}</span>)
+									: (<span>{tickets.join(", ")}</span>)
+								}
+							</p>
+						</div>
+						<hr />
+						<div className="user-info-row user-pw-row">
+							<h3>Change Password</h3>
+							<small style={{color: "red"}}>{errormsg}</small>
+							<label htmlFor="oldPassword">
+								<p>Enter current password</p>
+								<input type="password" name="oldPassword" id="oldPassword" onChange={handleCurrentPasswordInput} defaultValue={currentInputPassword}/>
+							</label>
+							<label htmlFor="newPassword">
+								<p>Enter new password</p>
+								<input type="password" name="newPassword" id="newPassword" onChange={((e) => {setNewPassword(e.target.value)})}/>
+							</label>
+						</div>
 					</div>
-					<div className="btn-wrapper">
-						<button className="btn" id="saveBtn" onClick={handlePatchUser}>Save Changes</button>
+					<div className="profile-content-right">
+						<div className="avatar-wrapper">
+							<img src={avatar} alt="" />
+							<button className="btn change-av-btn" onClick={changeAvatar}>Change Avatar</button>
+						</div>
+						<div className="btn-wrapper">
+							<button className="btn" id="saveBtn" onClick={handlePatchUser}>Save Changes</button>
+						</div>
 					</div>
 				</div>
 			</div>

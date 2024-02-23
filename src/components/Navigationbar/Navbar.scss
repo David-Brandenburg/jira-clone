@@ -8,13 +8,15 @@ nav{
 	z-index: 999;
 	.dark{
 		--color: #fff;
-		--colorHover: #9b9b9b;
-		--bgColor: #333;
+		--colorHover: #70acff;
+		--bgColorHover: #0f0f0f;
+		--bgColor: linear-gradient(to top, #0a0a0a, #000);
 		--textShadow: 3px 3px 5px rgba(0,0,0,1);
 	}
 	.light{
 		--color: #000;
-		--colorHover: #757575;
+		--colorHover: #70acff;
+		--bgColorHover: #f5f5f5;
 		--bgColor: #fff;
 		--textShadow: 3px 3px 5px rgba(0,0,0,.3);
 	}
@@ -26,7 +28,8 @@ nav{
 		align-items: center;
 		justify-content: space-between;
 		position: relative;
-		background-color: var(--bgColor);
+		// background-color: var(--bgColor);
+		background: var(--bgColor);
 		color: var(--color);
 		.toggle-wrapper{
 			width: 25px;
@@ -110,14 +113,15 @@ nav{
 				right: 0;
 				text-align: end;
 				color: var(--color);
-				background-color: var(--bgColor);
+				background: var(--bgColor);
 				box-shadow: 2px 4px 5px rgba(0,0,0,0.5);
 				visibility: hidden;
 				p{
 					margin: 0;
 					padding: 10px;
 					&:hover{
-						background-color: var(--colorHover);
+						background: var(--bgColorHover);
+						color: var(--colorHover);
 						cursor: pointer;
 					}
 				}

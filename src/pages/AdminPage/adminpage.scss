@@ -2,11 +2,12 @@
 
 .admin-page{
 	.dark{
-		--bg-color: #555;
+		--bg-color: linear-gradient(to top, #0a0a0a, #000);
 		--color: #fff;
 		--color2: #000;
 		--box-shadow: 0px 3px 5px rgba(0,0,0,0.2);
-		--tr-bg-color: #666;
+		--tr-bg-color: #111;
+		--color-hover-turned: #fff;
 	}
 	.light{
 		--bg-color: #fff;
@@ -14,6 +15,7 @@
 		--color2: #fff;
 		--box-shadow: 0px 3px 5px rgba(0,0,0,0.1);
 		--tr-bg-color: #f2f2f2;
+		--color-hover-turned: #000;
 	}
 	.admin-wrapper{
 		display: flex;
@@ -25,7 +27,7 @@
 			justify-content: space-between;
 			align-items: center;
 			height: 50px;
-			background-color: var(--bg-color);
+			background: var(--bg-color);
 			color: var(--color);
 			box-shadow: var(--box-shadow);
 			padding: 20px;
@@ -66,7 +68,7 @@
 			}
 		}
 		.admin-content{
-			background-color: var(--bg-color);
+			background: var(--bg-color);
 			color: var(--color);
 			box-shadow: var(--box-shadow);
 			height: inherit;
@@ -178,6 +180,13 @@
 								width: 100px;
 							}
 							width: 200px;
+							.bi{
+								&:hover{
+									cursor: pointer;
+									font-weight: bold;
+									color: var(--color-hover-turned);
+								}
+							}
 						}
 						&:nth-child(odd){
 							background-color: var(--tr-bg-color);

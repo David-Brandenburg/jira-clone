@@ -13,7 +13,7 @@
 }
 
 .body-dark{
-	--bg-color: #666;
+	--bg-color: #151515;
 }
 .body-light{
 	--bg-color: #f5f5f5;
@@ -21,7 +21,7 @@
 
 body{
 	height: calc(100dvh - 60px);
-	background-color: var(--bg-color);
+	background: var(--bg-color);
 	#root{
 		height: inherit;
 	}
