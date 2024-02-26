@@ -87,6 +87,13 @@
 					background-color: $accent-color;
 					color: var(--color2);
 				}
+				.bi{
+					&:hover{
+						cursor: pointer;
+						font-weight: bold;
+						color: var(--color-hover-turned);
+					}
+				}
 			}
 			.userTable{
 				thead{
@@ -99,14 +106,17 @@
 								min-width: 200px;
 							}
 							&:last-child{
-								width: 50px;
+								width: 140px;
 								border: none;
 							}
-							&:nth-child(4){
+							&:nth-child(4), &:nth-child(6), &:nth-child(7){
 								width: 100px;
 							}
 							&:nth-child(5){
 								width: 200px;
+							}
+							&:nth-child(8){
+								width: 50px;
 							}
 							width: 150px;
 						}
@@ -122,14 +132,17 @@
 								min-width: 200px;
 							}
 							&:last-child{
-								width: 50px;
+								width: 140px;
 								border: none;
 							}
-							&:nth-child(4){
+							&:nth-child(4), &:nth-child(6), &:nth-child(7){
 								width: 100px;
 							}
 							&:nth-child(5){
 								width: 200px;
+							}
+							&:nth-child(8){
+								width: 50px;
 							}
 							width: 150px;
 						}
@@ -180,13 +193,6 @@
 								width: 100px;
 							}
 							width: 200px;
-							.bi{
-								&:hover{
-									cursor: pointer;
-									font-weight: bold;
-									color: var(--color-hover-turned);
-								}
-							}
 						}
 						&:nth-child(odd){
 							background-color: var(--tr-bg-color);
@@ -296,5 +302,104 @@
 			}
 		}
 	}
-	
+	.editEntryModal-blocker{
+		position: fixed;
+		top: 0;
+		bottom: 0;
+		right: 0;
+		left: 0;
+		background-color: #3333338a;
+		backdrop-filter: blur(3px);
+		z-index: 9998;
+		.editEntryModal{
+			width: 500px;
+			height: 500px;
+			position: absolute;
+			top: 0;
+			bottom: 0;
+			left: 0;
+			right: 0;
+			margin: auto;
+			background-color: #333;
+			padding: 20px;
+			// gap: 10px;
+			color: #fff;
+			border-radius: 10px;
+			box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.6);
+			user-select: none;
+			display: grid;
+			grid-template-columns: 1fr 1fr;
+			grid-template-rows: 40px 1fr 50px;
+			grid-template-areas:
+			"head head"
+			"body body"
+			"btn btn";
+
+			h2{
+				grid-area: head;
+				text-align: center;
+				span{
+					color: $accent-color;
+				}
+			}
+			.input-body{
+				grid-area: body;
+				display: flex;
+				gap: 20px;
+				.input-left, .input-right{
+					width: 50%;
+					display: flex;
+					flex-direction: column;
+					gap: 10px;
+				}
+				.input-row{
+					display: flex;
+					flex-direction: column;
+					gap: 5px;
+					textarea{
+						height: 10lh;
+						&::-webkit-scrollbar{
+							display: none;
+						}
+					}
+					input, textarea, select{
+						color: var(--color);
+						resize: none;
+						width: 100%;
+						padding: 6px;
+						background-color: transparent;
+						box-shadow: inset 3px 3px 5px rgba(0, 0, 0, 0.6), inset -1px -1px 3px rgba(255, 255, 255, 0.3);
+					}
+					option{
+						background-color: #333;
+					}
+					img{
+						width: 75%;
+						align-self: center;
+						justify-self: center;
+						margin-bottom: 17px;
+					}
+				}
+				.input-admin-row{
+					display: flex;
+					align-items: center;
+					flex-direction: row-reverse;
+					justify-content: start;
+					gap: 5px;
+				}
+			}
+			.input-btn-row{
+				grid-area: btn;
+				display: flex;
+				height: 100%;
+				width: 100%;
+				gap: 10px;
+				justify-content: flex-end;
+				align-items: flex-end;
+				.btn{
+					height: fit-content;
+				}
+			}
+		}
+	}
 }
