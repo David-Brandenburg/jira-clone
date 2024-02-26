@@ -11,7 +11,7 @@
       ],
       "isadmin": true,
       "isloggedin": true,
-      "id": 1
+      "id": "1"
     },
     {
       "email": "michelle@mail.com",
@@ -25,7 +25,7 @@
       ],
       "isadmin": true,
       "isloggedin": false,
-      "id": 2
+      "id": "2"
     },
     {
       "email": "david@mail.com",
@@ -38,7 +38,8 @@
       ],
       "isadmin": true,
       "isloggedin": true,
-      "id": 3
+      "timeLoggedIn": "26.2.2024 10:52:20",
+      "id": "3"
     },
     {
       "email": "test@mail.com",
@@ -49,7 +50,7 @@
       "ticketIds": [],
       "isadmin": false,
       "isloggedin": false,
-      "id": 4
+      "id": "4"
     },
     {
       "email": "Zwegat69@cock.com",
@@ -60,7 +61,7 @@
       "ticketIds": [],
       "isadmin": false,
       "isloggedin": false,
-      "id": 5
+      "id": "5"
     },
     {
       "email": "cock123@web.de",
@@ -71,7 +72,7 @@
       "ticketIds": [],
       "isadmin": true,
       "isloggedin": false,
-      "id": 6
+      "id": "6"
     },
     {
       "email": "last1@mail.com",
@@ -82,7 +83,7 @@
       "ticketIds": [],
       "isadmin": false,
       "isloggedin": false,
-      "id": 7
+      "id": "7"
     },
     {
       "email": "danny@cock.com",
@@ -93,7 +94,7 @@
       "ticketIds": [],
       "isadmin": true,
       "isloggedin": false,
-      "id": 8
+      "id": "8"
     },
     {
       "email": "31231321@123.com",
@@ -104,7 +105,7 @@
       "ticketIds": [],
       "isadmin": false,
       "isloggedin": false,
-      "id": 9
+      "id": "9"
     }
   ],
   "tickets": [
@@ -195,6 +196,36 @@
       "editorId": "1",
       "editorAvatar": "https://robohash.org/ph38?set=set4",
       "id": "OdBbzfo"
+    }
+  ],
+  "log": [
+    {
+      "userid": "",
+      "username": "",
+      "lastLoggedIn": "",
+      "lastLoggedOut": "",
+      "tickeErstelltTime": "",
+      "id": "6f6e"
+    },
+    {
+      "id": "be97",
+      "userid": "3",
+      "lastLoggedIn": "26.2.2024 13:52:58"
+    },
+    {
+      "id": "8a57",
+      "userid": "3",
+      "lastLoggedIn": "26.2.2024 14:04:51"
+    },
+    {
+      "id": "d08b",
+      "userid": "3",
+      "lastLoggedOut": "26.2.2024 14:16:23"
+    },
+    {
+      "id": "3f31",
+      "userid": "3",
+      "lastLoggedIn": "26.2.2024 14:16:44"
     }
   ]
 }

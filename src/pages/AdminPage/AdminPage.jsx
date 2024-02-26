@@ -10,20 +10,28 @@ const AdminPage = () => {
   const [data, setData] = useState(null);
   const [dataToSave, setDataToSave] = useState({});
   const [dataToPatch, setDataToPatch] = useState({});
-	const [entryData, setEntryData] = useState({});
+  const [entryData, setEntryData] = useState({});
   const [allUser, setAllUser] = useState([]);
   const [avatar, setAvatar] = useState(defaultAvatar);
   const [activeTab, setActiveTab] = useState(null);
   const [openModal, setOpenModal] = useState(false);
   const [openEditModal, setOpenEditModal] = useState(false);
   const [currentUser, setCurrentUser] = useState(null);
-  const [selectedEditor, setSelectedEditor] = useState({ name: "", id: "", avatar: "" });
-  const [selectedEditEditor, setSelectedEditEditor] = useState({ name: "", id: "", avatar: "" });
+  const [selectedEditor, setSelectedEditor] = useState({
+    name: "",
+    id: "",
+    avatar: "",
+  });
+  const [selectedEditEditor, setSelectedEditEditor] = useState({
+    name: "",
+    id: "",
+    avatar: "",
+  });
 
   const { theme } = useContext(ThemeContext);
   const { loggedInUser } = useContext(LoggedinContext);
 
-  const dataBase = ["Users", "Tickets", "Placeholder", "Placeholder"];
+  const dataBase = ["Users", "Tickets", "Log", "Placeholder"];
 
   const url = "http://localhost:5000/";
   const options = {
@@ -45,19 +53,19 @@ const AdminPage = () => {
     }
   };
 
-	const fetchEntry = async (id) => {
-		try {
-			const response = await fetch(`${url}${activeTab}/${id}`)
-			if (!response.ok){
-				throw new Error("Failed to fetch!", response.status);
-			};
-			const entryValue = await response.json();
-			console.log(entryValue)
-			setEntryData(entryValue);
-		} catch (error) {
-			console.error(error);
-		}
-	}
+  const fetchEntry = async (id) => {
+    try {
+      const response = await fetch(`${url}${activeTab}/${id}`);
+      if (!response.ok) {
+        throw new Error("Failed to fetch!", response.status);
+      }
+      const entryValue = await response.json();
+      console.log(entryValue);
+      setEntryData(entryValue);
+    } catch (error) {
+      console.error(error);
+    }
+  };
 
   (async () => {
     try {
@@ -75,7 +83,7 @@ const AdminPage = () => {
 
   const handleOpenAddEntryModal = (parameter) => {
     if (!parameter || parameter === "placeholder") {
-			toast.warn("You have to select a real table.")
+      toast.warn("You have to select a real table.");
       return;
     }
     setOpenModal(true);
@@ -113,23 +121,23 @@ const AdminPage = () => {
 
   const handleEditorChange = (e) => {
     const selectedOption = e.target.options[e.target.selectedIndex];
-    const avatar = selectedOption.getAttribute('data-avatar');
+    const avatar = selectedOption.getAttribute("data-avatar");
     setSelectedEditor({
       name: selectedOption.text,
       id: selectedOption.value,
-      avatar: avatar
+      avatar: avatar,
     });
-	};
+  };
 
   const handleEditEditorChange = (e) => {
     const selectedOption = e.target.options[e.target.selectedIndex];
-    const avatar = selectedOption.getAttribute('data-avatar');
+    const avatar = selectedOption.getAttribute("data-avatar");
     setSelectedEditEditor({
       name: selectedOption.text,
       id: selectedOption.value,
-      avatar: avatar
+      avatar: avatar,
     });
-	};
+  };
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -169,8 +177,8 @@ const AdminPage = () => {
     }
   }, [dataToPatch]);
 
-	const patchData = async (object) => {
-		const optionsPatchTicket = {
+  const patchData = async (object) => {
+    const optionsPatchTicket = {
       method: "PATCH",
       headers: {
         "Content-Type": "application/json",
@@ -183,7 +191,7 @@ const AdminPage = () => {
         creator: object.creator,
         editor: selectedEditEditor.name || entryData.editor,
         editorId: selectedEditEditor.id || entryData.editorId,
-				editorAvatar: selectedEditEditor.avatar || entryData.editorAvatar,
+        editorAvatar: selectedEditEditor.avatar || entryData.editorAvatar,
       }),
     };
     const optionsPatchUser = {
@@ -204,116 +212,124 @@ const AdminPage = () => {
       }),
     };
 
-		try {
-			if (activeTab === "users"){
-				console.log("cock")
-			} else if (activeTab === "tickets") {
-				const resp = await fetch(`${url}${activeTab}/${entryData.id}`, optionsPatchTicket)
-				if (!resp.ok){
-					throw new Error("Failed to fetch!", resp.status)
-				}
-				toast.success(`Successfully changed entrys to ticket with Id: ${entryData.id}`)
-				setOpenEditModal(false);
-				setDataToPatch({})
-				fetchData(activeTab);
-			}
-		} catch (error) {
-			console.error(error);
-		}
-		console.log(object)
-	}
+    try {
+      if (activeTab === "users") {
+        console.log("cock");
+      } else if (activeTab === "tickets") {
+        const resp = await fetch(
+          `${url}${activeTab}/${entryData.id}`,
+          optionsPatchTicket
+        );
+        if (!resp.ok) {
+          throw new Error("Failed to fetch!", resp.status);
+        }
+        toast.success(
+          `Successfully changed entrys to ticket with Id: ${entryData.id}`
+        );
+        setOpenEditModal(false);
+        setDataToPatch({});
+        fetchData(activeTab);
+      }
+    } catch (error) {
+      console.error(error);
+    }
+    console.log(object);
+  };
 
-	const postData = async (object) => {
+  const postData = async (object) => {
     const optionsPostTicket = {
-        method: "POST",
-        headers: {
-            "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-            title: object.title,
-            desc: object.desc,
-            status: object.status,
-            deadline: object.deadline,
-            creator: object.creator,
-            editor: selectedEditor.name,
-            editorId: selectedEditor.id,
-            editorAvatar: selectedEditor.avatar,
-        }),
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        title: object.title,
+        desc: object.desc,
+        status: object.status,
+        deadline: object.deadline,
+        creator: object.creator,
+        editor: selectedEditor.name,
+        editorId: selectedEditor.id,
+        editorAvatar: selectedEditor.avatar,
+      }),
     };
     const optionsPostUser = {
-        method: "POST",
-        headers: {
-            "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-            email: object.email,
-            fname: object.fname,
-            lname: object.lname,
-            password: object.password,
-            avatar: avatar,
-            ticketIds: [],
-            isadmin: object.isadmin,
-            isloggedin: false,
-            id: Number,
-        }),
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        email: object.email,
+        fname: object.fname,
+        lname: object.lname,
+        password: object.password,
+        avatar: avatar,
+        ticketIds: [],
+        isadmin: object.isadmin,
+        isloggedin: false,
+        id: Number,
+      }),
     };
 
     try {
-        if (activeTab === "users") {
-					const respUsers = await fetch(`${url}users`, options);
-					if (!respUsers.ok) {
-						throw new Error("Failed to fetch!", respUsers.status);
-					}
-					const users = await respUsers.json();
-					const checkUser = users.find((user) => user.email === object.email);
-					if (checkUser) {
-						toast.warn("E-Mail already in use!");
-						setDataToSave({});
-					} else {
-						const postUser = await fetch(`${url}${activeTab}`, optionsPostUser);
-						if (!postUser.ok) {
-							throw new Error("Failed to fetch!", postUser.status);
-						}
-						toast.success("New user added!");
-						setOpenModal(false);
-						setDataToSave({});
-						setAvatar(defaultAvatar);
-						fetchData("users");
-					}
-        } else if (activeTab === "tickets") {
-            const resp = await fetch(`${url}${activeTab}`, optionsPostTicket);
-            if (!resp.ok) {
-                throw new Error("Failed to fetch!", resp.status);
-            }
-            const newTicket = await resp.json();
-            const ticketId = newTicket.id;
-            const editorId = selectedEditor.id;
-            const editorResponse = await fetch(`${url}users/${editorId}`);
-            if (!editorResponse.ok) {
-                throw new Error("Failed to fetch editor data", editorResponse.status);
-            }
-            const editorData = await editorResponse.json();
-            editorData.ticketIds.push(ticketId);
-            const updateEditorResponse = await fetch(`${url}users/${editorId}`, {
-                method: 'PUT',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify(editorData),
-            });
-            if (!updateEditorResponse.ok) {
-                throw new Error("Failed to update editor data", updateEditorResponse.status);
-            }
-
-            toast.success("New ticket added!");
-            setOpenModal(false);
-            setDataToSave({});
-            fetchData("tickets");
+      if (activeTab === "users") {
+        const respUsers = await fetch(`${url}users`, options);
+        if (!respUsers.ok) {
+          throw new Error("Failed to fetch!", respUsers.status);
         }
+        const users = await respUsers.json();
+        const checkUser = users.find((user) => user.email === object.email);
+        if (checkUser) {
+          toast.warn("E-Mail already in use!");
+          setDataToSave({});
+        } else {
+          const postUser = await fetch(`${url}${activeTab}`, optionsPostUser);
+          if (!postUser.ok) {
+            throw new Error("Failed to fetch!", postUser.status);
+          }
+          toast.success("New user added!");
+          setOpenModal(false);
+          setDataToSave({});
+          setAvatar(defaultAvatar);
+          fetchData("users");
+        }
+      } else if (activeTab === "tickets") {
+        const resp = await fetch(`${url}${activeTab}`, optionsPostTicket);
+        if (!resp.ok) {
+          throw new Error("Failed to fetch!", resp.status);
+        }
+        const newTicket = await resp.json();
+        const ticketId = newTicket.id;
+        const editorId = selectedEditor.id;
+        const editorResponse = await fetch(`${url}users/${editorId}`);
+        if (!editorResponse.ok) {
+          throw new Error("Failed to fetch editor data", editorResponse.status);
+        }
+        const editorData = await editorResponse.json();
+        editorData.ticketIds.push(ticketId);
+        const updateEditorResponse = await fetch(`${url}users/${editorId}`, {
+          method: "PUT",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(editorData),
+        });
+        if (!updateEditorResponse.ok) {
+          throw new Error(
+            "Failed to update editor data",
+            updateEditorResponse.status
+          );
+        }
+
+        toast.success("New ticket added!");
+        setOpenModal(false);
+        setDataToSave({});
+        fetchData("tickets");
+      }
     } catch (error) {
-        console.error(error);
+      console.error(error);
     }
-	};
+  };
 
   const handleAvatarChange = (e) => {
     e.preventDefault();
@@ -322,64 +338,74 @@ const AdminPage = () => {
   };
 
   const handleEditTicket = (e, id) => {
-		e.preventDefault();
-		setOpenEditModal(true);
-		fetchEntry(id);
+    e.preventDefault();
+    setOpenEditModal(true);
+    fetchEntry(id);
   };
 
-	const handleDeleteTicket = async (e, ticketId) => {
+  const handleDeleteTicket = async (e, ticketId) => {
     e.preventDefault();
     const urlDel = `http://localhost:5000/tickets/${ticketId}`;
     const optionsDel = {
-        method: "DELETE",
+      method: "DELETE",
     };
 
     try {
-        const response = await fetch(urlDel, optionsDel);
-        if (!response.ok) {
-            throw new Error("Failed to delete ticket", response.status);
-        }
-        toast.success(`Successfully deleted ticket with Id: ${ticketId}`);
-        const userResponse = await fetch('http://localhost:5000/users', {
-            method: 'GET',
-        });
-        if (!userResponse.ok) {
-            throw new Error('Failed to fetch user data', userResponse.status);
-        }
-        const userData = await userResponse.json();
+      const response = await fetch(urlDel, optionsDel);
+      if (!response.ok) {
+        throw new Error("Failed to delete ticket", response.status);
+      }
+      toast.success(`Successfully deleted ticket with Id: ${ticketId}`);
+      const userResponse = await fetch("http://localhost:5000/users", {
+        method: "GET",
+      });
+      if (!userResponse.ok) {
+        throw new Error("Failed to fetch user data", userResponse.status);
+      }
+      const userData = await userResponse.json();
 
-        const userToUpdate = userData.find(user => user.ticketIds.includes(ticketId));
-        if (!userToUpdate) {
-            throw new Error('User with ticketId not found');
+      const userToUpdate = userData.find((user) =>
+        user.ticketIds.includes(ticketId)
+      );
+      if (!userToUpdate) {
+        throw new Error("User with ticketId not found");
+      }
+      userToUpdate.ticketIds = userToUpdate.ticketIds.filter(
+        (id) => id !== ticketId
+      );
+      const updateUserResponse = await fetch(
+        `http://localhost:5000/users/${userToUpdate.id}`,
+        {
+          method: "PUT",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(userToUpdate),
         }
-        userToUpdate.ticketIds = userToUpdate.ticketIds.filter(id => id !== ticketId);
-        const updateUserResponse = await fetch(`http://localhost:5000/users/${userToUpdate.id}`, {
-            method: 'PUT',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify(userToUpdate),
-        });
+      );
 
-        if (!updateUserResponse.ok) {
-            throw new Error('Failed to update user data', updateUserResponse.status);
-        }
-        fetchData("tickets");
+      if (!updateUserResponse.ok) {
+        throw new Error(
+          "Failed to update user data",
+          updateUserResponse.status
+        );
+      }
+      fetchData("tickets");
     } catch (error) {
-        toast.error("Something went wrong!");
-        console.error(error);
+      toast.error("Something went wrong!");
+      console.error(error);
     }
-	};
+  };
 
-	const handleEditUser = (e, id) => {
-		e.preventDefault();
-		console.log(id)
-	};
+  const handleEditUser = (e, id) => {
+    e.preventDefault();
+    console.log(id);
+  };
 
-	const handleDeleteUser = (e, id) => {
-		e.preventDefault();
-		console.log(id)
-	}; 
+  const handleDeleteUser = (e, id) => {
+    e.preventDefault();
+    console.log(id);
+  };
 
   return (
     <div className="main-content admin-page">
@@ -415,52 +441,69 @@ const AdminPage = () => {
                     (key, index) =>
                       key !== "password" && (
                         <th key={index}>
-													{key === "isloggedin"
-														? "STATUS"
-														: key === "fname"
-														? "FIRSTNAME"
-														: key === "lname"
-														? "LASTNAME"
-														: key.toUpperCase()
-													}
-												</th>
+                          {key === "isloggedin"
+                            ? "STATUS"
+                            : key === "fname"
+                            ? "FIRSTNAME"
+                            : key === "lname"
+                            ? "LASTNAME"
+                            : key.toUpperCase()}
+                        </th>
                       )
                   )}
-									<th>Edit | Delete</th>
+                  <th>Edit | Delete</th>
                 </tr>
               </thead>
               <tbody>
                 {data[1].map((item, index) => (
-									<tr key={index}>
-										{Object.entries(item).map(([key, value], index) => (
-											key !== "password" && (
-												<td key={index} style={{color: key === "isloggedin" ? (value ? "green" : "red") : "inherit"}}>
-													{key === "avatar" ? (
-														<img className={key} src={value} alt="Avatar" />
-													) : key === "isloggedin" ? (
-														value ? "online" : "offline"
-													) : typeof value === "boolean" ? (
-														value.toString()
-													) : typeof value === "object" ? (
-														value.length === 0 ? (
-															"N/A"
-														) : value.length > 2 ? (
-															value.join(", ").slice(0, 17) + " ..."
-														) : (
-															value.join(", ")
-														)
-													) : (
-														value
-													)}
-												</td>
-											)
-										))}
-										<td>
-											<i className="bi bi-pencil-square" onClick={((e) => handleEditUser(e, item.id))} ></i>
-											&nbsp;&nbsp; | &nbsp;&nbsp;
-											<i className="bi bi-trash" onClick={((e) => handleDeleteUser(e, item.id))}></i>
+                  <tr key={index}>
+                    {Object.entries(item).map(
+                      ([key, value], index) =>
+                        key !== "password" && (
+                          <td
+                            key={index}
+                            style={{
+                              color:
+                                key === "isloggedin"
+                                  ? value
+                                    ? "green"
+                                    : "red"
+                                  : "inherit",
+                            }}>
+                            {key === "avatar" ? (
+                              <img className={key} src={value} alt="Avatar" />
+                            ) : key === "isloggedin" ? (
+                              value ? (
+                                "online"
+                              ) : (
+                                "offline"
+                              )
+                            ) : typeof value === "boolean" ? (
+                              value.toString()
+                            ) : typeof value === "object" ? (
+                              value.length === 0 ? (
+                                "N/A"
+                              ) : value.length > 2 ? (
+                                value.join(", ").slice(0, 17) + " ..."
+                              ) : (
+                                value.join(", ")
+                              )
+                            ) : (
+                              value
+                            )}
+                          </td>
+                        )
+                    )}
+                    <td>
+                      <i
+                        className="bi bi-pencil-square"
+                        onClick={(e) => handleEditUser(e, item.id)}></i>
+                      &nbsp;&nbsp; | &nbsp;&nbsp;
+                      <i
+                        className="bi bi-trash"
+                        onClick={(e) => handleDeleteUser(e, item.id)}></i>
                     </td>
-									</tr>
+                  </tr>
                 ))}
               </tbody>
             </table>
@@ -471,7 +514,10 @@ const AdminPage = () => {
                 <tr>
                   {Object.keys(data[1][0]).map(
                     (key, index) =>
-                      (key !== "desc" && key !== "editorAvatar") && <th key={index}>{key.toUpperCase()}</th>
+                      key !== "desc" &&
+                      key !== "editorAvatar" && (
+                        <th key={index}>{key.toUpperCase()}</th>
+                      )
                   )}
                   <th>Edit | Delete</th>
                 </tr>
@@ -481,12 +527,17 @@ const AdminPage = () => {
                   <tr key={index}>
                     {Object.entries(item).map(
                       ([key, value], index) =>
-                        (key !== "desc" && key !== "editorAvatar") && <td key={index}>{value}</td>
+                        key !== "desc" &&
+                        key !== "editorAvatar" && <td key={index}>{value}</td>
                     )}
                     <td>
-											<i className="bi bi-pencil-square" onClick={((e) => handleEditTicket(e, item.id))} ></i>
-											&nbsp;&nbsp; | &nbsp;&nbsp;
-											<i className="bi bi-trash" onClick={((e) => handleDeleteTicket(e, item.id))}></i>
+                      <i
+                        className="bi bi-pencil-square"
+                        onClick={(e) => handleEditTicket(e, item.id)}></i>
+                      &nbsp;&nbsp; | &nbsp;&nbsp;
+                      <i
+                        className="bi bi-trash"
+                        onClick={(e) => handleDeleteTicket(e, item.id)}></i>
                     </td>
                   </tr>
                 ))}
@@ -602,23 +653,23 @@ const AdminPage = () => {
                     <div className="input-row">
                       <label htmlFor="editor">Editor</label>
                       <select
-												className="form-input"
-												name="editor"
-												id="editor"
-												required
-												onChange={handleEditorChange}>
-												<option defaultValue="" selected disabled>
-														Bitte auswählen:
-												</option>
-												{allUser.map((user, index) => (
-														<option
-															key={index}
-															value={user.id}
-															data-avatar={user.avatar}>
-																{user.fname}
-														</option>
-												))}
-											</select>
+                        className="form-input"
+                        name="editor"
+                        id="editor"
+                        required
+                        onChange={handleEditorChange}>
+                        <option defaultValue="" selected disabled>
+                          Bitte auswählen:
+                        </option>
+                        {allUser.map((user, index) => (
+                          <option
+                            key={index}
+                            value={user.id}
+                            data-avatar={user.avatar}>
+                            {user.fname}
+                          </option>
+                        ))}
+                      </select>
                     </div>
                     <div className="input-row">
                       <label htmlFor="desc">Description</label>
@@ -652,10 +703,10 @@ const AdminPage = () => {
                         <option defaultValue="" selected disabled>
                           Bitte auswählen:
                         </option>
-												<option value="TO DO">TO DO</option>
-												<option value="IN PROGRESS">IN PROGRESS</option>
-												<option value="IN REVIEW">IN REVIEW</option>
-												<option value="DONE">DONE</option>
+                        <option value="TO DO">TO DO</option>
+                        <option value="IN PROGRESS">IN PROGRESS</option>
+                        <option value="IN REVIEW">IN REVIEW</option>
+                        <option value="DONE">DONE</option>
                       </select>
                     </div>
                   </div>
@@ -672,7 +723,7 @@ const AdminPage = () => {
                   setOpenModal(false);
                   setDataToSave({});
                   setAvatar(defaultAvatar);
-									toast.warn("Action canceled!");
+                  toast.warn("Action canceled!");
                 }}>
                 Cancel
               </button>
@@ -680,18 +731,18 @@ const AdminPage = () => {
           </form>
         </div>
       )}
-			{openEditModal && (
-				<div
-					className="editEntryModal-blocker"
-					onClick={(e) => {
-						e.stopPropagation();
-					}}>
-					<form
+      {openEditModal && (
+        <div
+          className="editEntryModal-blocker"
+          onClick={(e) => {
+            e.stopPropagation();
+          }}>
+          <form
             className="editEntryModal"
             onSubmit={(e) => {
               handleEditSubmit(e);
             }}>
-						{activeTab === "users" && (
+            {activeTab === "users" && (
               <>
                 <h2>Add User</h2>
                 <div className="input-body">
@@ -760,7 +811,9 @@ const AdminPage = () => {
             )}
             {activeTab === "tickets" && (
               <>
-                <h2>Edit Ticket with Id: <span>{entryData.id}</span></h2>
+                <h2>
+                  Edit Ticket with Id: <span>{entryData.id}</span>
+                </h2>
                 <div className="input-body">
                   <div className="input-left">
                     <div className="input-row">
@@ -770,7 +823,7 @@ const AdminPage = () => {
                         type="text"
                         name="title"
                         id="title"
-												defaultValue={entryData.title}
+                        defaultValue={entryData.title}
                         required
                       />
                     </div>
@@ -788,23 +841,26 @@ const AdminPage = () => {
                     <div className="input-row">
                       <label htmlFor="editor">Editor</label>
                       <select
-												className="form-input"
-												name="editor"
-												id="editor"
-												required
-												onChange={handleEditEditorChange}>
-												<option defaultValue={entryData.editor} selected disabled>
-														{entryData.editor}
-												</option>
-												{allUser.map((user, index) => (
-														<option
-															key={index}
-															value={user.id}
-															data-avatar={user.avatar}>
-																{user.fname}
-														</option>
-												))}
-											</select>
+                        className="form-input"
+                        name="editor"
+                        id="editor"
+                        required
+                        onChange={handleEditEditorChange}>
+                        <option
+                          defaultValue={entryData.editor}
+                          selected
+                          disabled>
+                          {entryData.editor}
+                        </option>
+                        {allUser.map((user, index) => (
+                          <option
+                            key={index}
+                            value={user.id}
+                            data-avatar={user.avatar}>
+                            {user.fname}
+                          </option>
+                        ))}
+                      </select>
                     </div>
                     <div className="input-row">
                       <label htmlFor="desc">Description</label>
@@ -813,7 +869,7 @@ const AdminPage = () => {
                         name="desc"
                         id="desc"
                         maxLength={"500"}
-												defaultValue={entryData.desc}
+                        defaultValue={entryData.desc}
                         required
                       />
                     </div>
@@ -826,7 +882,7 @@ const AdminPage = () => {
                         type="date"
                         name="deadline"
                         id="deadline"
-												defaultValue={entryData.deadline}
+                        defaultValue={entryData.deadline}
                         required
                       />
                     </div>
@@ -837,36 +893,40 @@ const AdminPage = () => {
                         name="status"
                         id="status"
                         required>
-                        <option defaultValue={entryData.status} selected disabled>
+                        <option
+                          defaultValue={entryData.status}
+                          selected
+                          disabled>
                           {entryData.status}
                         </option>
-												<option value="TO DO">TO DO</option>
-												<option value="IN PROGRESS">IN PROGRESS</option>
-												<option value="IN REVIEW">IN REVIEW</option>
-												<option value="DONE">DONE</option>
+                        <option value="TO DO">TO DO</option>
+                        <option value="IN PROGRESS">IN PROGRESS</option>
+                        <option value="IN REVIEW">IN REVIEW</option>
+                        <option value="DONE">DONE</option>
                       </select>
                     </div>
                   </div>
                 </div>
               </>
             )}
-						<div className="input-btn-row">
+            <div className="input-btn-row">
               <button className="btn">
-                Edit {activeTab.charAt(0).toUpperCase() + activeTab.slice(1, -1)}
+                Edit{" "}
+                {activeTab.charAt(0).toUpperCase() + activeTab.slice(1, -1)}
               </button>
               <button
                 className="btn"
                 onClick={() => {
                   setOpenEditModal(false);
-									setDataToPatch({});
-									toast.warn("Action canceled!");
+                  setDataToPatch({});
+                  toast.warn("Action canceled!");
                 }}>
                 Cancel
               </button>
             </div>
-					</form>
-				</div>
-			)}
+          </form>
+        </div>
+      )}
     </div>
   );
 };
