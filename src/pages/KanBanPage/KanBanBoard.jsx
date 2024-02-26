@@ -1,4 +1,5 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
+import { ThemeContext } from "../../context/themeContext";
 import "./KanBanBoard.scss";
 
 export const KanBanBoard = () => {
@@ -8,6 +9,8 @@ export const KanBanBoard = () => {
     method: "GET",
   };
   const [showEditor, setShowEditor] = useState(false);
+
+	const { theme } = useContext(ThemeContext);
 
   const fetchTickets = async () => {
     try {
@@ -40,7 +43,7 @@ export const KanBanBoard = () => {
       (ticket) => ticket.status === status
     );
     return filteredTickets?.map((ticket) => (
-      <div className="ticket KanBanticket" key={ticket.id}>
+      <div className={`ticket KanBanticket ${theme}`} key={ticket.id}>
         <div className="ticket-heading">
           <p>Editor: {ticket.editor}</p>
           <div
@@ -65,7 +68,7 @@ export const KanBanBoard = () => {
   };
 
   return (
-    <div className="main-content">
+    <div className="main-content kanban-content">
       <table>
         <thead>
           <tr>

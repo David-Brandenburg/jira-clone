@@ -127,7 +127,7 @@ const ProfilePage = () => {
 			};
 			const user = await resp.json();
 			setUserData(user);
-			setTickets(user.ticketId);
+			setTickets(user.ticketIds);
 			setCurrentAvatar(user.avatar);
 			setNewAvatar(user.avatar);
 			setEmail(user.email);
@@ -140,24 +140,6 @@ const ProfilePage = () => {
 	};
 
 	useEffect(() => {
-		// (async () => {
-		// 	try {
-		// 		const resp = await fetch(`${url}${userId}`, options);
-		// 		if (!resp.ok){
-		// 			throw new Error("Failed to fetch!", resp.status);
-		// 		};
-		// 		const user = await resp.json();
-		// 		setUserData(user);
-		// 		setTickets(user.ticketId);
-		// 		setAvatar(user.avatar);
-		// 		setEmail(user.email);
-		// 		setFName(user.fname);
-		// 		setLName(user.lname);
-		// 		setCurrentPassword(user.password);
-		// 	} catch (error) {
-		// 		console.error(error);
-		// 	};
-		// })()
 		fetchUser();
 	}, []);
 	

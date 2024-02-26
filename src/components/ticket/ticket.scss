@@ -6,29 +6,42 @@
   cursor: pointer;
   box-shadow: 2px 2px 3px rgba(0, 0, 0, 0.3),
     inset 2px 2px 3px rgba(255, 255, 255, 0.5);
+	&:hover {
+		background-color: #0b55c5;
+	}
   &:active {
     background-color: #ccc;
-  }
-  &:hover {
-    background-color: #0b55c5;
   }
 }
 
 .ticket-container {
   // margin: 50px;
-  width: fit-content;
-  height: fit-content;
+  width: 100%;
+  height: 100%;
   display: flex;
   gap: 20px;
   flex-wrap: wrap;
+	.dark{
+		--color: #fff;
+		--bgColor: linear-gradient(to top, #0a0a0a, #000);
+		--ticketHoverBg: linear-gradient(to bottom, #0a0a0a, #000);
+	}
+	.light{
+		--color: #000;
+		--bgColor: linear-gradient(to top, #e7e7e7, #fff);
+		--ticketHoverBg: linear-gradient(to bottom, #e7e7e7, #fff);
+	}
+
   .ticket {
     width: 350px;
     display: flex;
     flex-direction: column;
     gap: 20px;
     padding: 20px;
-    border-radius: 10px;
-    background-color: #ddd;
+    border-radius: 5px;
+    background: var(--bgColor);
+		color: var(--color);
+		box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
     .ticket-heading {
       display: flex;
       align-items: center;
@@ -84,6 +97,11 @@
       height: fit-content;
       justify-content: flex-end;
     }
+		&:hover{
+			background: var(--ticketHoverBg);
+			scale: 1.05;
+			transition: all 300ms ease-in-out;
+		}
   }
 }
 
@@ -100,10 +118,7 @@
     width: 500px;
     height: 500px;
     position: absolute;
-    top: 0;
-    bottom: 0;
-    left: 0;
-    right: 0;
+    top: 0; bottom: 0; left: 0; right: 0;
     margin: auto;
     background-color: #333;
     padding: 20px;

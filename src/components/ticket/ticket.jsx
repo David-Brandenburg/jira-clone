@@ -2,6 +2,7 @@ import React, { useState, useEffect, useContext } from "react";
 import "./ticket.scss";
 import { ToastContainer, toast } from "react-toastify";
 import { LoggedinContext } from "../../context/loggedinContext";
+import { ThemeContext } from "../../context/themeContext";
 
 export const Ticket = () => {
   const [tickets, setTickets] = useState(null);
@@ -20,7 +21,8 @@ export const Ticket = () => {
     editorId: "",
   });
 
-  const { loggedInUser } = useContext(LoggedinContext);
+  const { loggedInUser, isAdmin } = useContext(LoggedinContext);
+	const { theme } = useContext(ThemeContext);
   const [showEditor, setShowEditor] = useState(false);
 
   const url = `http://localhost:5000/tickets`;
@@ -290,7 +292,7 @@ export const Ticket = () => {
   };
 
   return (
-    <div className="main">
+    <>
       <ToastContainer />
       <div className="card2">
         <button
@@ -370,7 +372,7 @@ export const Ticket = () => {
       </div>
       <div className="ticket-container">
         {tickets?.map((ticket) => (
-          <div className="ticket" key={ticket.id}>
+          <div className={`ticket ${theme}`} key={ticket.id}>
             <div className="ticket-heading">
               <h2>{ticket.title}</h2>
               <p>Creator: {ticket.creator}</p>
@@ -396,11 +398,11 @@ export const Ticket = () => {
               </div>
             </div>
             <div className="ticket-buttons">
-              <button
+              {isAdmin && <button
                 className="btn edit-btn"
                 onClick={() => handleTicketEdit(ticket.id)}>
                 Bearbeiten
-              </button>
+              </button>}
               <button
                 className="btn delete-btn"
                 onClick={() => handleDeleteTicket(ticket.id)}>
@@ -497,6 +499,6 @@ export const Ticket = () => {
           </form>
         </div>
       )}
-    </div>
+    </>
   );
 };

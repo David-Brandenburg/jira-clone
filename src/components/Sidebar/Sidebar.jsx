@@ -52,7 +52,7 @@ export const Sidebar = () => {
   }, [userCount]); // Dieser useEffect reagiert nur auf Änderungen in 'userCount'
 
   return (
-    <aside className={theme === "light" ? "light" : "dark"}>
+    <aside className={`${theme}`}>
       <div
         className="aside-head-row"
         onClick={() => {
