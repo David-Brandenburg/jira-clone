@@ -16,6 +16,7 @@ const Navbar2 = () => {
     setLoggedInUser,
     setStayLoggedIn,
     isAdmin,
+    saveDateTimeLogOut,
   } = useContext(LoggedinContext);
   const { theme, setTheme } = useContext(ThemeContext);
   const [showMenu, setShowMenu] = useState(false);
@@ -115,6 +116,7 @@ const Navbar2 = () => {
                   onClick={() => {
                     logout(loggedInUser.userId);
                     setShowMenu(false);
+                    saveDateTimeLogOut();
                   }}>
                   Ausloggen
                 </p>

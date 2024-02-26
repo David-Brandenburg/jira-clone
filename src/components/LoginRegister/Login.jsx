@@ -11,6 +11,8 @@ const Login = ({ setPage }) => {
     setStayLoggedIn,
     setLoggedInUser,
     setIsAdmin,
+    loggedInUser,
+    loggedIn,
     saveDateTime,
   } = useContext(LoggedinContext);
   const usenavigate = useNavigate();
@@ -90,6 +92,18 @@ const Login = ({ setPage }) => {
     }
   };
 
+  useEffect(() => {
+    if (loggedIn && loggedInUser) {
+      handleSaveDateTime();
+    }
+  }, [loggedIn, loggedInUser]);
+
+  const handleSaveDateTime = () => {
+    setTimeout(() => {
+      saveDateTime();
+    }, 6500);
+  };
+
   return (
     <div className="form-wrapper">
       <ToastContainer />
@@ -123,7 +137,7 @@ const Login = ({ setPage }) => {
               />
               <small>Eingeloggt bleiben!</small>
             </label>
-            <button onClick={saveDateTime}>Einloggen</button>
+            <button onClick={handleSaveDateTime}>Einloggen</button>
           </div>
           <p>
             Sie haben noch keinen Account?{" "}

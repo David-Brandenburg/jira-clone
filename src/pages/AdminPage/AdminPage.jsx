@@ -24,7 +24,7 @@ const AdminPage = () => {
   const { theme } = useContext(ThemeContext);
   const { loggedInUser } = useContext(LoggedinContext);
 
-  const dataBase = ["Users", "Tickets", "Placeholder", "Placeholder"];
+  const dataBase = ["Users", "Tickets", "Log", "Placeholder"];
 
   const url = "http://localhost:5000/";
   const options = {

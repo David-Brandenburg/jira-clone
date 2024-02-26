@@ -25,6 +25,8 @@ export const LoggedinContextProvider = ({ children }) => {
       : null
   );
 
+  const [logUserID, setlogUserID] = useState("");
+
   useEffect(() => {
     localStorage.setItem("stayLoggedIn", stayLoggedIn);
   }, [stayLoggedIn]);
@@ -50,6 +52,7 @@ export const LoggedinContextProvider = ({ children }) => {
             throw new Error("Failed to fetch!", resp.status);
           }
           const user = await resp.json();
+          setlogUserID(loggedInUser.userId);
           if (user.isadmin === true) {
             sessionStorage.setItem("admin", true);
             setIsAdmin(true);
@@ -69,18 +72,17 @@ export const LoggedinContextProvider = ({ children }) => {
       const currentDate = new Date();
       const formattedDate = `${currentDate.toLocaleDateString()} ${currentDate.toLocaleTimeString()}`;
 
-      // Hier könntest du das Datum und die Uhrzeit speichern, z.B. in der Datenbank
       console.log(`Date and time when loggedIn changes: ${formattedDate}`);
 
-      // Daten an die Datenbank senden, um das timeLoggedIn-Attribut zu aktualisieren
-      const url = `http://localhost:5000/users/${loggedInUser.userId}`;
+      const url = `http://localhost:5000/log`;
       const options = {
-        method: "PATCH", // Verwende PATCH, um nur bestimmte Eigenschaften zu aktualisieren
+        method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
-          timeLoggedIn: formattedDate, // Nur timeLoggedIn aktualisieren
+          userid: logUserID,
+          lastLoggedIn: formattedDate,
         }),
       };
 
@@ -89,8 +91,35 @@ export const LoggedinContextProvider = ({ children }) => {
         throw new Error("Failed to save date and time to database");
       }
       console.log("Date and time saved to database successfully");
+    } catch (error) {
+      console.error(error);
+    }
+  };
 
-      // Aktualisierung des State ist nicht erforderlich, da nur die Datenbank aktualisiert werden
+  const saveDateTimeLogOut = async () => {
+    try {
+      const currentDate = new Date();
+      const formattedDate = `${currentDate.toLocaleDateString()} ${currentDate.toLocaleTimeString()}`;
+
+      console.log(`Date and time when loggedIn changes: ${formattedDate}`);
+
+      const url = `http://localhost:5000/log`;
+      const options = {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          userid: logUserID,
+          lastLoggedOut: formattedDate,
+        }),
+      };
+
+      const response = await fetch(url, options);
+      if (!response.ok) {
+        throw new Error("Failed to save date and time to database");
+      }
+      console.log("Date and time saved to database successfully");
     } catch (error) {
       console.error(error);
     }
@@ -107,6 +136,7 @@ export const LoggedinContextProvider = ({ children }) => {
         isAdmin,
         setIsAdmin,
         saveDateTime,
+        saveDateTimeLogOut,
       }}>
       {children}
     </LoggedinContext.Provider>
