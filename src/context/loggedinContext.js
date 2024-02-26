@@ -67,6 +67,8 @@ export const LoggedinContextProvider = ({ children }) => {
     }
   }, [loggedIn, loggedInUser, setIsAdmin]);
 
+  console.log(loggedInUser);
+
   const saveDateTime = async () => {
     try {
       const currentDate = new Date();
