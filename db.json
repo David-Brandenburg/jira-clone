@@ -7,8 +7,7 @@
       "password": "test12345",
       "avatar": "https://robohash.org/ph38?set=set4",
       "ticketIds": [
-        "OdBbzfo",
-        "B9Z53Pg"
+        "OdBbzfo"
       ],
       "isadmin": true,
       "isloggedin": true,
@@ -196,17 +195,6 @@
       "editorId": "1",
       "editorAvatar": "https://robohash.org/ph38?set=set4",
       "id": "OdBbzfo"
-    },
-    {
-      "title": "testIDticket2idtest",
-      "desc": "123abvc",
-      "status": "IN PROGRESS",
-      "deadline": "2024-03-10",
-      "creator": "Danny",
-      "editor": "Huge",
-      "editorId": "4",
-      "editorAvatar": "https://robohash.org/2zzk?set=set4",
-      "id": "B9Z53Pg"
     }
   ]
 }

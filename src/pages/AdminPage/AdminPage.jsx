@@ -414,7 +414,16 @@ const AdminPage = () => {
                   {Object.keys(data[1][0]).map(
                     (key, index) =>
                       key !== "password" && (
-                        <th key={index}>{key === "isloggedin" ? "STATUS" : key.toUpperCase()}</th>
+                        <th key={index}>
+													{key === "isloggedin"
+														? "STATUS"
+														: key === "fname"
+														? "FIRSTNAME"
+														: key === "lname"
+														? "LASTNAME"
+														: key.toUpperCase()
+													}
+												</th>
                       )
                   )}
 									<th>Edit | Delete</th>
@@ -435,6 +444,8 @@ const AdminPage = () => {
 													) : typeof value === "object" ? (
 														value.length === 0 ? (
 															"N/A"
+														) : value.length > 2 ? (
+															value.join(", ").slice(0, 17) + " ..."
 														) : (
 															value.join(", ")
 														)
@@ -661,7 +672,7 @@ const AdminPage = () => {
                   setOpenModal(false);
                   setDataToSave({});
                   setAvatar(defaultAvatar);
-									toast.warn("Action canceled! Nothing were patched!");
+									toast.warn("Action canceled!");
                 }}>
                 Cancel
               </button>
@@ -848,7 +859,7 @@ const AdminPage = () => {
                 onClick={() => {
                   setOpenEditModal(false);
 									setDataToPatch({});
-									toast.warn("Action canceled! Nothing were patched!");
+									toast.warn("Action canceled!");
                 }}>
                 Cancel
               </button>
