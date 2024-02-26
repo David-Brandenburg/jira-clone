@@ -15,7 +15,11 @@ const AdminPage = () => {
   const [openModal, setOpenModal] = useState(false);
   const [openEditModal, setOpenEditModal] = useState(false);
   const [currentUser, setCurrentUser] = useState(null);
-  const [selectedEditor, setSelectedEditor] = useState({ name: "", id: "", avatar: "" });
+  const [selectedEditor, setSelectedEditor] = useState({
+    name: "",
+    id: "",
+    avatar: "",
+  });
 
   const { theme } = useContext(ThemeContext);
   const { loggedInUser } = useContext(LoggedinContext);
@@ -42,9 +46,9 @@ const AdminPage = () => {
     }
   };
 
-	const fetchEntry = async (id) => {
-		console.log(id)
-	}
+  const fetchEntry = async (id) => {
+    console.log(id);
+  };
 
   (async () => {
     try {
@@ -62,7 +66,7 @@ const AdminPage = () => {
 
   const handleOpenAddEntryModal = (parameter) => {
     if (!parameter || parameter === "placeholder") {
-			toast.warn("You have to select a real table.")
+      toast.warn("You have to select a real table.");
       return;
     }
     setOpenModal(true);
@@ -100,13 +104,13 @@ const AdminPage = () => {
 
   const handleEditorChange = (e) => {
     const selectedOption = e.target.options[e.target.selectedIndex];
-    const avatar = selectedOption.getAttribute('data-avatar');
+    const avatar = selectedOption.getAttribute("data-avatar");
     setSelectedEditor({
       name: selectedOption.text,
       id: selectedOption.value,
-      avatar: avatar
+      avatar: avatar,
     });
-	};
+  };
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -141,7 +145,7 @@ const AdminPage = () => {
         creator: object.creator,
         editor: selectedEditor.name,
         editorId: selectedEditor.id,
-				editorAvatar: selectedEditor.avatar,
+        editorAvatar: selectedEditor.avatar,
       }),
     };
     const optionsPostUser = {
@@ -192,7 +196,7 @@ const AdminPage = () => {
         toast.success("New ticket added!");
         setOpenModal(false);
         setDataToSave({});
-				fetchData("tickets")
+        fetchData("tickets");
       }
     } catch (error) {
       console.error(error);
@@ -206,29 +210,29 @@ const AdminPage = () => {
   };
 
   const handleEditTicket = (e, id) => {
-		e.preventDefault();
-		setOpenEditModal(true);
-		fetchEntry(id);
+    e.preventDefault();
+    setOpenEditModal(true);
+    fetchEntry(id);
   };
 
   const handleDeleteTicket = async (e, ticketId) => {
-		e.preventDefault();
-		const urlDel = `http://localhost:5000/tickets/${ticketId}`
-		const optionsDel = {
-			method: "DELETE",
-		}
+    e.preventDefault();
+    const urlDel = `http://localhost:5000/tickets/${ticketId}`;
+    const optionsDel = {
+      method: "DELETE",
+    };
 
-		try {
-			const response = await fetch(urlDel, optionsDel);
-			if (!response.ok){
-				throw new Error("Failed to fetch!", response.status)
-			}
-			toast.success(`Successfully deleted ticket with Id: ${ticketId}`)
-			fetchData("tickets")
-		} catch (error) {
-			toast.error("Something went wrong! 404")
-			console.error(error);
-		}
+    try {
+      const response = await fetch(urlDel, optionsDel);
+      if (!response.ok) {
+        throw new Error("Failed to fetch!", response.status);
+      }
+      toast.success(`Successfully deleted ticket with Id: ${ticketId}`);
+      fetchData("tickets");
+    } catch (error) {
+      toast.error("Something went wrong! 404");
+      console.error(error);
+    }
   };
 
   return (
@@ -303,7 +307,10 @@ const AdminPage = () => {
                 <tr>
                   {Object.keys(data[1][0]).map(
                     (key, index) =>
-                      (key !== "desc" && key !== "editorAvatar") && <th key={index}>{key.toUpperCase()}</th>
+                      key !== "desc" &&
+                      key !== "editorAvatar" && (
+                        <th key={index}>{key.toUpperCase()}</th>
+                      )
                   )}
                   <th>Edit | Delete</th>
                 </tr>
@@ -313,10 +320,17 @@ const AdminPage = () => {
                   <tr key={index}>
                     {Object.entries(item).map(
                       ([key, value], index) =>
-                        (key !== "desc" && key !== "editorAvatar") && <td key={index}>{value}</td>
+                        key !== "desc" &&
+                        key !== "editorAvatar" && <td key={index}>{value}</td>
                     )}
                     <td>
-						<i className="bi bi-pencil-square" onClick={((e) => handleEditTicket(e, item.id))} ></i>&nbsp;&nbsp; | &nbsp;&nbsp;<i className="bi bi-trash" onClick={((e) => handleDeleteTicket(e, item.id))}></i>
+                      <i
+                        className="bi bi-pencil-square"
+                        onClick={(e) => handleEditTicket(e, item.id)}></i>
+                      &nbsp;&nbsp; | &nbsp;&nbsp;
+                      <i
+                        className="bi bi-trash"
+                        onClick={(e) => handleDeleteTicket(e, item.id)}></i>
                     </td>
                   </tr>
                 ))}
@@ -432,23 +446,23 @@ const AdminPage = () => {
                     <div className="input-row">
                       <label htmlFor="editor">Editor</label>
                       <select
-												className="form-input"
-												name="editor"
-												id="editor"
-												required
-												onChange={handleEditorChange}>
-												<option defaultValue="" selected disabled>
-														Bitte auswählen:
-												</option>
-												{allUser.map((user, index) => (
-														<option
-															key={index}
-															value={user.id}
-															data-avatar={user.avatar}>
-																{user.fname}
-														</option>
-												))}
-											</select>
+                        className="form-input"
+                        name="editor"
+                        id="editor"
+                        required
+                        onChange={handleEditorChange}>
+                        <option defaultValue="" selected disabled>
+                          Bitte auswählen:
+                        </option>
+                        {allUser.map((user, index) => (
+                          <option
+                            key={index}
+                            value={user.id}
+                            data-avatar={user.avatar}>
+                            {user.fname}
+                          </option>
+                        ))}
+                      </select>
                     </div>
                     <div className="input-row">
                       <label htmlFor="desc">Description</label>
@@ -510,9 +524,9 @@ const AdminPage = () => {
           </form>
         </div>
       )}
-			{openEditModal && (
-				<div className="editEntryModal-blocker">{openEditModal}</div>
-			)}
+      {openEditModal && (
+        <div className="editEntryModal-blocker">{openEditModal}</div>
+      )}
     </div>
   );
 };

@@ -6,7 +6,13 @@ import "react-toastify/dist/ReactToastify.css";
 
 const Login = ({ setPage }) => {
   const [loginData, setLoginData] = useState({ mail: "", pass: "" });
-  const { setLoggedIn, setStayLoggedIn, setLoggedInUser, setIsAdmin } = useContext(LoggedinContext);
+  const {
+    setLoggedIn,
+    setStayLoggedIn,
+    setLoggedInUser,
+    setIsAdmin,
+    saveDateTime,
+  } = useContext(LoggedinContext);
   const usenavigate = useNavigate();
 
   const handleSubmit = (e) => {
@@ -60,15 +66,15 @@ const Login = ({ setPage }) => {
             throw new Error("Failed to fetch/login", patch.status);
           }
           toast.success("Successfully logged in!");
-		  if (findUser.isadmin === true){
-			setIsAdmin(true)
-		  } else {
-			setIsAdmin(false)
-		  }
+          if (findUser.isadmin === true) {
+            setIsAdmin(true);
+          } else {
+            setIsAdmin(false);
+          }
           setTimeout(() => {
-			setLoggedIn(true);
+            setLoggedIn(true);
             usenavigate("/home");
-			setLoggedInUser({avatar: findUser.avatar, userId: findUser.id})
+            setLoggedInUser({ avatar: findUser.avatar, userId: findUser.id });
           }, 6000);
         } else {
           toast.error("Wrong username or password!");
@@ -117,7 +123,7 @@ const Login = ({ setPage }) => {
               />
               <small>Eingeloggt bleiben!</small>
             </label>
-            <button>Einloggen</button>
+            <button onClick={saveDateTime}>Einloggen</button>
           </div>
           <p>
             Sie haben noch keinen Account?{" "}
