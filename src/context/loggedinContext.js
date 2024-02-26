@@ -85,6 +85,7 @@ export const LoggedinContextProvider = ({ children }) => {
         body: JSON.stringify({
           userid: logUserID,
           lastLoggedIn: formattedDate,
+          lastLoggedOut: "",
         }),
       };
 
@@ -113,6 +114,7 @@ export const LoggedinContextProvider = ({ children }) => {
         },
         body: JSON.stringify({
           userid: logUserID,
+          lastLoggedIn: "",
           lastLoggedOut: formattedDate,
         }),
       };

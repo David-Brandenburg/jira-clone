@@ -544,6 +544,38 @@ const AdminPage = () => {
               </tbody>
             </table>
           )}
+          {data && data[0] === "log" && (
+            <table className="ticketTable">
+              <thead>
+                <tr>
+                  {Object.keys(data[1][0]).map((key, index) => (
+                    <th key={index}>{key.toUpperCase()}</th>
+                  ))}
+                  <th>Edit | Delete</th>
+                </tr>
+              </thead>
+              <tbody>
+                {data[1].map((item, index) => (
+                  <tr key={index}>
+                    {Object.entries(item).map(
+                      ([key, value], index) =>
+                        key !== "desc" &&
+                        key !== "editorAvatar" && <td key={index}>{value}</td>
+                    )}
+                    <td>
+                      <i
+                        className="bi bi-pencil-square"
+                        onClick={(e) => handleEditTicket(e, item.id)}></i>
+                      &nbsp;&nbsp; | &nbsp;&nbsp;
+                      <i
+                        className="bi bi-trash"
+                        onClick={(e) => handleDeleteTicket(e, item.id)}></i>
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          )}
         </div>
       </div>
       {openModal && (
