@@ -129,6 +129,139 @@ export const LoggedinContextProvider = ({ children }) => {
     }
   };
 
+  const saveDateTimeTicketEstellen = async () => {
+    try {
+      const currentDate = new Date();
+      const formattedDate = `${currentDate.toLocaleDateString()} ${currentDate.toLocaleTimeString()}`;
+
+      console.log(`Date and time when loggedIn changes: ${formattedDate}`);
+
+      const url = `http://localhost:5000/log`;
+      const options = {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          userid: logUserID,
+          lastLoggedIn: "",
+          lastLoggedOut: "",
+          Ticketerstelltam: formattedDate,
+          Benutzerzugeordnetam: "",
+        }),
+      };
+
+      const response = await fetch(url, options);
+      if (!response.ok) {
+        throw new Error("Failed to save date and time to database");
+      }
+      console.log("Date and time saved to database successfully");
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+  const saveDateTimeBenutzerZuOrdnen = async () => {
+    try {
+      const currentDate = new Date();
+      const formattedDate = `${currentDate.toLocaleDateString()} ${currentDate.toLocaleTimeString()}`;
+
+      console.log(`Date and time when loggedIn changes: ${formattedDate}`);
+
+      const url = `http://localhost:5000/log`;
+      const options = {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          userid: logUserID,
+          lastLoggedIn: "",
+          lastLoggedOut: "",
+          Ticketerstelltam: "",
+          Benutzerzugeordnetam: formattedDate,
+          Ticketbearbeitetam: "",
+        }),
+      };
+
+      const response = await fetch(url, options);
+      if (!response.ok) {
+        throw new Error("Failed to save date and time to database");
+      }
+      console.log("Date and time saved to database successfully");
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+  const saveDateTimeTicketBearbeitet = async (ticketId2) => {
+    try {
+      const currentDate = new Date();
+      const formattedDate = `${currentDate.toLocaleDateString()} ${currentDate.toLocaleTimeString()}`;
+
+      console.log(`Date and time when loggedIn changes: ${formattedDate}`);
+
+      const url = `http://localhost:5000/log`;
+      const options = {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          userid: logUserID,
+          lastLoggedIn: "",
+          lastLoggedOut: "",
+          Ticketerstelltam: "",
+          Benutzerzugeordnetam: "",
+          TicketID: ticketId2,
+          Ticketbearbeitetam: formattedDate,
+        }),
+      };
+
+      const response = await fetch(url, options);
+      if (!response.ok) {
+        throw new Error("Failed to save date and time to database");
+      }
+      console.log("Date and time saved to database successfully");
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+  const saveDateTimeTicketLöschen = async (tickedID) => {
+    try {
+      const currentDate = new Date();
+      const formattedDate = `${currentDate.toLocaleDateString()} ${currentDate.toLocaleTimeString()}`;
+
+      console.log(`Date and time when loggedIn changes: ${formattedDate}`);
+
+      const url = `http://localhost:5000/log`;
+      const options = {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          userid: logUserID,
+          lastLoggedIn: "",
+          lastLoggedOut: "",
+          Ticketerstelltam: "",
+          Benutzerzugeordnetam: "",
+          Ticketbearbeitetam: "",
+          TicketID: tickedID,
+          TicketGelöschtAm: formattedDate,
+        }),
+      };
+
+      const response = await fetch(url, options);
+      if (!response.ok) {
+        throw new Error("Failed to save date and time to database");
+      }
+      console.log("Date and time saved to database successfully");
+    } catch (error) {
+      console.error(error);
+    }
+  };
   return (
     <LoggedinContext.Provider
       value={{
@@ -141,6 +274,10 @@ export const LoggedinContextProvider = ({ children }) => {
         setIsAdmin,
         saveDateTime,
         saveDateTimeLogOut,
+        saveDateTimeTicketEstellen,
+        saveDateTimeBenutzerZuOrdnen,
+        saveDateTimeTicketBearbeitet,
+        saveDateTimeTicketLöschen,
       }}>
       {children}
     </LoggedinContext.Provider>
