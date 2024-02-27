@@ -118,7 +118,7 @@ export const Sidebar = () => {
       </div>
       <hr />
       <div className="aside-row online">
-        <h2>Useres Online:</h2>
+        <h2>Users Online:</h2>
         <p>{userloggedin}</p>
       </div>
     </aside>
