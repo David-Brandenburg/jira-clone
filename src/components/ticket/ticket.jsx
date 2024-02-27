@@ -21,8 +21,15 @@ export const Ticket = () => {
     editorId: "",
   });
 
-  const { loggedInUser, isAdmin } = useContext(LoggedinContext);
-	const { theme } = useContext(ThemeContext);
+  const {
+    loggedInUser,
+    isAdmin,
+    saveDateTimeTicketEstellen,
+    saveDateTimeBenutzerZuOrdnen,
+    saveDateTimeTicketBearbeitet,
+    saveDateTimeTicketLöschen,
+  } = useContext(LoggedinContext);
+  const { theme } = useContext(ThemeContext);
   const [showEditor, setShowEditor] = useState(false);
 
   const url = `http://localhost:5000/tickets`;
@@ -118,6 +125,7 @@ export const Ticket = () => {
         throw new Error("Failed to fetch!", response.status);
       }
       toast.success("Ticket erfolgreich bearbeitet!");
+      saveDateTimeTicketBearbeitet(ticketId2);
       setEditTicket(null);
       fetchTickets();
     } catch (error) {
@@ -242,6 +250,7 @@ export const Ticket = () => {
       const userEditorId = editedTicket.editorId; // Annahme: Das editor-Attribut des Tickets enthält die userId
 
       updateUserTicketId(userEditorId, ticketId); // Benutzerprofil aktualisieren
+      saveDateTimeTicketLöschen(ticketId);
       fetchTickets(); // Tickets erneut abrufen, um die aktualisierten Daten anzuzeigen
     } catch (error) {
       toast.error("Ticket konnte nicht gelöscht werden!");
@@ -354,9 +363,13 @@ export const Ticket = () => {
                 <button
                   type="submit"
                   className="btn"
-                  onClick={(e) => handleSubmit(e)}>
+                  onClick={(e) => {
+                    handleSubmit(e);
+                    saveDateTimeTicketEstellen();
+                  }}>
                   Erstelle Ticket
                 </button>
+
                 <button
                   className="btn cancel-btn"
                   onClick={() => {
@@ -397,14 +410,18 @@ export const Ticket = () => {
               </div>
             </div>
             <div className="ticket-buttons">
-              {isAdmin && <button
-                className="btn edit-btn"
-                onClick={() => handleTicketEdit(ticket.id)}>
-                Bearbeiten
-              </button>}
+              {isAdmin && (
+                <button
+                  className="btn edit-btn"
+                  onClick={() => handleTicketEdit(ticket.id)}>
+                  Bearbeiten
+                </button>
+              )}
               <button
                 className="btn delete-btn"
-                onClick={() => handleDeleteTicket(ticket.id)}>
+                onClick={() => {
+                  handleDeleteTicket(ticket.id);
+                }}>
                 Löschen
               </button>
             </div>
@@ -423,7 +440,10 @@ export const Ticket = () => {
               </select>
               <button
                 className="btn update-benutzer"
-                onClick={(e) => handleUpdateEditor(e, ticket.id)}>
+                onClick={(e) => {
+                  handleUpdateEditor(e, ticket.id);
+                  saveDateTimeBenutzerZuOrdnen();
+                }}>
                 Update Benutzer
               </button>
             </div>
