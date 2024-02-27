@@ -668,7 +668,7 @@ const AdminPage = () => {
             </table>
           )}
           {data && data[0] === "log" && data[1] && data[1].length > 0 && (
-            <table className="ticketTable">
+            <table className="LogTable">
               <thead>
                 <tr>
                   {Object.keys(data[1][0]).map((key, index) => (
