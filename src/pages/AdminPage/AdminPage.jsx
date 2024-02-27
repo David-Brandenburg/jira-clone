@@ -611,7 +611,7 @@ const AdminPage = () => {
               </tbody>
             </table>
           )}
-          {data && data[0] === "tickets" && (
+          {data && data[0] === "tickets" && data[1] && data[1].length > 0 &&
             <table className="ticketTable">
               <thead>
                 <tr>
@@ -646,9 +646,9 @@ const AdminPage = () => {
                 ))}
               </tbody>
             </table>
-          )}
-          {data && data[0] === "log" && (
-            <table className="ticketTable">
+					}
+          {data && data[0] === "log" && data[1] && data[1].length > 0 &&
+						<table className="ticketTable">
               <thead>
                 <tr>
                   {Object.keys(data[1][0]).map((key, index) => (
@@ -668,7 +668,8 @@ const AdminPage = () => {
                 ))}
               </tbody>
             </table>
-          )}
+					}
+					{data && data[1].length < 1 && <h2>No Entrys found</h2>}
         </div>
       </div>
       {openModal && (
