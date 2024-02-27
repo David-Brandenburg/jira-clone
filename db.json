@@ -5,11 +5,11 @@
       "fname": "Danny",
       "lname": "Böhm",
       "password": "test12345",
-      "avatar": "https://robohash.org/ph38?set=set4",
-      "ticketIds": ["OdBbzfo"],
+      "avatar": "https://robohash.org/e4mm8r?set=set4",
+      "ticketIds": [],
       "isadmin": true,
       "isloggedin": true,
-      "id": "1"
+      "id": 1
     },
     {
       "email": "michelle@mail.com",
@@ -17,10 +17,12 @@
       "lname": "Sträßer",
       "password": "test1234",
       "avatar": "https://robohash.org/asd213sd?set=set4",
-      "ticketIds": ["1b49", "d2cf"],
+      "ticketIds": [
+        "d2cf"
+      ],
       "isadmin": true,
       "isloggedin": false,
-      "id": "2"
+      "id": 2
     },
     {
       "email": "david@mail.com",
@@ -28,10 +30,14 @@
       "lname": "Brandenburg",
       "password": "test1234",
       "avatar": "https://robohash.org/da1234dsa?set=set4",
-      "ticketIds": ["d3f1"],
+      "ticketIds": [
+        "uH2zfQ8",
+        "qmAmEZn",
+        "f2e5"
+      ],
       "isadmin": true,
       "isloggedin": true,
-      "id": "3"
+      "id": 3
     },
     {
       "email": "test@mail.com",
@@ -42,7 +48,7 @@
       "ticketIds": [],
       "isadmin": false,
       "isloggedin": false,
-      "id": "4"
+      "id": 4
     },
     {
       "email": "Zwegat69@cock.com",
@@ -52,8 +58,8 @@
       "avatar": "/static/media/defaultProfilepic.b5d0704057147e38225a.webp",
       "ticketIds": [],
       "isadmin": false,
-      "isloggedin": false,
-      "id": "5"
+      "isloggedin": true,
+      "id": 5
     },
     {
       "email": "cock123@web.de",
@@ -61,10 +67,13 @@
       "lname": "Cock",
       "password": "12345",
       "avatar": "https://robohash.org/ijnmlgjl?set=set4",
-      "ticketIds": [],
-      "isadmin": true,
+      "ticketIds": [
+        "JzVXp9i",
+        "ofcNxM9"
+      ],
+      "isadmin": false,
       "isloggedin": false,
-      "id": "6"
+      "id": 6
     },
     {
       "email": "last1@mail.com",
@@ -75,29 +84,7 @@
       "ticketIds": [],
       "isadmin": false,
       "isloggedin": false,
-      "id": "7"
-    },
-    {
-      "email": "danny@cock.com",
-      "fname": "testname1",
-      "lname": "testname2",
-      "password": "ichhabcock",
-      "avatar": "https://robohash.org/byu9jvda?set=set4",
-      "ticketIds": [],
-      "isadmin": true,
-      "isloggedin": false,
-      "id": "8"
-    },
-    {
-      "email": "31231321@123.com",
-      "fname": "123123123",
-      "lname": "3232131231",
-      "password": "1231231231223132",
-      "avatar": "https://robohash.org/g9fkklc?set=set4",
-      "ticketIds": [],
-      "isadmin": false,
-      "isloggedin": false,
-      "id": "9"
+      "id": 7
     }
   ],
   "tickets": [
@@ -129,20 +116,20 @@
       "status": "IN PROGRESS",
       "deadline": "2024-02-24",
       "creator": "Danny",
-      "editor": "David",
-      "editorId": "3",
-      "editorAvatar": "https://robohash.org/da1234dsa?set=set4",
+      "editor": "",
+      "editorId": "",
+      "editorAvatar": "",
       "id": "3J6gWG4"
     },
     {
       "title": "test123",
       "desc": "test",
-      "status": "IN REVIEW",
+      "status": "TO DO",
       "deadline": "2024-02-24",
       "creator": "Danny",
-      "editor": "testname1",
-      "editorId": "8",
-      "editorAvatar": "https://robohash.org/byu9jvda?set=set4",
+      "editor": "",
+      "editorId": "",
+      "editorAvatar": "",
       "id": "P1oXUVz"
     },
     {
@@ -179,26 +166,29 @@
       "id": "f2e5"
     },
     {
-      "title": "testIdTEST",
-      "desc": "123123123123123123",
-      "status": "IN REVIEW",
+      "title": "test1",
+      "desc": "123",
+      "status": "TO DO",
       "deadline": "2024-02-23",
       "creator": "Danny",
-      "editor": "Danny",
-      "editorId": "1",
-      "editorAvatar": "https://robohash.org/ph38?set=set4",
-      "id": "OdBbzfo"
+      "editor": "CumEater",
+      "editorId": "6",
+      "editorAvatar": "https://robohash.org/ijnmlgjl?set=set4",
+      "id": "JzVXp9i"
+    },
+    {
+      "title": "testCock",
+      "desc": "123",
+      "status": "IN PROGRESS",
+      "deadline": "2024-02-16",
+      "creator": "Danny",
+      "editor": "",
+      "editorId": "",
+      "editorAvatar": "",
+      "id": "0DG7ZZN"
     }
   ],
   "log": [
-    {
-      "userid": "",
-      "username": "",
-      "lastLoggedIn": "",
-      "lastLoggedOut": "",
-      "tickeErstelltTime": "",
-      "id": "6f6e"
-    },
     {
       "id": "be97",
       "userid": "3",
@@ -233,6 +223,36 @@
       "id": "aa55",
       "userid": "3",
       "lastLoggedIn": "26.2.2024 14:52:08"
+    },
+    {
+      "userid": 1,
+      "lastLoggedOut": "27.2.2024 08:18:52",
+      "id": "NZiMQbA"
+    },
+    {
+      "userid": 1,
+      "lastLoggedIn": "27.2.2024 08:19:46",
+      "id": "520AibB"
+    },
+    {
+      "userid": "",
+      "lastLoggedIn": "27.2.2024 08:20:12",
+      "id": "FNLNdK1"
+    },
+    {
+      "userid": "1",
+      "lastLoggedOut": "27.2.2024 08:20:18",
+      "id": "SBO_uVd"
+    },
+    {
+      "userid": "1",
+      "lastLoggedIn": "27.2.2024 08:20:51",
+      "id": "uY1XuQS"
+    },
+    {
+      "userid": "",
+      "lastLoggedIn": "27.2.2024 08:21:15",
+      "id": "NrAIWLo"
     }
   ]
 }

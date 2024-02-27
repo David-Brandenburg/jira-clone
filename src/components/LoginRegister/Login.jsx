@@ -77,7 +77,7 @@ const Login = ({ setPage }) => {
             setLoggedIn(true);
             usenavigate("/home");
             setLoggedInUser({ avatar: findUser.avatar, userId: findUser.id });
-          }, 6000);
+          }, 3000);
         } else {
           toast.error("Wrong username or password!");
           throw new Error("Wrong username or password!");
@@ -101,12 +101,11 @@ const Login = ({ setPage }) => {
   const handleSaveDateTime = () => {
     setTimeout(() => {
       saveDateTime();
-    }, 6500);
+    }, 3500);
   };
 
   return (
     <div className="form-wrapper">
-      <ToastContainer />
       <div className="text-wrapper">
         <h2>&nbsp;</h2>
         <p>&nbsp;</p>

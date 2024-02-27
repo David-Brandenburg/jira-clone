@@ -1,6 +1,6 @@
 import { useContext, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { ToastContainer, toast } from "react-toastify";
+import { toast } from "react-toastify";
 import { LoggedinContext } from "../../context/loggedinContext";
 import { ThemeContext } from "../../context/themeContext";
 import search_icon_light from "../../assets/search-w.png";
@@ -52,7 +52,7 @@ const Navbar2 = () => {
         setStayLoggedIn(false);
         setLoggedInUser(null);
         navigate("/");
-      }, 6000);
+      }, 3000);
     } catch (error) {
       console.error(error);
     }
@@ -61,7 +61,6 @@ const Navbar2 = () => {
 
   return (
     <>
-      <ToastContainer />
       <nav>
         <div className={`nav-wrapper ${theme}`}>
           <div className="toggle-wrapper">

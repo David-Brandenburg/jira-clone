@@ -1,6 +1,7 @@
 import { Route, Routes, Navigate, useNavigate } from "react-router-dom";
 import { useContext, useEffect } from "react";
 import { LoggedinContext } from "./context/loggedinContext";
+import { ThemeContext } from "./context/themeContext.js";
 import LoginAndRegister from "./components/LoginRegister/LoginAndRegister";
 import ErrorPage from "./pages/ErrorPage/ErrorPage";
 import HomePage from "./pages/HomePage/HomePage.jsx";
@@ -9,9 +10,12 @@ import { Sidebar } from "./components/Sidebar/Sidebar.jsx";
 import ProfilePage from "./pages/ProfilePage/ProfilePage.jsx";
 import AdminPage from "./pages/AdminPage/AdminPage.jsx";
 import { KanBanBoard } from "./pages/KanBanPage/KanBanBoard.jsx";
+import { ToastContainer, toast } from "react-toastify";
+import 'react-toastify/dist/ReactToastify.css';
 
 function App() {
   const { loggedIn, isAdmin } = useContext(LoggedinContext);
+	const { theme } = useContext(ThemeContext);
 	const navigate = useNavigate();
 
   useEffect(() => {
@@ -31,7 +35,7 @@ function App() {
   }
 
   return (
-    <div className="main">
+		<div className="main">
       {loggedIn && (
         <>
           <Navbar />
@@ -46,6 +50,7 @@ function App() {
         <Route path="*" element={<ErrorPage />} />
         <Route path="/kanBanBoard" element={<PrivateRoute element={<KanBanBoard />} loggedIn={loggedIn} /> } />
       </Routes>
+			<ToastContainer theme={theme} pauseOnFocusLoss={false} pauseOnHover={false} autoClose={3000}/>
     </div>
   );
 }

@@ -293,7 +293,6 @@ export const Ticket = () => {
 
   return (
     <>
-      <ToastContainer />
       <div className="card2">
         <button
           className="erstellen-btn"

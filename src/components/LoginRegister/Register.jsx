@@ -70,7 +70,6 @@ const Register = ({setPage}) => {
 
     return (
         <div className="form-wrapper">
-			<ToastContainer />
 			<div className="text-wrapper">
 				<h2>Erste Schritte</h2>
 				<p>Kostenlos für bis zu 10 Benutzer</p>

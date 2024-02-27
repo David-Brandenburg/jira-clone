@@ -2,9 +2,9 @@ import { useState, useContext, useEffect } from "react";
 import { generateRandomAvatar } from "../..";
 import { ThemeContext } from "../../context/themeContext";
 import { LoggedinContext } from "../../context/loggedinContext";
-import "./adminpage.scss";
-import { ToastContainer, toast } from "react-toastify";
+import { toast } from "react-toastify";
 import defaultAvatar from "../../assets/defaultProfilepic.webp";
+import "./adminpage.scss";
 
 const AdminPage = () => {
   const [data, setData] = useState(null);
@@ -203,31 +203,85 @@ const AdminPage = () => {
         email: object.email,
         fname: object.fname,
         lname: object.lname,
-        password: object.password,
-        avatar: avatar,
-        ticketId: [],
         isadmin: object.isadmin,
-        isloggedin: false,
-        id: Number,
       }),
     };
 
     try {
       if (activeTab === "users") {
-        console.log("cock");
+        const response = await fetch(`${url}${activeTab}/${entryData.id}`, optionsPatchUser)
+				if (!response.ok){
+					throw new Error("Failed to fetch!", response.status)
+				}
+				toast.success(`Successfully changed entrys to user with Id: ${entryData.id}`);
+				setOpenEditModal(false);
+				setDataToPatch({});
+				setEntryData({});
+				fetchData(activeTab);
       } else if (activeTab === "tickets") {
-        const resp = await fetch(
-          `${url}${activeTab}/${entryData.id}`,
-          optionsPatchTicket
-        );
+				const ticketId = entryData.id;
+				const selEditorId = selectedEditEditor.id;
+        const resp = await fetch(`${url}${activeTab}/${ticketId}`, optionsPatchTicket);
         if (!resp.ok) {
           throw new Error("Failed to fetch!", resp.status);
         }
         toast.success(
-          `Successfully changed entrys to ticket with Id: ${entryData.id}`
+          `Successfully changed entrys to ticket with Id: ${ticketId}`
         );
+				const userResponse = await fetch("http://localhost:5000/users", {
+					method: "GET",
+				});
+				if (!userResponse.ok) {
+					throw new Error("Failed to fetch user data", userResponse.status);
+				}
+				const userData = await userResponse.json();
+
+				const userToUpdate = userData.find((user) =>
+					user.ticketIds.includes(ticketId)
+				);
+				if (!userToUpdate) {
+					throw new Error("User with ticketId not found");
+				}
+				userToUpdate.ticketIds = userToUpdate.ticketIds.filter(
+					(id) => id !== ticketId
+				);
+				const updateUserResponse = await fetch(
+					`http://localhost:5000/users/${userToUpdate.id}`,
+					{
+						method: "PUT",
+						headers: {
+							"Content-Type": "application/json",
+						},
+						body: JSON.stringify(userToUpdate),
+					}
+				);
+				if (!updateUserResponse.ok) {
+					throw new Error("Failed to update user data", updateUserResponse.status);
+				}
+
+				const editorResponse = await fetch(`${url}users/${selEditorId}`);
+        if (!editorResponse.ok) {
+          throw new Error("Failed to fetch editor data", editorResponse.status);
+        }
+        const editorData = await editorResponse.json();
+        editorData.ticketIds.push(ticketId);
+        const updateEditorResponse = await fetch(`${url}users/${selEditorId}`, {
+          method: "PUT",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(editorData),
+        });
+        if (!updateEditorResponse.ok) {
+          throw new Error(
+            "Failed to update editor data",
+            updateEditorResponse.status
+          );
+        }
+
         setOpenEditModal(false);
         setDataToPatch({});
+				setEntryData({});
         fetchData(activeTab);
       }
     } catch (error) {
@@ -400,16 +454,65 @@ const AdminPage = () => {
   const handleEditUser = (e, id) => {
     e.preventDefault();
     console.log(id);
+		setOpenEditModal(true);
+		fetchEntry(id);
   };
 
-  const handleDeleteUser = (e, id) => {
+  const handleDeleteUser = async (e, id) => {
     e.preventDefault();
-    console.log(id);
+    const urlDel = `${url}${activeTab}/${id}`;
+    const optionsDel = {
+      method: "DELETE",
+    };
+
+		try {
+			const getUser = await fetch(`${url}${activeTab}/${id}`, options);
+			if (!getUser.ok){
+				throw new Error("Failed to fetch, couldnt find user!", getUser.status);
+			}
+			const gotUser = await getUser.json()
+			const userTickets = gotUser.ticketIds;
+			if (userTickets.length > 0){
+				userTickets.forEach(ticketId => {
+					changeDeletedUserTickets(ticketId);
+				});
+			};
+			const deleteResp = await fetch(urlDel, optionsDel);
+			if (!deleteResp.ok){
+				throw new Error("Failed to fetch, user couldnt be deleted.", deleteResp.status)
+			};
+			fetchData(activeTab)
+		} catch (error) {
+			toast.error("Something went wrong!");
+			console.error(error);
+		}
   };
+
+	const changeDeletedUserTickets = async (ticketId) => {
+		const optionsPatchTicket = {
+			method: "PATCH",
+			headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        editor: "",
+        editorId: "",
+        editorAvatar: "",
+      }),
+		}
+
+		try {
+			const respTicket = await fetch(`${url}tickets/${ticketId}`, optionsPatchTicket);
+			if (!respTicket.ok){
+				throw new Error("Failed to fetch!", respTicket.status)
+			}
+		} catch (error) {
+			console.error(error);
+		}
+	} 
 
   return (
     <div className="main-content admin-page">
-      <ToastContainer />
       <div className={`admin-wrapper ${theme}`}>
         <div className="admin-headnav">
           <ul>
@@ -754,6 +857,7 @@ const AdminPage = () => {
                         type="text"
                         name="fname"
                         id="fname"
+												defaultValue={entryData.fname}
                         required
                       />
                     </div>
@@ -764,6 +868,7 @@ const AdminPage = () => {
                         type="text"
                         name="lname"
                         id="lname"
+												defaultValue={entryData.lname}
                         required
                       />
                     </div>
@@ -774,16 +879,7 @@ const AdminPage = () => {
                         type="email"
                         name="email"
                         id="email"
-                        required
-                      />
-                    </div>
-                    <div className="input-row">
-                      <label htmlFor="password">Password</label>
-                      <input
-                        className="form-input"
-                        type="password"
-                        name="password"
-                        id="password"
+												defaultValue={entryData.email}
                         required
                       />
                     </div>
@@ -794,16 +890,15 @@ const AdminPage = () => {
                         type="checkbox"
                         name="isadmin"
                         id="isadmin"
+												checked={entryData.isadmin}
+												onChange={() => setEntryData(prevData => ({ ...prevData, isadmin: !prevData.isadmin }))}
                       />
                     </div>
                   </div>
                   <div className="input-right">
                     <div className="input-row">
                       <label htmlFor="">Avatar</label>
-                      <img src={avatar} alt="" />
-                      <button className="btn" onClick={handleAvatarChange}>
-                        Change Avatar
-                      </button>
+                      <img src={entryData.avatar} alt="" />
                     </div>
                   </div>
                 </div>
@@ -919,6 +1014,7 @@ const AdminPage = () => {
                 onClick={() => {
                   setOpenEditModal(false);
                   setDataToPatch({});
+									setEntryData({});
                   toast.warn("Action canceled!");
                 }}>
                 Cancel

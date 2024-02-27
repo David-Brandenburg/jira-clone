@@ -1,7 +1,7 @@
 import { useState, useEffect, useContext } from "react"
 import { LoggedinContext } from "../../context/loggedinContext"
 import { ThemeContext } from "../../context/themeContext";
-import { ToastContainer, toast } from "react-toastify";
+import { toast } from "react-toastify";
 import { generateRandomAvatar } from "../..";
 import "./profilepage.scss"
 
@@ -39,8 +39,8 @@ const ProfilePage = () => {
 	};
 
 	const restoreAvatar = () => {
-		setNewAvatar(currentAvatar)
-	}
+		setNewAvatar(currentAvatar);
+	};
 
 	const handleCurrentPasswordInput = (e) => {
 		setCurrentInputPassword(e.target.value);
@@ -167,10 +167,6 @@ const ProfilePage = () => {
 	}, [editProfile]);
 
 	useEffect(() => {
-		// kann man leer lassen, oder etwas ausführen sobald sich userData verändert - hier leer damit es immer aktuell ist.
-		// also, wenn ich userData setze oben wäre das 1. abgreifen von userData leer, also revaluiere ich userData, wenn sie sich verändert
-		// mit der abhängigkeitsarray
-		// console.log("userData: ", userData)
 	}, [userData]);
 
 	useEffect(() => {
@@ -207,7 +203,6 @@ const ProfilePage = () => {
 
 	return (
 		<div className={`main-content profile-content`}>
-			<ToastContainer />
 			<div className="profile-wrapper">
 				<div className={`profile-header ${theme}`}>
 					<div className="dummyBox"></div>
