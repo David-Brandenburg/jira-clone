@@ -85,12 +85,12 @@ export const LoggedinContextProvider = ({ children }) => {
         body: JSON.stringify({
           userid: logUserID,
           lastLoggedIn: formattedDate,
-          lastLoggedOut: "",
-          Ticketerstelltam: "",
-          Benutzerzugeordnetam: "",
-          Ticketbearbeitetam: "",
-          TicketID: "",
-          TicketGelöschtAm: "",
+          lastLoggedOut: "--",
+          Ticketerstellt: "--",
+          Editor: "--",
+          TicketEdit: "--",
+          TicketID: "--",
+          TicketGelöscht: "--",
         }),
       };
 
@@ -119,13 +119,13 @@ export const LoggedinContextProvider = ({ children }) => {
         },
         body: JSON.stringify({
           userid: logUserID,
-          lastLoggedIn: "",
+          lastLoggedIn: "--",
           lastLoggedOut: formattedDate,
-          Ticketerstelltam: "",
-          Benutzerzugeordnetam: "",
-          Ticketbearbeitetam: "",
-          TicketID: "",
-          TicketGelöschtAm: "",
+          Ticketerstellt: "--",
+          Editor: "--",
+          TicketEdit: "--",
+          TicketID: "--",
+          TicketGelöscht: "--",
         }),
       };
 
@@ -154,13 +154,13 @@ export const LoggedinContextProvider = ({ children }) => {
         },
         body: JSON.stringify({
           userid: logUserID,
-          lastLoggedIn: "",
-          lastLoggedOut: "",
-          Ticketerstelltam: formattedDate,
-          Benutzerzugeordnetam: "",
-          Ticketbearbeitetam: "",
-          TicketID: "",
-          TicketGelöschtAm: "",
+          lastLoggedIn: "--",
+          lastLoggedOut: "--",
+          Ticketerstellt: formattedDate,
+          Editor: "--",
+          TicketEdit: "--",
+          TicketID: "--",
+          TicketGelöscht: "--",
         }),
       };
 
@@ -189,13 +189,13 @@ export const LoggedinContextProvider = ({ children }) => {
         },
         body: JSON.stringify({
           userid: logUserID,
-          lastLoggedIn: "",
-          lastLoggedOut: "",
-          Ticketerstelltam: "",
-          Benutzerzugeordnetam: formattedDate,
-          Ticketbearbeitetam: "",
+          lastLoggedIn: "--",
+          lastLoggedOut: "--",
+          Ticketerstellt: "--",
+          Editor: formattedDate,
+          TicketEdit: "--",
           TicketID: ticketId,
-          TicketGelöschtAm: "",
+          TicketGelöscht: "--",
         }),
       };
 
@@ -224,12 +224,13 @@ export const LoggedinContextProvider = ({ children }) => {
         },
         body: JSON.stringify({
           userid: logUserID,
-          lastLoggedIn: "",
-          lastLoggedOut: "",
-          Ticketerstelltam: "",
-          Benutzerzugeordnetam: "",
+          lastLoggedIn: "--",
+          lastLoggedOut: "--",
+          Ticketerstellt: "--",
+          Editor: "--",
+          TicketEdit: formattedDate,
           TicketID: ticketId2,
-          Ticketbearbeitetam: formattedDate,
+          TicketGelöscht: "--",
         }),
       };
 
@@ -258,13 +259,13 @@ export const LoggedinContextProvider = ({ children }) => {
         },
         body: JSON.stringify({
           userid: logUserID,
-          lastLoggedIn: "",
-          lastLoggedOut: "",
-          Ticketerstelltam: "",
-          Benutzerzugeordnetam: "",
-          Ticketbearbeitetam: "",
+          lastLoggedIn: "--",
+          lastLoggedOut: "--",
+          Ticketerstellt: "--",
+          Editor: "--",
+          TicketEdit: "--",
           TicketID: tickedId,
-          TicketGelöschtAm: formattedDate,
+          TicketGelöscht: formattedDate,
         }),
       };
 
