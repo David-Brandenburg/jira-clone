@@ -239,24 +239,23 @@ const AdminPage = () => {
 				const userToUpdate = userData.find((user) =>
 					user.ticketIds.includes(ticketId)
 				);
-				if (!userToUpdate) {
-					throw new Error("User with ticketId not found");
-				}
-				userToUpdate.ticketIds = userToUpdate.ticketIds.filter(
-					(id) => id !== ticketId
-				);
-				const updateUserResponse = await fetch(
-					`http://localhost:5000/users/${userToUpdate.id}`,
-					{
-						method: "PUT",
-						headers: {
-							"Content-Type": "application/json",
-						},
-						body: JSON.stringify(userToUpdate),
+				if (userToUpdate){
+					userToUpdate.ticketIds = userToUpdate.ticketIds.filter(
+						(id) => id !== ticketId
+					);
+					const updateUserResponse = await fetch(
+						`http://localhost:5000/users/${userToUpdate.id}`,
+						{
+							method: "PUT",
+							headers: {
+								"Content-Type": "application/json",
+							},
+							body: JSON.stringify(userToUpdate),
+						}
+					);
+					if (!updateUserResponse.ok) {
+						throw new Error("Failed to update user data", updateUserResponse.status);
 					}
-				);
-				if (!updateUserResponse.ok) {
-					throw new Error("Failed to update user data", updateUserResponse.status);
 				}
 
 				const editorResponse = await fetch(`${url}users/${selEditorId}`);
@@ -273,10 +272,7 @@ const AdminPage = () => {
           body: JSON.stringify(editorData),
         });
         if (!updateEditorResponse.ok) {
-          throw new Error(
-            "Failed to update editor data",
-            updateEditorResponse.status
-          );
+          throw new Error("Failed to update editor data", updateEditorResponse.status);
         }
 
         setOpenEditModal(false);
@@ -287,7 +283,7 @@ const AdminPage = () => {
     } catch (error) {
       console.error(error);
     }
-    console.log(object);
+    // console.log(object);
   };
 
   const postData = async (object) => {

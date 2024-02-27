@@ -6,7 +6,10 @@
       "lname": "Böhm",
       "password": "test12345",
       "avatar": "https://robohash.org/e4mm8r?set=set4",
-      "ticketIds": [],
+      "ticketIds": [
+        "P1oXUVz",
+        "0DG7ZZN"
+      ],
       "isadmin": true,
       "isloggedin": true,
       "id": 1
@@ -116,9 +119,9 @@
       "status": "IN PROGRESS",
       "deadline": "2024-02-24",
       "creator": "Danny",
-      "editor": "",
-      "editorId": "",
-      "editorAvatar": "",
+      "editor": "Huge",
+      "editorId": "4",
+      "editorAvatar": "https://robohash.org/2zzk?set=set4",
       "id": "3J6gWG4"
     },
     {
@@ -127,9 +130,9 @@
       "status": "TO DO",
       "deadline": "2024-02-24",
       "creator": "Danny",
-      "editor": "",
-      "editorId": "",
-      "editorAvatar": "",
+      "editor": "Danny",
+      "editorId": "1",
+      "editorAvatar": "https://robohash.org/e4mm8r?set=set4",
       "id": "P1oXUVz"
     },
     {
@@ -182,9 +185,9 @@
       "status": "IN PROGRESS",
       "deadline": "2024-02-16",
       "creator": "Danny",
-      "editor": "",
-      "editorId": "",
-      "editorAvatar": "",
+      "editor": "Danny",
+      "editorId": "1",
+      "editorAvatar": "https://robohash.org/e4mm8r?set=set4",
       "id": "0DG7ZZN"
     }
   ],
