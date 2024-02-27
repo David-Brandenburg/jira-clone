@@ -442,7 +442,7 @@ export const Ticket = () => {
                 className="btn update-benutzer"
                 onClick={(e) => {
                   handleUpdateEditor(e, ticket.id);
-                  saveDateTimeBenutzerZuOrdnen();
+                  saveDateTimeBenutzerZuOrdnen(ticket.id);
                 }}>
                 Update Benutzer
               </button>

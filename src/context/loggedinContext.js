@@ -86,6 +86,11 @@ export const LoggedinContextProvider = ({ children }) => {
           userid: logUserID,
           lastLoggedIn: formattedDate,
           lastLoggedOut: "",
+          Ticketerstelltam: "",
+          Benutzerzugeordnetam: "",
+          Ticketbearbeitetam: "",
+          TicketID: "",
+          TicketGelöschtAm: "",
         }),
       };
 
@@ -116,6 +121,11 @@ export const LoggedinContextProvider = ({ children }) => {
           userid: logUserID,
           lastLoggedIn: "",
           lastLoggedOut: formattedDate,
+          Ticketerstelltam: "",
+          Benutzerzugeordnetam: "",
+          Ticketbearbeitetam: "",
+          TicketID: "",
+          TicketGelöschtAm: "",
         }),
       };
 
@@ -148,6 +158,9 @@ export const LoggedinContextProvider = ({ children }) => {
           lastLoggedOut: "",
           Ticketerstelltam: formattedDate,
           Benutzerzugeordnetam: "",
+          Ticketbearbeitetam: "",
+          TicketID: "",
+          TicketGelöschtAm: "",
         }),
       };
 
@@ -161,7 +174,7 @@ export const LoggedinContextProvider = ({ children }) => {
     }
   };
 
-  const saveDateTimeBenutzerZuOrdnen = async () => {
+  const saveDateTimeBenutzerZuOrdnen = async (ticketId) => {
     try {
       const currentDate = new Date();
       const formattedDate = `${currentDate.toLocaleDateString()} ${currentDate.toLocaleTimeString()}`;
@@ -181,6 +194,8 @@ export const LoggedinContextProvider = ({ children }) => {
           Ticketerstelltam: "",
           Benutzerzugeordnetam: formattedDate,
           Ticketbearbeitetam: "",
+          TicketID: ticketId,
+          TicketGelöschtAm: "",
         }),
       };
 
@@ -228,7 +243,7 @@ export const LoggedinContextProvider = ({ children }) => {
     }
   };
 
-  const saveDateTimeTicketLöschen = async (tickedID) => {
+  const saveDateTimeTicketLöschen = async (tickedId) => {
     try {
       const currentDate = new Date();
       const formattedDate = `${currentDate.toLocaleDateString()} ${currentDate.toLocaleTimeString()}`;
@@ -248,7 +263,7 @@ export const LoggedinContextProvider = ({ children }) => {
           Ticketerstelltam: "",
           Benutzerzugeordnetam: "",
           Ticketbearbeitetam: "",
-          TicketID: tickedID,
+          TicketID: tickedId,
           TicketGelöschtAm: formattedDate,
         }),
       };

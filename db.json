@@ -118,9 +118,9 @@
       "status": "IN PROGRESS",
       "deadline": "2024-02-28",
       "creator": "David",
-      "editor": "David",
-      "editorId": "3",
-      "editorAvatar": "https://robohash.org/da1234dsa?set=set4",
+      "editor": "Michelle",
+      "editorId": "2",
+      "editorAvatar": "https://robohash.org/asd213sd?set=set4",
       "id": "f2e5"
     },
     {
@@ -140,13 +140,13 @@
       "status": "IN PROGRESS",
       "deadline": "2024-02-16",
       "creator": "Danny",
-      "editor": "Danny",
-      "editorId": "1",
-      "editorAvatar": "https://robohash.org/ph38?set=set4",
+      "editor": "Huge",
+      "editorId": "4",
+      "editorAvatar": "https://robohash.org/2zzk?set=set4",
       "id": "OdBbzfo"
     },
     {
-			"title": "Black screen",
+      "title": "Black screen",
       "desc": "Black screen, wenn man das menu öffnet",
       "status": "IN PROGRESS",
       "deadline": "2024-02-29",
@@ -157,166 +157,5 @@
       "id": "7ca4"
     }
   ],
-  "log": [
-    {
-      "id": "883f",
-      "userid": "3",
-      "lastLoggedIn": "",
-      "lastLoggedOut": "26.2.2024 15:05:54"
-    },
-    {
-      "id": "2ffe",
-      "userid": "3",
-      "lastLoggedIn": "26.2.2024 15:06:20",
-      "lastLoggedOut": ""
-    },
-    {
-      "id": "1e08",
-      "userid": "3",
-      "lastLoggedIn": "",
-      "lastLoggedOut": "",
-      "Ticketerstelltam": "27.2.2024 09:25:48"
-    },
-    {
-      "id": "2bff",
-      "userid": "3",
-      "lastLoggedIn": "",
-      "lastLoggedOut": "",
-      "Ticketerstelltam": "",
-      "Benutzerzugeordnetam": "27.2.2024 09:34:09"
-    },
-    {
-      "id": "ad54",
-      "userid": "3",
-      "lastLoggedIn": "",
-      "lastLoggedOut": "",
-      "Ticketerstelltam": "",
-      "Benutzerzugeordnetam": "27.2.2024 09:34:22"
-    },
-    {
-      "id": "f43b",
-      "userid": "3",
-      "lastLoggedIn": "",
-      "lastLoggedOut": "",
-      "Ticketerstelltam": "",
-      "Benutzerzugeordnetam": "",
-      "Ticketbearbeitetam": "27.2.2024 09:38:42"
-    },
-    {
-      "id": "e2df",
-      "userid": "3",
-      "lastLoggedIn": "",
-      "lastLoggedOut": "",
-      "Ticketerstelltam": "",
-      "Benutzerzugeordnetam": "",
-      "Ticketbearbeitetam": "27.2.2024 09:38:42"
-    },
-    {
-      "id": "ec64",
-      "userid": "3",
-      "lastLoggedIn": "",
-      "lastLoggedOut": "",
-      "Ticketerstelltam": "",
-      "Benutzerzugeordnetam": "",
-      "Ticketbearbeitetam": "27.2.2024 09:38:42"
-    },
-    {
-      "id": "dfea",
-      "userid": "3",
-      "lastLoggedIn": "",
-      "lastLoggedOut": "",
-      "Ticketerstelltam": "",
-      "Benutzerzugeordnetam": "",
-      "Ticketbearbeitetam": "27.2.2024 09:38:42"
-    },
-    {
-      "id": "a014",
-      "userid": "3",
-      "lastLoggedIn": "",
-      "lastLoggedOut": "",
-      "Ticketerstelltam": "",
-      "Benutzerzugeordnetam": "",
-      "Ticketbearbeitetam": "27.2.2024 09:40:16"
-    },
-    {
-      "id": "2a5b",
-      "userid": "3",
-      "lastLoggedIn": "",
-      "lastLoggedOut": "",
-      "Ticketerstelltam": "",
-      "Benutzerzugeordnetam": "",
-      "Ticketbearbeitetam": "27.2.2024 09:40:40"
-    },
-    {
-      "id": "769d",
-      "userid": "",
-      "lastLoggedIn": "",
-      "lastLoggedOut": "",
-      "Ticketerstelltam": "",
-      "Benutzerzugeordnetam": "",
-      "Ticketbearbeitetam": ""
-    },
-    {
-      "id": "f532",
-      "userid": "3",
-      "lastLoggedIn": "",
-      "lastLoggedOut": "",
-      "Ticketerstelltam": "",
-      "Benutzerzugeordnetam": "",
-      "Ticketbearbeitetam": "",
-      "TicketGelöschtAm": "27.2.2024 10:00:43"
-    },
-    {
-      "id": "d799",
-      "userid": "3",
-      "lastLoggedIn": "",
-      "lastLoggedOut": "",
-      "Ticketerstelltam": "",
-      "Benutzerzugeordnetam": "",
-      "Ticketbearbeitetam": "",
-      "TicketGelöschtAm": "27.2.2024 10:01:02"
-    },
-    {
-      "id": "c23b",
-      "userid": "3",
-      "lastLoggedIn": "",
-      "lastLoggedOut": "",
-      "Ticketerstelltam": "",
-      "Benutzerzugeordnetam": "",
-      "Ticketbearbeitetam": "",
-      "TicketGelöschtAm": "27.2.2024 10:02:42"
-    },
-    {
-      "id": "fe78",
-      "userid": "3",
-      "lastLoggedIn": "",
-      "lastLoggedOut": "",
-      "Ticketerstelltam": "",
-      "Benutzerzugeordnetam": "",
-      "Ticketbearbeitetam": "",
-      "TicketID": "qmAmEZn",
-      "TicketGelöschtAm": "27.2.2024 10:06:05"
-    },
-    {
-      "id": "f349",
-      "userid": "3",
-      "lastLoggedIn": "",
-      "lastLoggedOut": "",
-      "Ticketerstelltam": "",
-      "Benutzerzugeordnetam": "",
-      "Ticketbearbeitetam": "",
-      "TicketID": "ofcNxM9",
-      "TicketGelöschtAm": "27.2.2024 10:06:48"
-    },
-    {
-      "id": "b967",
-      "userid": "3",
-      "lastLoggedIn": "",
-      "lastLoggedOut": "",
-      "Ticketerstelltam": "",
-      "Benutzerzugeordnetam": "",
-      "TicketID": "f2e5",
-      "Ticketbearbeitetam": "27.2.2024 10:10:06"
-    }
-  ]
+  "log": []
 }
