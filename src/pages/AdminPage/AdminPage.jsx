@@ -86,10 +86,10 @@ const AdminPage = () => {
       toast.warn("You have to select a real table.");
       return;
     }
-		if (parameter === "log"){
-			toast.warn("You cant add a log manually!")
-			return;
-		}
+    if (parameter === "log") {
+      toast.warn("You cant add a log manually!");
+      return;
+    }
     setOpenModal(true);
   };
 
@@ -213,56 +213,67 @@ const AdminPage = () => {
 
     try {
       if (activeTab === "users") {
-        const response = await fetch(`${url}${activeTab}/${entryData.id}`, optionsPatchUser)
-				if (!response.ok){
-					throw new Error("Failed to fetch!", response.status)
-				}
-				toast.success(`Successfully changed entrys to user with Id: ${entryData.id}`);
-				setOpenEditModal(false);
-				setDataToPatch({});
-				setEntryData({});
-				fetchData(activeTab);
+        const response = await fetch(
+          `${url}${activeTab}/${entryData.id}`,
+          optionsPatchUser
+        );
+        if (!response.ok) {
+          throw new Error("Failed to fetch!", response.status);
+        }
+        toast.success(
+          `Successfully changed entrys to user with Id: ${entryData.id}`
+        );
+        setOpenEditModal(false);
+        setDataToPatch({});
+        setEntryData({});
+        fetchData(activeTab);
       } else if (activeTab === "tickets") {
-				const ticketId = entryData.id;
-				const selEditorId = selectedEditEditor.id;
-        const resp = await fetch(`${url}${activeTab}/${ticketId}`, optionsPatchTicket);
+        const ticketId = entryData.id;
+        const selEditorId = selectedEditEditor.id;
+        const resp = await fetch(
+          `${url}${activeTab}/${ticketId}`,
+          optionsPatchTicket
+        );
         if (!resp.ok) {
           throw new Error("Failed to fetch!", resp.status);
         }
         toast.success(
           `Successfully changed entrys to ticket with Id: ${ticketId}`
         );
-				const userResponse = await fetch("http://localhost:5000/users", {
-					method: "GET",
-				});
-				if (!userResponse.ok) {
-					throw new Error("Failed to fetch user data", userResponse.status);
-				}
-				const userData = await userResponse.json();
+        const userResponse = await fetch("http://localhost:5000/users", {
+          method: "GET",
+        });
+        if (!userResponse.ok) {
+          throw new Error("Failed to fetch user data", userResponse.status);
+        }
+        const userData = await userResponse.json();
 
-				const userToUpdate = userData.find((user) =>
-					user.ticketIds.includes(ticketId)
-				);
-				if (userToUpdate){
-					userToUpdate.ticketIds = userToUpdate.ticketIds.filter(
-						(id) => id !== ticketId
-					);
-					const updateUserResponse = await fetch(
-						`http://localhost:5000/users/${userToUpdate.id}`,
-						{
-							method: "PUT",
-							headers: {
-								"Content-Type": "application/json",
-							},
-							body: JSON.stringify(userToUpdate),
-						}
-					);
-					if (!updateUserResponse.ok) {
-						throw new Error("Failed to update user data", updateUserResponse.status);
-					}
-				}
+        const userToUpdate = userData.find((user) =>
+          user.ticketIds.includes(ticketId)
+        );
+        if (userToUpdate) {
+          userToUpdate.ticketIds = userToUpdate.ticketIds.filter(
+            (id) => id !== ticketId
+          );
+          const updateUserResponse = await fetch(
+            `http://localhost:5000/users/${userToUpdate.id}`,
+            {
+              method: "PUT",
+              headers: {
+                "Content-Type": "application/json",
+              },
+              body: JSON.stringify(userToUpdate),
+            }
+          );
+          if (!updateUserResponse.ok) {
+            throw new Error(
+              "Failed to update user data",
+              updateUserResponse.status
+            );
+          }
+        }
 
-				const editorResponse = await fetch(`${url}users/${selEditorId}`);
+        const editorResponse = await fetch(`${url}users/${selEditorId}`);
         if (!editorResponse.ok) {
           throw new Error("Failed to fetch editor data", editorResponse.status);
         }
@@ -276,12 +287,15 @@ const AdminPage = () => {
           body: JSON.stringify(editorData),
         });
         if (!updateEditorResponse.ok) {
-          throw new Error("Failed to update editor data", updateEditorResponse.status);
+          throw new Error(
+            "Failed to update editor data",
+            updateEditorResponse.status
+          );
         }
 
         setOpenEditModal(false);
         setDataToPatch({});
-				setEntryData({});
+        setEntryData({});
         fetchData(activeTab);
       }
     } catch (error) {
@@ -454,8 +468,8 @@ const AdminPage = () => {
   const handleEditUser = (e, id) => {
     e.preventDefault();
     console.log(id);
-		setOpenEditModal(true);
-		fetchEntry(id);
+    setOpenEditModal(true);
+    fetchEntry(id);
   };
 
   const handleDeleteUser = async (e, id) => {
@@ -465,33 +479,36 @@ const AdminPage = () => {
       method: "DELETE",
     };
 
-		try {
-			const getUser = await fetch(`${url}${activeTab}/${id}`, options);
-			if (!getUser.ok){
-				throw new Error("Failed to fetch, couldnt find user!", getUser.status);
-			}
-			const gotUser = await getUser.json()
-			const userTickets = gotUser.ticketIds;
-			if (userTickets.length > 0){
-				userTickets.forEach(ticketId => {
-					changeDeletedUserTickets(ticketId);
-				});
-			};
-			const deleteResp = await fetch(urlDel, optionsDel);
-			if (!deleteResp.ok){
-				throw new Error("Failed to fetch, user couldnt be deleted.", deleteResp.status)
-			};
-			fetchData(activeTab)
-		} catch (error) {
-			toast.error("Something went wrong!");
-			console.error(error);
-		}
+    try {
+      const getUser = await fetch(`${url}${activeTab}/${id}`, options);
+      if (!getUser.ok) {
+        throw new Error("Failed to fetch, couldnt find user!", getUser.status);
+      }
+      const gotUser = await getUser.json();
+      const userTickets = gotUser.ticketIds;
+      if (userTickets.length > 0) {
+        userTickets.forEach((ticketId) => {
+          changeDeletedUserTickets(ticketId);
+        });
+      }
+      const deleteResp = await fetch(urlDel, optionsDel);
+      if (!deleteResp.ok) {
+        throw new Error(
+          "Failed to fetch, user couldnt be deleted.",
+          deleteResp.status
+        );
+      }
+      fetchData(activeTab);
+    } catch (error) {
+      toast.error("Something went wrong!");
+      console.error(error);
+    }
   };
 
-	const changeDeletedUserTickets = async (ticketId) => {
-		const optionsPatchTicket = {
-			method: "PATCH",
-			headers: {
+  const changeDeletedUserTickets = async (ticketId) => {
+    const optionsPatchTicket = {
+      method: "PATCH",
+      headers: {
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
@@ -499,17 +516,20 @@ const AdminPage = () => {
         editorId: "",
         editorAvatar: "",
       }),
-		}
+    };
 
-		try {
-			const respTicket = await fetch(`${url}tickets/${ticketId}`, optionsPatchTicket);
-			if (!respTicket.ok){
-				throw new Error("Failed to fetch!", respTicket.status)
-			}
-		} catch (error) {
-			console.error(error);
-		}
-	} 
+    try {
+      const respTicket = await fetch(
+        `${url}tickets/${ticketId}`,
+        optionsPatchTicket
+      );
+      if (!respTicket.ok) {
+        throw new Error("Failed to fetch!", respTicket.status);
+      }
+    } catch (error) {
+      console.error(error);
+    }
+  };
 
   return (
     <div className="main-content admin-page">
@@ -611,7 +631,7 @@ const AdminPage = () => {
               </tbody>
             </table>
           )}
-          {data && data[0] === "tickets" && data[1] && data[1].length > 0 &&
+          {data && data[0] === "tickets" && data[1] && data[1].length > 0 && (
             <table className="ticketTable">
               <thead>
                 <tr>
@@ -646,9 +666,9 @@ const AdminPage = () => {
                 ))}
               </tbody>
             </table>
-					}
-          {data && data[0] === "log" && data[1] && data[1].length > 0 &&
-						<table className="ticketTable">
+          )}
+          {data && data[0] === "log" && data[1] && data[1].length > 0 && (
+            <table className="ticketTable">
               <thead>
                 <tr>
                   {Object.keys(data[1][0]).map((key, index) => (
@@ -659,17 +679,15 @@ const AdminPage = () => {
               <tbody>
                 {data[1].map((item, index) => (
                   <tr key={index}>
-                    {Object.entries(item).map(
-                      ([key, value], index) =>
-                        key !== "desc" &&
-                        key !== "editorAvatar" && <td key={index}>{value}</td>
-                    )}
+                    {Object.entries(item).map(([key, value], index) => (
+                      <td key={index}>{value}</td>
+                    ))}
                   </tr>
                 ))}
               </tbody>
             </table>
-					}
-					{data && data[1].length < 1 && <h2>No Entrys found</h2>}
+          )}
+          {data && data[1].length < 1 && <h2>No Entrys found</h2>}
         </div>
       </div>
       {openModal && (
@@ -880,7 +898,7 @@ const AdminPage = () => {
                         type="text"
                         name="fname"
                         id="fname"
-												defaultValue={entryData.fname}
+                        defaultValue={entryData.fname}
                         required
                       />
                     </div>
@@ -891,7 +909,7 @@ const AdminPage = () => {
                         type="text"
                         name="lname"
                         id="lname"
-												defaultValue={entryData.lname}
+                        defaultValue={entryData.lname}
                         required
                       />
                     </div>
@@ -902,7 +920,7 @@ const AdminPage = () => {
                         type="email"
                         name="email"
                         id="email"
-												defaultValue={entryData.email}
+                        defaultValue={entryData.email}
                         required
                       />
                     </div>
@@ -913,8 +931,13 @@ const AdminPage = () => {
                         type="checkbox"
                         name="isadmin"
                         id="isadmin"
-												checked={entryData.isadmin}
-												onChange={() => setEntryData(prevData => ({ ...prevData, isadmin: !prevData.isadmin }))}
+                        checked={entryData.isadmin}
+                        onChange={() =>
+                          setEntryData((prevData) => ({
+                            ...prevData,
+                            isadmin: !prevData.isadmin,
+                          }))
+                        }
                       />
                     </div>
                   </div>
@@ -1037,7 +1060,7 @@ const AdminPage = () => {
                 onClick={() => {
                   setOpenEditModal(false);
                   setDataToPatch({});
-									setEntryData({});
+                  setEntryData({});
                   toast.warn("Action canceled!");
                 }}>
                 Cancel

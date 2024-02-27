@@ -1,405 +1,482 @@
 @import "../../variables";
 
-.admin-page{
-	.dark{
-		--bg-color: linear-gradient(to top, #0a0a0a, #000);
-		--color: #fff;
-		--color2: #000;
-		--box-shadow: 0px 3px 5px rgba(0,0,0,0.2);
-		--tr-bg-color: #111;
-		--color-hover-turned: #fff;
-	}
-	.light{
-		--bg-color: #fff;
-		--color: #000;
-		--color2: #fff;
-		--box-shadow: 0px 3px 5px rgba(0,0,0,0.1);
-		--tr-bg-color: #f2f2f2;
-		--color-hover-turned: #000;
-	}
-	.admin-wrapper{
-		display: flex;
-		flex-direction: column;
-		gap: 20px;
-		height: 100%;
-		.admin-headnav{
-			display: flex;
-			justify-content: space-between;
-			align-items: center;
-			height: 50px;
-			background: var(--bg-color);
-			color: var(--color);
-			box-shadow: var(--box-shadow);
-			padding: 20px;
-			user-select: none;
-			ul{
-				display: flex;
-				gap: 20px;
-				li{
-					cursor: pointer;
-					border-bottom: 1px solid transparent;
-					padding: 0 5px;
-					&:hover{
-						border-color: var(--color);
-					}
-				}
-				.active{
-					border-bottom: 1px solid $accent-color;
-					color: $accent-color;
-				}
-			}
-			.addEntryBtn{
-				font-size: 16px;
-				cursor: pointer;
-				position: relative;
-				font-size: 20px;
-				&:hover{
-					::after{
-						content: "Add Entry";
-						position: absolute;
-						width: 100px;
-						right: -20px;
-						top: 5px;
-						font-style: normal;
-						font-size: 12px;
-						text-shadow: 3px 3px 5px rgba(0,0,0,0.5);
-					}
-				}
-			}
-		}
-		.admin-content{
-			background: var(--bg-color);
-			color: var(--color);
-			box-shadow: var(--box-shadow);
-			height: inherit;
-			padding: 20px;
-			.avatar{
-				width: 25px;
-			}
-			table{
-				border-collapse: collapse;
-				display: flex;
-				flex-direction: column;
-				user-select: none;
-			}
-			td{
-				&:hover{
-					background-color: $accent-color;
-					color: var(--color2);
-				}
-				.bi{
-					&:hover{
-						cursor: pointer;
-						font-weight: bold;
-						color: var(--color-hover-turned);
-					}
-				}
-			}
-			.userTable{
-				thead{
-					tr{
-						border-bottom: 1px solid var(--color);
-						height: 50px;
-						th{
-							border-right: 1px solid var(--color);
-							&:first-child{
-								min-width: 200px;
-							}
-							&:last-child{
-								width: 140px;
-								border: none;
-							}
-							&:nth-child(4), &:nth-child(6), &:nth-child(7){
-								width: 100px;
-							}
-							&:nth-child(5){
-								width: 200px;
-							}
-							&:nth-child(8){
-								width: 50px;
-							}
-							width: 150px;
-						}
-					}
-				}
-				tbody{
-					tr{
-						td{
-							border-right: 1px solid var(--color);
-							text-align: center;
-							height: 40px;
-							&:first-child{
-								min-width: 200px;
-							}
-							&:last-child{
-								width: 140px;
-								border: none;
-							}
-							&:nth-child(4), &:nth-child(6), &:nth-child(7){
-								width: 100px;
-							}
-							&:nth-child(5){
-								width: 200px;
-							}
-							&:nth-child(8){
-								width: 50px;
-							}
-							width: 150px;
-						}
-						&:nth-child(odd){
-							background-color: var(--tr-bg-color);
-						}
-						&:hover{
-							background-color: $accent-hover-color;
-						}
-					}
-				}
-			}
-			.ticketTable{
-				thead{
-					tr{
-						border-bottom: 1px solid var(--color);
-						height: 50px;
-						th{
-							border-right: 1px solid var(--color);
-							&:last-child{
-								width: 140px;
-								border: none;
-							}
-							&:nth-child(3){
-								width: 150px;
-							}
-							&:nth-child(4), &:nth-child(6), &:nth-child(7){
-								width: 100px;
-							}
-							width: 200px;
-						}
-					}
-				}
-				tbody{
-					tr{
-						height: 40px;
-						td{
-							border-right: 1px solid var(--color);
-							text-align: center;
-							&:last-child{
-								width: 140px;
-								border: none;
-							}
-							&:nth-child(3){
-								width: 150px;
-							}
-							&:nth-child(4), &:nth-child(6), &:nth-child(7){
-								width: 100px;
-							}
-							width: 200px;
-						}
-						&:nth-child(odd){
-							background-color: var(--tr-bg-color);
-						}
-						&:hover{
-							background-color: $accent-hover-color;
-						}
-					}
-				}
-			}
-		}
-	}
-	.addEntryModal-blocker{
-		position: fixed;
-		top: 0;
-		bottom: 0;
-		right: 0;
-		left: 0;
-		background-color: #3333338a;
-		backdrop-filter: blur(3px);
-		z-index: 9998;
-		.addEntryModal{
-			width: 500px;
-			height: 500px;
-			position: absolute;
-			top: 0;
-			bottom: 0;
-			left: 0;
-			right: 0;
-			margin: auto;
-			background-color: #333;
-			padding: 20px;
-			// gap: 10px;
-			color: #fff;
-			border-radius: 10px;
-			box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.6);
-			user-select: none;
-			display: grid;
-			grid-template-columns: 1fr 1fr;
-			grid-template-rows: 40px 1fr 50px;
-			grid-template-areas:
-			"head head"
-			"body body"
-			"btn btn";
+.admin-page {
+  .dark {
+    --bg-color: linear-gradient(to top, #0a0a0a, #000);
+    --color: #fff;
+    --color2: #000;
+    --box-shadow: 0px 3px 5px rgba(0, 0, 0, 0.2);
+    --tr-bg-color: #111;
+    --color-hover-turned: #fff;
+  }
+  .light {
+    --bg-color: #fff;
+    --color: #000;
+    --color2: #fff;
+    --box-shadow: 0px 3px 5px rgba(0, 0, 0, 0.1);
+    --tr-bg-color: #f2f2f2;
+    --color-hover-turned: #000;
+  }
+  .admin-wrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    height: 100%;
+    .admin-headnav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      height: 50px;
+      background: var(--bg-color);
+      color: var(--color);
+      box-shadow: var(--box-shadow);
+      padding: 20px;
+      user-select: none;
+      ul {
+        display: flex;
+        gap: 20px;
+        li {
+          cursor: pointer;
+          border-bottom: 1px solid transparent;
+          padding: 0 5px;
+          &:hover {
+            border-color: var(--color);
+          }
+        }
+        .active {
+          border-bottom: 1px solid $accent-color;
+          color: $accent-color;
+        }
+      }
+      .addEntryBtn {
+        font-size: 16px;
+        cursor: pointer;
+        position: relative;
+        font-size: 20px;
+        &:hover {
+          ::after {
+            content: "Add Entry";
+            position: absolute;
+            width: 100px;
+            right: -20px;
+            top: 5px;
+            font-style: normal;
+            font-size: 12px;
+            text-shadow: 3px 3px 5px rgba(0, 0, 0, 0.5);
+          }
+        }
+      }
+    }
+    .admin-content {
+      background: var(--bg-color);
+      color: var(--color);
+      box-shadow: var(--box-shadow);
+      height: inherit;
+      padding: 20px;
+      .avatar {
+        width: 25px;
+      }
+      table {
+        border-collapse: collapse;
+        display: flex;
+        flex-direction: column;
+        user-select: none;
+      }
+      td {
+        &:hover {
+          background-color: $accent-color;
+          color: var(--color2);
+        }
+        .bi {
+          &:hover {
+            cursor: pointer;
+            font-weight: bold;
+            color: var(--color-hover-turned);
+          }
+        }
+      }
+      .userTable {
+        thead {
+          tr {
+            border-bottom: 1px solid var(--color);
+            height: 50px;
+            th {
+              border-right: 1px solid var(--color);
+              &:first-child {
+                min-width: 200px;
+              }
+              &:last-child {
+                width: 140px;
+                border: none;
+              }
+              &:nth-child(4),
+              &:nth-child(6),
+              &:nth-child(7) {
+                width: 100px;
+              }
+              &:nth-child(5) {
+                width: 200px;
+              }
+              &:nth-child(8) {
+                width: 50px;
+              }
+              width: 150px;
+            }
+          }
+        }
+        tbody {
+          tr {
+            td {
+              border-right: 1px solid var(--color);
+              text-align: center;
+              height: 40px;
+              &:first-child {
+                min-width: 200px;
+              }
+              &:last-child {
+                width: 140px;
+                border: none;
+              }
+              &:nth-child(4),
+              &:nth-child(6),
+              &:nth-child(7) {
+                width: 100px;
+              }
+              &:nth-child(5) {
+                width: 200px;
+              }
+              &:nth-child(8) {
+                width: 50px;
+              }
+              width: 150px;
+            }
+            &:nth-child(odd) {
+              background-color: var(--tr-bg-color);
+            }
+            &:hover {
+              background-color: $accent-hover-color;
+            }
+          }
+        }
+      }
+      .ticketTable {
+        thead {
+          tr {
+            border-bottom: 1px solid var(--color);
+            height: 50px;
+            th {
+              border-right: 1px solid var(--color);
+              &:last-child {
+                width: 140px;
+                border: none;
+              }
+              &:nth-child(3) {
+                width: 150px;
+              }
+              &:nth-child(4),
+              &:nth-child(6),
+              &:nth-child(7) {
+                width: 100px;
+              }
+              width: 200px;
+            }
+          }
+        }
+        tbody {
+          tr {
+            height: 40px;
+            td {
+              border-right: 1px solid var(--color);
+              text-align: center;
+              &:last-child {
+                width: 140px;
+                border: none;
+              }
+              &:nth-child(3) {
+                width: 150px;
+              }
+              &:nth-child(4),
+              &:nth-child(6),
+              &:nth-child(7) {
+                width: 100px;
+              }
+              width: 200px;
+            }
+            &:nth-child(odd) {
+              background-color: var(--tr-bg-color);
+            }
+            &:hover {
+              background-color: $accent-hover-color;
+            }
+          }
+        }
+      }
+      .LogTable {
+        thead {
+          font-size: 12px;
+          tr {
+            border-bottom: 1px solid var(--color);
+            height: 50px;
+            th {
+              border-right: 1px solid var(--color);
+              &:last-child {
+                width: 140px;
+                border: none;
+              }
+              &:nth-child(2) {
+                width: 50px;
+              }
+              &:nth-child(3) {
+                width: 150px;
+              }
+              &:nth-child(4),
+              &:nth-child(5),
+              &:nth-child(6),
+              &:nth-child(7) {
+                width: 150px;
+              }
+              width: 100px;
+            }
+          }
+        }
+        tbody {
+          tr {
+            height: 40px;
+            td {
+              border-right: 1px solid var(--color);
+              text-align: center;
+              &:last-child {
+                width: 140px;
+                border: none;
+              }
+              &:nth-child(2) {
+                width: 50px;
+              }
+              &:nth-child(3) {
+                width: 150px;
+              }
+              &:nth-child(4),
+              &:nth-child(5),
+              &:nth-child(6),
+              &:nth-child(7) {
+                width: 150px;
+              }
+              width: 100px;
+            }
+            &:nth-child(odd) {
+              background-color: var(--tr-bg-color);
+            }
+            &:hover {
+              background-color: $accent-hover-color;
+            }
+          }
+        }
+      }
+    }
+  }
+  .addEntryModal-blocker {
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    left: 0;
+    background-color: #3333338a;
+    backdrop-filter: blur(3px);
+    z-index: 9998;
+    .addEntryModal {
+      width: 500px;
+      height: 500px;
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      margin: auto;
+      background-color: #333;
+      padding: 20px;
+      // gap: 10px;
+      color: #fff;
+      border-radius: 10px;
+      box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.6);
+      user-select: none;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      grid-template-rows: 40px 1fr 50px;
+      grid-template-areas:
+        "head head"
+        "body body"
+        "btn btn";
 
-			h2{
-				grid-area: head;
-				text-align: center;
-			}
-			.input-body{
-				grid-area: body;
-				display: flex;
-				gap: 20px;
-				.input-left, .input-right{
-					width: 50%;
-					display: flex;
-					flex-direction: column;
-					gap: 10px;
-				}
-				.input-row{
-					display: flex;
-					flex-direction: column;
-					gap: 5px;
-					textarea{
-						height: 10lh;
-						&::-webkit-scrollbar{
-							display: none;
-						}
-					}
-					input, textarea, select{
-						color: var(--color);
-						resize: none;
-						width: 100%;
-						padding: 6px;
-						background-color: transparent;
-						box-shadow: inset 3px 3px 5px rgba(0, 0, 0, 0.6), inset -1px -1px 3px rgba(255, 255, 255, 0.3);
-					}
-					option{
-						background-color: #333;
-					}
-					img{
-						width: 75%;
-						align-self: center;
-						justify-self: center;
-						margin-bottom: 17px;
-					}
-				}
-				.input-admin-row{
-					display: flex;
-					align-items: center;
-					flex-direction: row-reverse;
-					justify-content: start;
-					gap: 5px;
-				}
-			}
-			.input-btn-row{
-				grid-area: btn;
-				display: flex;
-				height: 100%;
-				width: 100%;
-				gap: 10px;
-				justify-content: flex-end;
-				align-items: flex-end;
-				.btn{
-					height: fit-content;
-				}
-			}
-		}
-	}
-	.editEntryModal-blocker{
-		position: fixed;
-		top: 0;
-		bottom: 0;
-		right: 0;
-		left: 0;
-		background-color: #3333338a;
-		backdrop-filter: blur(3px);
-		z-index: 9998;
-		.editEntryModal{
-			width: 500px;
-			height: 500px;
-			position: absolute;
-			top: 0;
-			bottom: 0;
-			left: 0;
-			right: 0;
-			margin: auto;
-			background-color: #333;
-			padding: 20px;
-			// gap: 10px;
-			color: #fff;
-			border-radius: 10px;
-			box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.6);
-			user-select: none;
-			display: grid;
-			grid-template-columns: 1fr 1fr;
-			grid-template-rows: 40px 1fr 50px;
-			grid-template-areas:
-			"head head"
-			"body body"
-			"btn btn";
+      h2 {
+        grid-area: head;
+        text-align: center;
+      }
+      .input-body {
+        grid-area: body;
+        display: flex;
+        gap: 20px;
+        .input-left,
+        .input-right {
+          width: 50%;
+          display: flex;
+          flex-direction: column;
+          gap: 10px;
+        }
+        .input-row {
+          display: flex;
+          flex-direction: column;
+          gap: 5px;
+          textarea {
+            height: 10lh;
+            &::-webkit-scrollbar {
+              display: none;
+            }
+          }
+          input,
+          textarea,
+          select {
+            color: var(--color);
+            resize: none;
+            width: 100%;
+            padding: 6px;
+            background-color: transparent;
+            box-shadow: inset 3px 3px 5px rgba(0, 0, 0, 0.6),
+              inset -1px -1px 3px rgba(255, 255, 255, 0.3);
+          }
+          option {
+            background-color: #333;
+          }
+          img {
+            width: 75%;
+            align-self: center;
+            justify-self: center;
+            margin-bottom: 17px;
+          }
+        }
+        .input-admin-row {
+          display: flex;
+          align-items: center;
+          flex-direction: row-reverse;
+          justify-content: start;
+          gap: 5px;
+        }
+      }
+      .input-btn-row {
+        grid-area: btn;
+        display: flex;
+        height: 100%;
+        width: 100%;
+        gap: 10px;
+        justify-content: flex-end;
+        align-items: flex-end;
+        .btn {
+          height: fit-content;
+        }
+      }
+    }
+  }
+  .editEntryModal-blocker {
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    left: 0;
+    background-color: #3333338a;
+    backdrop-filter: blur(3px);
+    z-index: 9998;
+    .editEntryModal {
+      width: 500px;
+      height: 500px;
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      margin: auto;
+      background-color: #333;
+      padding: 20px;
+      // gap: 10px;
+      color: #fff;
+      border-radius: 10px;
+      box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.6);
+      user-select: none;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      grid-template-rows: 40px 1fr 50px;
+      grid-template-areas:
+        "head head"
+        "body body"
+        "btn btn";
 
-			h2{
-				grid-area: head;
-				text-align: center;
-				span{
-					color: $accent-color;
-				}
-			}
-			.input-body{
-				grid-area: body;
-				display: flex;
-				gap: 20px;
-				.input-left, .input-right{
-					width: 50%;
-					display: flex;
-					flex-direction: column;
-					gap: 10px;
-				}
-				.input-row{
-					display: flex;
-					flex-direction: column;
-					gap: 5px;
-					textarea{
-						height: 10lh;
-						&::-webkit-scrollbar{
-							display: none;
-						}
-					}
-					input, textarea, select{
-						color: var(--color);
-						resize: none;
-						width: 100%;
-						padding: 6px;
-						background-color: transparent;
-						box-shadow: inset 3px 3px 5px rgba(0, 0, 0, 0.6), inset -1px -1px 3px rgba(255, 255, 255, 0.3);
-					}
-					option{
-						background-color: #333;
-					}
-					img{
-						width: 75%;
-						align-self: center;
-						justify-self: center;
-						margin-bottom: 17px;
-					}
-				}
-				.input-admin-row{
-					display: flex;
-					align-items: center;
-					flex-direction: row-reverse;
-					justify-content: start;
-					gap: 5px;
-				}
-			}
-			.input-btn-row{
-				grid-area: btn;
-				display: flex;
-				height: 100%;
-				width: 100%;
-				gap: 10px;
-				justify-content: flex-end;
-				align-items: flex-end;
-				.btn{
-					height: fit-content;
-				}
-			}
-		}
-	}
+      h2 {
+        grid-area: head;
+        text-align: center;
+        span {
+          color: $accent-color;
+        }
+      }
+      .input-body {
+        grid-area: body;
+        display: flex;
+        gap: 20px;
+        .input-left,
+        .input-right {
+          width: 50%;
+          display: flex;
+          flex-direction: column;
+          gap: 10px;
+        }
+        .input-row {
+          display: flex;
+          flex-direction: column;
+          gap: 5px;
+          textarea {
+            height: 10lh;
+            &::-webkit-scrollbar {
+              display: none;
+            }
+          }
+          input,
+          textarea,
+          select {
+            color: var(--color);
+            resize: none;
+            width: 100%;
+            padding: 6px;
+            background-color: transparent;
+            box-shadow: inset 3px 3px 5px rgba(0, 0, 0, 0.6),
+              inset -1px -1px 3px rgba(255, 255, 255, 0.3);
+          }
+          option {
+            background-color: #333;
+          }
+          img {
+            width: 75%;
+            align-self: center;
+            justify-self: center;
+            margin-bottom: 17px;
+          }
+        }
+        .input-admin-row {
+          display: flex;
+          align-items: center;
+          flex-direction: row-reverse;
+          justify-content: start;
+          gap: 5px;
+        }
+      }
+      .input-btn-row {
+        grid-area: btn;
+        display: flex;
+        height: 100%;
+        width: 100%;
+        gap: 10px;
+        justify-content: flex-end;
+        align-items: flex-end;
+        .btn {
+          height: fit-content;
+        }
+      }
+    }
+  }
 }
