@@ -7,6 +7,7 @@ import search_icon_light from "../../assets/search-w.png";
 import search_icon_dark from "../../assets/search-b.png";
 import toggle_light from "../../assets/day.png";
 import toggle_dark from "../../assets/night.png";
+import { currentDateTime } from "../..";
 import "./Navbar.scss";
 
 const Navbar2 = () => {
@@ -16,7 +17,6 @@ const Navbar2 = () => {
     setLoggedInUser,
     setStayLoggedIn,
     isAdmin,
-    saveDateTimeLogOut,
   } = useContext(LoggedinContext);
   const { theme, setTheme } = useContext(ThemeContext);
   const [showMenu, setShowMenu] = useState(false);
@@ -53,10 +53,35 @@ const Navbar2 = () => {
         setLoggedInUser(null);
         navigate("/");
       }, 3000);
+      saveloggedOutTime(loggedInUserId);
     } catch (error) {
       console.error(error);
     }
     console.log("Logout", url);
+  };
+
+  const saveloggedOutTime = async (userId) => {
+    try {
+      const dateTime = currentDateTime();
+      const respLog = await fetch(`http://localhost:5000/log`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          userId: userId,
+          date: dateTime.date,
+          time: dateTime.time,
+          status: "logout",
+        }),
+      });
+      if (!respLog.ok) {
+        throw new Error("Failed to set Date or Time", respLog.status);
+      }
+      console.log("Date and time saved to database successfully");
+    } catch (error) {
+      console.error(error);
+    }
   };
 
   return (
@@ -115,7 +140,6 @@ const Navbar2 = () => {
                   onClick={() => {
                     logout(loggedInUser.userId);
                     setShowMenu(false);
-                    saveDateTimeLogOut();
                   }}>
                   Ausloggen
                 </p>

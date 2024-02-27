@@ -25,8 +25,6 @@ export const LoggedinContextProvider = ({ children }) => {
       : null
   );
 
-  const [logUserID, setlogUserID] = useState("");
-
   useEffect(() => {
     localStorage.setItem("stayLoggedIn", stayLoggedIn);
   }, [stayLoggedIn]);
@@ -52,7 +50,7 @@ export const LoggedinContextProvider = ({ children }) => {
             throw new Error("Failed to fetch!", resp.status);
           }
           const user = await resp.json();
-          setlogUserID(loggedInUser.userId);
+
           if (user.isadmin === true) {
             sessionStorage.setItem("admin", true);
             setIsAdmin(true);
@@ -69,215 +67,6 @@ export const LoggedinContextProvider = ({ children }) => {
 
   console.log(loggedInUser);
 
-  const saveDateTime = async () => {
-    try {
-      const currentDate = new Date();
-      const formattedDate = `${currentDate.toLocaleDateString()} ${currentDate.toLocaleTimeString()}`;
-
-      console.log(`Date and time when loggedIn changes: ${formattedDate}`);
-
-      const url = `http://localhost:5000/log`;
-      const options = {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          userid: logUserID,
-          lastLoggedIn: formattedDate,
-          lastLoggedOut: "--",
-          Ticketerstellt: "--",
-          Editor: "--",
-          TicketEdit: "--",
-          TicketID: "--",
-          TicketGelöscht: "--",
-        }),
-      };
-
-      const response = await fetch(url, options);
-      if (!response.ok) {
-        throw new Error("Failed to save date and time to database");
-      }
-      console.log("Date and time saved to database successfully");
-    } catch (error) {
-      console.error(error);
-    }
-  };
-
-  const saveDateTimeLogOut = async () => {
-    try {
-      const currentDate = new Date();
-      const formattedDate = `${currentDate.toLocaleDateString()} ${currentDate.toLocaleTimeString()}`;
-
-      console.log(`Date and time when loggedIn changes: ${formattedDate}`);
-
-      const url = `http://localhost:5000/log`;
-      const options = {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          userid: logUserID,
-          lastLoggedIn: "--",
-          lastLoggedOut: formattedDate,
-          Ticketerstellt: "--",
-          Editor: "--",
-          TicketEdit: "--",
-          TicketID: "--",
-          TicketGelöscht: "--",
-        }),
-      };
-
-      const response = await fetch(url, options);
-      if (!response.ok) {
-        throw new Error("Failed to save date and time to database");
-      }
-      console.log("Date and time saved to database successfully");
-    } catch (error) {
-      console.error(error);
-    }
-  };
-
-  const saveDateTimeTicketEstellen = async () => {
-    try {
-      const currentDate = new Date();
-      const formattedDate = `${currentDate.toLocaleDateString()} ${currentDate.toLocaleTimeString()}`;
-
-      console.log(`Date and time when loggedIn changes: ${formattedDate}`);
-
-      const url = `http://localhost:5000/log`;
-      const options = {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          userid: logUserID,
-          lastLoggedIn: "--",
-          lastLoggedOut: "--",
-          Ticketerstellt: formattedDate,
-          Editor: "--",
-          TicketEdit: "--",
-          TicketID: "--",
-          TicketGelöscht: "--",
-        }),
-      };
-
-      const response = await fetch(url, options);
-      if (!response.ok) {
-        throw new Error("Failed to save date and time to database");
-      }
-      console.log("Date and time saved to database successfully");
-    } catch (error) {
-      console.error(error);
-    }
-  };
-
-  const saveDateTimeBenutzerZuOrdnen = async (ticketId) => {
-    try {
-      const currentDate = new Date();
-      const formattedDate = `${currentDate.toLocaleDateString()} ${currentDate.toLocaleTimeString()}`;
-
-      console.log(`Date and time when loggedIn changes: ${formattedDate}`);
-
-      const url = `http://localhost:5000/log`;
-      const options = {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          userid: logUserID,
-          lastLoggedIn: "--",
-          lastLoggedOut: "--",
-          Ticketerstellt: "--",
-          Editor: formattedDate,
-          TicketEdit: "--",
-          TicketID: ticketId,
-          TicketGelöscht: "--",
-        }),
-      };
-
-      const response = await fetch(url, options);
-      if (!response.ok) {
-        throw new Error("Failed to save date and time to database");
-      }
-      console.log("Date and time saved to database successfully");
-    } catch (error) {
-      console.error(error);
-    }
-  };
-
-  const saveDateTimeTicketBearbeitet = async (ticketId2) => {
-    try {
-      const currentDate = new Date();
-      const formattedDate = `${currentDate.toLocaleDateString()} ${currentDate.toLocaleTimeString()}`;
-
-      console.log(`Date and time when loggedIn changes: ${formattedDate}`);
-
-      const url = `http://localhost:5000/log`;
-      const options = {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          userid: logUserID,
-          lastLoggedIn: "--",
-          lastLoggedOut: "--",
-          Ticketerstellt: "--",
-          Editor: "--",
-          TicketEdit: formattedDate,
-          TicketID: ticketId2,
-          TicketGelöscht: "--",
-        }),
-      };
-
-      const response = await fetch(url, options);
-      if (!response.ok) {
-        throw new Error("Failed to save date and time to database");
-      }
-      console.log("Date and time saved to database successfully");
-    } catch (error) {
-      console.error(error);
-    }
-  };
-
-  const saveDateTimeTicketLöschen = async (tickedId) => {
-    try {
-      const currentDate = new Date();
-      const formattedDate = `${currentDate.toLocaleDateString()} ${currentDate.toLocaleTimeString()}`;
-
-      console.log(`Date and time when loggedIn changes: ${formattedDate}`);
-
-      const url = `http://localhost:5000/log`;
-      const options = {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          userid: logUserID,
-          lastLoggedIn: "--",
-          lastLoggedOut: "--",
-          Ticketerstellt: "--",
-          Editor: "--",
-          TicketEdit: "--",
-          TicketID: tickedId,
-          TicketGelöscht: formattedDate,
-        }),
-      };
-
-      const response = await fetch(url, options);
-      if (!response.ok) {
-        throw new Error("Failed to save date and time to database");
-      }
-      console.log("Date and time saved to database successfully");
-    } catch (error) {
-      console.error(error);
-    }
-  };
   return (
     <LoggedinContext.Provider
       value={{
@@ -288,12 +77,6 @@ export const LoggedinContextProvider = ({ children }) => {
         setLoggedInUser,
         isAdmin,
         setIsAdmin,
-        saveDateTime,
-        saveDateTimeLogOut,
-        saveDateTimeTicketEstellen,
-        saveDateTimeBenutzerZuOrdnen,
-        saveDateTimeTicketBearbeitet,
-        saveDateTimeTicketLöschen,
       }}>
       {children}
     </LoggedinContext.Provider>
