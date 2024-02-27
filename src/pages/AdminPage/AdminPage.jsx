@@ -86,6 +86,10 @@ const AdminPage = () => {
       toast.warn("You have to select a real table.");
       return;
     }
+		if (parameter === "log"){
+			toast.warn("You cant add a log manually!")
+			return;
+		}
     setOpenModal(true);
   };
 
