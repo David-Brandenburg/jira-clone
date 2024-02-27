@@ -146,7 +146,7 @@ const Login = ({ setPage }) => {
             <button>Einloggen</button>
           </div>
           <p>
-            Sie haben noch keinen Account?{" "}
+            Sie haben noch keinen Account?
             <small
               onClick={() => {
                 setPage("register");
