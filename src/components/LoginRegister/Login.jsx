@@ -2,19 +2,13 @@ import { useState, useEffect, useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import { LoggedinContext } from "../../context/loggedinContext";
 import { ToastContainer, toast } from "react-toastify";
+import { currentDateTime } from "../..";
 import "react-toastify/dist/ReactToastify.css";
 
 const Login = ({ setPage }) => {
   const [loginData, setLoginData] = useState({ mail: "", pass: "" });
-  const {
-    setLoggedIn,
-    setStayLoggedIn,
-    setLoggedInUser,
-    setIsAdmin,
-    loggedInUser,
-    loggedIn,
-    saveDateTime,
-  } = useContext(LoggedinContext);
+  const { setLoggedIn, setStayLoggedIn, setLoggedInUser, setIsAdmin } =
+    useContext(LoggedinContext);
   const usenavigate = useNavigate();
 
   const handleSubmit = (e) => {
@@ -78,6 +72,7 @@ const Login = ({ setPage }) => {
             usenavigate("/home");
             setLoggedInUser({ avatar: findUser.avatar, userId: findUser.id });
           }, 3000);
+          saveDateTime(findUser.id);
         } else {
           toast.error("Wrong username or password!");
           throw new Error("Wrong username or password!");
@@ -92,16 +87,28 @@ const Login = ({ setPage }) => {
     }
   };
 
-  useEffect(() => {
-    if (loggedIn && loggedInUser) {
-      handleSaveDateTime();
+  const saveDateTime = async (userId) => {
+    try {
+      const dateTime = currentDateTime();
+      const respLog = await fetch(`http://localhost:5000/log`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          userId: userId,
+          date: dateTime.date,
+          time: dateTime.time,
+          status: "login",
+        }),
+      });
+      if (!respLog.ok) {
+        throw new Error("Failed to set Date or Time", respLog.status);
+      }
+      console.log("Date and time saved to database successfully");
+    } catch (error) {
+      console.error(error);
     }
-  }, [loggedIn, loggedInUser]);
-
-  const handleSaveDateTime = () => {
-    setTimeout(() => {
-      saveDateTime();
-    }, 3500);
   };
 
   return (
@@ -136,7 +143,7 @@ const Login = ({ setPage }) => {
               />
               <small>Eingeloggt bleiben!</small>
             </label>
-            <button onClick={handleSaveDateTime}>Einloggen</button>
+            <button>Einloggen</button>
           </div>
           <p>
             Sie haben noch keinen Account?

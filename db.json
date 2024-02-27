@@ -6,11 +6,9 @@
       "lname": "Böhm",
       "password": "test12345",
       "avatar": "https://robohash.org/ph38?set=set4",
-      "ticketIds": [
-        "OdBbzfo"
-      ],
+      "ticketIds": [],
       "isadmin": true,
-      "isloggedin": true,
+      "isloggedin": false,
       "id": "1"
     },
     {
@@ -19,10 +17,7 @@
       "lname": "Sträßer",
       "password": "test1234",
       "avatar": "https://robohash.org/asd213sd?set=set4",
-      "ticketIds": [
-        "1b49",
-        "d2cf"
-      ],
+      "ticketIds": [],
       "isadmin": true,
       "isloggedin": false,
       "id": "2"
@@ -33,215 +28,20 @@
       "lname": "Brandenburg",
       "password": "test1234",
       "avatar": "https://robohash.org/da1234dsa?set=set4",
-      "ticketIds": [
-        "d3f1"
-      ],
+      "ticketIds": [],
       "isadmin": true,
       "isloggedin": true,
       "id": "3"
-    },
-    {
-      "email": "test@mail.com",
-      "fname": "Huge",
-      "lname": "Cock",
-      "password": "12345678",
-      "avatar": "https://robohash.org/2zzk?set=set4",
-      "ticketIds": [],
-      "isadmin": false,
-      "isloggedin": false,
-      "id": "4"
-    },
-    {
-      "email": "Zwegat69@cock.com",
-      "fname": "Peter",
-      "lname": "Zwegat",
-      "password": "hugecock123",
-      "avatar": "/static/media/defaultProfilepic.b5d0704057147e38225a.webp",
-      "ticketIds": [],
-      "isadmin": false,
-      "isloggedin": true,
-      "id": "5"
-    },
-    {
-      "email": "cock123@web.de",
-      "fname": "CumEater",
-      "lname": "Cock",
-      "password": "12345",
-      "avatar": "https://robohash.org/ijnmlgjl?set=set4",
-      "ticketIds": [
-        "JzVXp9i",
-        "ofcNxM9"
-      ],
-      "isadmin": false,
-      "isloggedin": false,
-      "id": "6"
-    },
-    {
-      "email": "last1@mail.com",
-      "fname": "test69",
-      "lname": "69last",
-      "password": "123",
-      "avatar": "https://robohash.org/lz6368t?set=set4",
-      "ticketIds": [],
-      "isadmin": false,
-      "isloggedin": false,
-      "id": "7"
-    },
-    {
-      "email": "danny@cock.com",
-      "fname": "testname1",
-      "lname": "testname2",
-      "password": "ichhabcock",
-      "avatar": "https://robohash.org/byu9jvda?set=set4",
-      "ticketIds": [],
-      "isadmin": true,
-      "isloggedin": false,
-      "id": "8"
-    },
-    {
-      "email": "31231321@123.com",
-      "fname": "123123123",
-      "lname": "3232131231",
-      "password": "1231231231223132",
-      "avatar": "https://robohash.org/g9fkklc?set=set4",
-      "ticketIds": [],
-      "isadmin": false,
-      "isloggedin": false,
-      "id": "9"
     }
   ],
-  "tickets": [
-    {
-      "title": "Buuu",
-      "desc": "fafasfasfaesefase",
-      "status": "DONE",
-      "deadline": "2024-02-29",
-      "creator": "Danny",
-      "editor": "Michelle",
-      "editorId": "2",
-      "editorAvatar": "https://robohash.org/asd213sd?set=set4",
-      "id": "d2cf"
-    },
-    {
-      "title": "das is ein test",
-      "desc": "test test teest pppp",
-      "status": "IN PROGRESS",
-      "deadline": "2024-02-28",
-      "creator": "David",
-      "editor": "David",
-      "editorId": "3",
-      "editorAvatar": "https://robohash.org/da1234dsa?set=set4",
-      "id": "f2e5"
-    },
-    {
-      "title": "test1",
-      "desc": "123",
-      "status": "TO DO",
-      "deadline": "2024-02-23",
-      "creator": "Danny",
-      "editor": "CumEater",
-      "editorId": "6",
-      "editorAvatar": "https://robohash.org/ijnmlgjl?set=set4",
-      "id": "JzVXp9i"
-    },
-    {
-      "title": "testCock",
-      "desc": "123",
-      "status": "IN PROGRESS",
-      "deadline": "2024-02-16",
-      "creator": "Danny",
-      "editor": "Danny",
-      "editorId": "1",
-      "editorAvatar": "https://robohash.org/ph38?set=set4",
-      "id": "OdBbzfo"
-    },
-    {
-      "title": "Black screen",
-      "desc": "Black screen, wenn man das menu öffnet",
-      "status": "IN PROGRESS",
-      "deadline": "2024-02-29",
-      "creator": "David",
-      "editor": "David",
-      "editorId": "3",
-      "editorAvatar": "https://robohash.org/da1234dsa?set=set4",
-      "id": "7ca4"
-    },
-    {
-      "id": "17cd",
-      "title": "test1234",
-      "desc": "dsgdasgfsdgsdg",
-      "status": "TO DO",
-      "deadline": "2024-02-29",
-      "creator": "David",
-      "editor": "Danny",
-      "editorId": "1",
-      "editorAvatar": "https://robohash.org/ph38?set=set4"
-    },
-    {
-      "id": "3d32",
-      "title": "dfgsgsdfg",
-      "desc": "sdgdsfgsdfgsdfg",
-      "status": "IN PROGRESS",
-      "deadline": "2024-02-29",
-      "creator": "David",
-      "editor": "",
-      "editorId": ""
-    },
-    {
-      "id": "2516",
-      "title": "vxcbfxcbfxc",
-      "desc": "bxcfbxcbfxbxxc",
-      "status": "IN PROGRESS",
-      "deadline": "2024-02-29",
-      "creator": "David",
-      "editor": "",
-      "editorId": ""
-    }
-  ],
+  "tickets": [],
   "log": [
     {
-      "id": "afea",
-      "userid": "3",
-      "lastLoggedIn": "--",
-      "lastLoggedOut": "27.2.2024 11:23:50",
-      "Ticketerstellt": "--",
-      "Editor": "--",
-      "TicketEdit": "--",
-      "TicketID": "--",
-      "TicketGelöscht": "--"
-    },
-    {
-      "id": "e990",
-      "userid": "3",
-      "lastLoggedIn": "27.2.2024 11:24:08",
-      "lastLoggedOut": "--",
-      "Ticketerstellt": "--",
-      "Editor": "--",
-      "TicketEdit": "--",
-      "TicketID": "--",
-      "TicketGelöscht": "--"
-    },
-    {
-      "id": "8cb0",
-      "userid": "3",
-      "lastLoggedIn": "--",
-      "lastLoggedOut": "27.2.2024 11:27:43",
-      "Ticketerstellt": "--",
-      "Editor": "--",
-      "TicketEdit": "--",
-      "TicketID": "--",
-      "TicketGelöscht": "--"
-    },
-    {
-      "id": "ec6e",
-      "userid": "3",
-      "lastLoggedIn": "27.2.2024 11:28:03",
-      "lastLoggedOut": "--",
-      "Ticketerstellt": "--",
-      "Editor": "--",
-      "TicketEdit": "--",
-      "TicketID": "--",
-      "TicketGelöscht": "--"
+      "id": "2517",
+      "userId": "3",
+      "date": "27.2.2024",
+      "time": "14:23:50",
+      "status": "login"
     }
   ]
 }
