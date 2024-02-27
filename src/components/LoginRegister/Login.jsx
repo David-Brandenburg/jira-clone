@@ -139,7 +139,7 @@ const Login = ({ setPage }) => {
             <button onClick={handleSaveDateTime}>Einloggen</button>
           </div>
           <p>
-            Sie haben noch keinen Account?{" "}
+            Sie haben noch keinen Account?
             <small
               onClick={() => {
                 setPage("register");
