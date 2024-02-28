@@ -7,9 +7,7 @@
       "lname": "Böhm",
       "password": "test12345",
       "avatar": "https://robohash.org/ph38?set=set4",
-      "ticketIds": [
-        "6sa3Fb_"
-      ],
+      "ticketIds": [],
       "role": "admin",
       "isadmin": true,
       "isloggedin": true
@@ -22,7 +20,7 @@
       "password": "test1234",
       "avatar": "https://robohash.org/asd213sd?set=set4",
       "ticketIds": [
-        "6sa3Fb_"
+        
       ],
       "role": "admin",
       "isadmin": true,
@@ -49,9 +47,7 @@
       "lname": "Manager",
       "password": "test1234",
       "avatar": "https://robohash.org/da1234dsa?set=set4",
-      "ticketIds": [
-        "6sa3Fb_"
-      ],
+      "ticketIds": [],
       "role": "manager",
       "isadmin": false,
       "isloggedin": false
@@ -76,9 +72,9 @@
       "status": "IN PROGRESS",
       "deadline": "2024-02-16",
       "creator": "Danny",
-      "editor": "Michelle",
-      "editorId": "2",
-      "editorAvatar": "https://robohash.org/asd213sd?set=set4",
+      "editor": "David",
+      "editorId": "3",
+      "editorAvatar": "https://robohash.org/da1234dsa?set=set4",
       "id": "6sa3Fb_"
     }
   ],
@@ -103,6 +99,20 @@
       "date": "28.2.2024",
       "time": "10:52:31",
       "status": "Benutzer zugewiesen 6sa3Fb_"
+    },
+    {
+      "userId": 1,
+      "date": "28.2.2024",
+      "time": "10:55:37",
+      "status": "Benutzer zugewiesen 6sa3Fb_",
+      "id": "rZT1RC1"
+    },
+    {
+      "userId": 1,
+      "date": "28.2.2024",
+      "time": "11:07:00",
+      "status": "Benutzer zugewiesen 6sa3Fb_",
+      "id": "_HWETVu"
     }
   ]
 }

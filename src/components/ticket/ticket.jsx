@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useContext } from "react";
 import "./ticket.scss";
-import { ToastContainer, toast } from "react-toastify";
+import { toast } from "react-toastify";
 import { LoggedinContext } from "../../context/loggedinContext";
 import { ThemeContext } from "../../context/themeContext";
 import { currentDateTime } from "../..";
@@ -122,7 +122,8 @@ export const Ticket = () => {
       toast.success("Ticket erfolgreich bearbeitet!");
       setEditTicket(null);
       fetchTickets();
-      saveEdit(loggedInUser.userId, ticketId2);
+      // saveEdit(loggedInUser.userId, ticketId2);
+      postLog(loggedInUser.userId, `Ticket bearbeitet ${ticketId2}`);
     } catch (error) {
       toast.error("Ticket konnte nicht gespeichert werden!");
       console.error(error);
@@ -154,7 +155,8 @@ export const Ticket = () => {
         if (!updateUserResponse.ok) {
           throw new Error("Network response was not ok");
         }
-        saveEditorZuweisung(loggedInUser.userId, ticket.id);
+        // saveEditorZuweisung(loggedInUser.userId, ticket.id);
+        postLog(loggedInUser.userId, `Benutzer zugewiesen ${ticket.id}`);
       } else {
         console.log("Ticket ID already exists in user profile.");
       }
@@ -213,7 +215,7 @@ export const Ticket = () => {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
-          ticketId: [], // Setze die Ticket-IDs auf eine leere Liste
+          ticketIds: [], // Setze die Ticket-IDs auf eine leere Liste
         }),
       };
 
@@ -246,7 +248,8 @@ export const Ticket = () => {
       const userEditorId = editedTicket.editorId; // Annahme: Das editor-Attribut des Tickets enthält die userId
 
       updateUserTicketId(userEditorId, ticketId); // Benutzerprofil aktualisieren
-      saveDeleteTicket(loggedInUser.userId, ticketId);
+      // saveDeleteTicket(loggedInUser.userId, ticketId);
+			postLog(loggedInUser.userId, `Ticket gelöscht ${ticketId}`)
       fetchTickets(); // Tickets erneut abrufen, um die aktualisierten Daten anzuzeigen
     } catch (error) {
       toast.error("Ticket konnte nicht gelöscht werden!");
@@ -284,7 +287,8 @@ export const Ticket = () => {
       toast.success("Ticket created successfully");
       setErstellen(false);
       fetchTickets();
-      saveErstellDatum(loggedInUser.userId, newTicket.id);
+      // saveErstellDatum(loggedInUser.userId, newTicket.id);
+      postLog(loggedInUser.userId, `Ticket erstellt ${newTicket.id}`);
     } catch (error) {
       console.error("Error creating ticket:", error);
     }
@@ -298,8 +302,8 @@ export const Ticket = () => {
     setShowEditor(false);
   };
 
-  const saveErstellDatum = async (userId, ticketId) => {
-    try {
+	const postLog = async (userId, message) => {
+		try {
       const dateTime = currentDateTime();
       const respLog = await fetch(`http://localhost:5000/log`, {
         method: "POST",
@@ -310,7 +314,7 @@ export const Ticket = () => {
           userId: userId,
           date: dateTime.date,
           time: dateTime.time,
-          status: `Ticket erstellt ${ticketId}`,
+          status: message
         }),
       });
       if (!respLog.ok) {
@@ -320,79 +324,7 @@ export const Ticket = () => {
     } catch (error) {
       console.error(error);
     }
-  };
-
-  const saveEditorZuweisung = async (userId, ticketId) => {
-    try {
-      const dateTime = currentDateTime();
-      const respLog = await fetch(`http://localhost:5000/log`, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          userId: userId,
-          date: dateTime.date,
-          time: dateTime.time,
-          status: `Benutzer zugewiesen ${ticketId}`,
-        }),
-      });
-      if (!respLog.ok) {
-        throw new Error("Failed to set Date or Time", respLog.status);
-      }
-      console.log("Date and time saved to database successfully");
-    } catch (error) {
-      console.error(error);
-    }
-  };
-
-  const saveEdit = async (userId, ticketId) => {
-    try {
-      const dateTime = currentDateTime();
-      const respLog = await fetch(`http://localhost:5000/log`, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          userId: userId,
-          date: dateTime.date,
-          time: dateTime.time,
-          status: `Ticket bearbeitet ${ticketId}`,
-        }),
-      });
-      if (!respLog.ok) {
-        throw new Error("Failed to set Date or Time", respLog.status);
-      }
-      console.log("Date and time saved to database successfully");
-    } catch (error) {
-      console.error(error);
-    }
-  };
-
-  const saveDeleteTicket = async (userId, ticketId) => {
-    try {
-      const dateTime = currentDateTime();
-      const respLog = await fetch(`http://localhost:5000/log`, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          userId: userId,
-          date: dateTime.date,
-          time: dateTime.time,
-          status: `Ticket gelöscht ${ticketId}`,
-        }),
-      });
-      if (!respLog.ok) {
-        throw new Error("Failed to set Date or Time", respLog.status);
-      }
-      console.log("Date and time saved to database successfully");
-    } catch (error) {
-      console.error(error);
-    }
-  };
+	}
 
   return (
     <>
