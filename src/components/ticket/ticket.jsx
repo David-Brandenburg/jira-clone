@@ -22,15 +22,7 @@ export const Ticket = () => {
     editorId: "",
   });
 
-<<<<<<< HEAD
-  const { loggedInUser, isAdmin } = useContext(LoggedinContext);
-=======
-  const {
-    loggedInUser,
-    isAdmin,
-		isManager
-  } = useContext(LoggedinContext);
->>>>>>> main
+  const { loggedInUser, isAdmin, isManager } = useContext(LoggedinContext);
   const { theme } = useContext(ThemeContext);
   const [showEditor, setShowEditor] = useState(false);
 
@@ -39,7 +31,6 @@ export const Ticket = () => {
   const optionsGet = {
     method: "GET",
   };
-  const [newMessage, setNewMessage] = useState("");
 
   const fetchTickets = async () => {
     try {
@@ -163,18 +154,10 @@ export const Ticket = () => {
           throw new Error("Network response was not ok");
         }
         saveEditorZuweisung(loggedInUser.userId, ticket.id);
-        notifyUser(selectedUser, ticket);
       } else {
         console.log("Ticket ID already exists in user profile.");
       }
     }
-  };
-
-  const notifyUser = (user, ticket) => {
-    // Hier kannst du die Benachrichtigungslogik implementieren, z.B. eine Benachrichtigungskomponente aktualisieren oder eine Benachrichtigungsnachricht anzeigen
-    setNewMessage(
-      `User ${user.fname} has been assigned a new ticket: ${ticket.id}`
-    );
   };
 
   useEffect(() => {
@@ -518,24 +501,45 @@ export const Ticket = () => {
                 <p>{ticket.deadline}</p>
               </div>
             </div>
-            {(isManager || isAdmin ) &&
-							<>
-								<div className="ticket-buttons">
-									<button className="btn edit-btn" onClick={() => handleTicketEdit(ticket.id)}>Bearbeiten</button>
-									<button className="btn delete-btn" onClick={() => {handleDeleteTicket(ticket.id);}}>Löschen</button>
-								</div>
-								<h2>Benutzer zuordnen:</h2>
-								<div>
-									<select value={benutzer} onChange={(e) => setBenutzer(e.target.value)} className="select-benutzer">
-										<option>Bitte auswählen</option>
-										{users?.map((user, index) => (
-											<option key={index} value={user.id}>{user.fname}</option>)
-										)}
-									</select>
-									<button className="btn update-benutzer" onClick={(e) => {handleUpdateEditor(e, ticket.id);}}>Update Benutzer</button>
-								</div>
-							</>
-						}
+            {(isManager || isAdmin) && (
+              <>
+                <div className="ticket-buttons">
+                  <button
+                    className="btn edit-btn"
+                    onClick={() => handleTicketEdit(ticket.id)}>
+                    Bearbeiten
+                  </button>
+                  <button
+                    className="btn delete-btn"
+                    onClick={() => {
+                      handleDeleteTicket(ticket.id);
+                    }}>
+                    Löschen
+                  </button>
+                </div>
+                <h2>Benutzer zuordnen:</h2>
+                <div>
+                  <select
+                    value={benutzer}
+                    onChange={(e) => setBenutzer(e.target.value)}
+                    className="select-benutzer">
+                    <option>Bitte auswählen</option>
+                    {users?.map((user, index) => (
+                      <option key={index} value={user.id}>
+                        {user.fname}
+                      </option>
+                    ))}
+                  </select>
+                  <button
+                    className="btn update-benutzer"
+                    onClick={(e) => {
+                      handleUpdateEditor(e, ticket.id);
+                    }}>
+                    Update Benutzer
+                  </button>
+                </div>
+              </>
+            )}
           </div>
         ))}
       </div>

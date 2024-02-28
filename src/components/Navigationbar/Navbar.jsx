@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import { LoggedinContext } from "../../context/loggedinContext";
 import { ThemeContext } from "../../context/themeContext";
+import { NotifyContext } from "../../context/notifyContext";
 import search_icon_light from "../../assets/search-w.png";
 import search_icon_dark from "../../assets/search-b.png";
 import toggle_light from "../../assets/day.png";
@@ -21,6 +22,14 @@ const Navbar2 = () => {
   const { theme, setTheme } = useContext(ThemeContext);
   const [showMenu, setShowMenu] = useState(false);
   const navigate = useNavigate();
+  const {
+    users,
+    setUsers,
+    userIds,
+    setUserIds,
+    allTicketIds,
+    setAllTicketIds,
+  } = useContext(NotifyContext);
 
   const toggleTheme = () => {
     setTheme(theme === "dark" ? "light" : "dark");
@@ -83,6 +92,61 @@ const Navbar2 = () => {
       console.error(error);
     }
   };
+
+  const fetchUsers = async () => {
+    const url2 = `http://localhost:5000/users`;
+    const optionsGet = {
+      method: "GET",
+    };
+    try {
+      const response = await fetch(url2, optionsGet);
+      if (!response.ok) {
+        throw new Error("Failed to fetch!", response.status);
+      }
+
+      const fetchedUsers = await response.json();
+      setUsers(fetchedUsers);
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+  const getuserIDs = async () => {
+    if (users && users.length > 0) {
+      // Durchlaufe das users-Array und extrahiere die IDs
+      setUserIds(users.map((user) => user.id));
+    }
+  };
+
+  useEffect(() => {
+    if (users && users.length > 0) {
+      const allTicketIds = users.reduce((acc, user) => {
+        // Überprüfe, ob user.ticketIDs ein Array ist, bevor du darauf zugreifst
+        if (Array.isArray(user.ticketIDs)) {
+          return [...acc, ...user.ticketIDs];
+        } else {
+          console.error("user.ticketIDs is not an array:", user.ticketIDs);
+          return acc;
+        }
+      }, []);
+      setAllTicketIds(allTicketIds);
+    }
+  }, [users]);
+  useEffect(() => {
+    fetchUsers();
+  }, []);
+
+  useEffect(() => {
+    console.log(users);
+  }, [users]);
+
+  useEffect(() => {
+    getuserIDs();
+  }, [users]);
+
+  useEffect(() => {
+    console.log(userIds);
+  }, [users]);
 
   return (
     <>

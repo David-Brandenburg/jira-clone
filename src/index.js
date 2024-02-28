@@ -3,6 +3,7 @@ import ReactDOM from "react-dom/client";
 import { BrowserRouter as Router } from "react-router-dom";
 import { LoggedinContextProvider } from "./context/loggedinContext.js";
 import { ThemeContextProvider } from "./context/themeContext.js";
+import { NotifyContextProvider } from "./context/notifyContext.js";
 import App from "./App";
 import "./index.scss";
 
@@ -11,9 +12,11 @@ root.render(
   <Router>
     <ThemeContextProvider>
       <LoggedinContextProvider>
-        <React.StrictMode>
-          <App />
-        </React.StrictMode>
+        <NotifyContextProvider>
+          <React.StrictMode>
+            <App />
+          </React.StrictMode>
+        </NotifyContextProvider>
       </LoggedinContextProvider>
     </ThemeContextProvider>
   </Router>
