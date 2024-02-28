@@ -7,9 +7,7 @@
       "lname": "Böhm",
       "password": "test12345",
       "avatar": "https://robohash.org/ph38?set=set4",
-      "ticketIds": [
-        "UTFH51W"
-      ],
+      "ticketIds": [],
       "role": "admin",
       "isadmin": true,
       "isloggedin": true
@@ -22,7 +20,9 @@
       "password": "test1234",
       "avatar": "https://robohash.org/asd213sd?set=set4",
       "ticketIds": [
-        "kkvavqR"
+        "kkvavqR",
+        "UTFH51W",
+        "lTw7hIc"
       ],
       "role": "admin",
       "isadmin": true,
@@ -35,9 +35,7 @@
       "lname": "Brandenburg",
       "password": "test1234",
       "avatar": "https://robohash.org/da1234dsa?set=set4",
-      "ticketIds": [
-        "lTw7hIc"
-      ],
+      "ticketIds": [],
       "role": "admin",
       "isadmin": true,
       "isloggedin": false
@@ -85,9 +83,9 @@
       "status": "IN PROGRESS",
       "deadline": "2024-02-17",
       "creator": "Danny",
-      "editor": "Danny",
-      "editorId": "1",
-      "editorAvatar": "https://robohash.org/ph38?set=set4",
+      "editor": "Michelle",
+      "editorId": "2",
+      "editorAvatar": "https://robohash.org/asd213sd?set=set4",
       "id": "UTFH51W"
     },
     {
@@ -96,9 +94,9 @@
       "status": "TO DO",
       "deadline": "2024-03-10",
       "creator": "Danny",
-      "editor": "David",
-      "editorId": "3",
-      "editorAvatar": "https://robohash.org/da1234dsa?set=set4",
+      "editor": "Michelle",
+      "editorId": "2",
+      "editorAvatar": "https://robohash.org/asd213sd?set=set4",
       "id": "lTw7hIc"
     }
   ],
@@ -186,6 +184,13 @@
       "time": "13:42:45",
       "status": "Ticket 'UTFH51W' wurde dem Benutzer 1 (Danny) zugewiesen.",
       "id": 12
+    },
+    {
+      "userId": 1,
+      "date": "28.2.2024",
+      "time": "13:58:52",
+      "status": "Ticket 'UTFH51W' wurde dem Benutzer 2 (Michelle) zugewiesen.",
+      "id": 13
     }
   ]
 }

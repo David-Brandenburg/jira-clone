@@ -612,7 +612,12 @@ const AdminPage = () => {
                               value.length === 0 ? (
                                 "N/A"
                               ) : value.length > 2 ? (
-                                value.join(", ").slice(0, 17) + " ..."
+																<>
+																	{value.join(", ").slice(0, 17)}
+																	<span className="inCellHover"> ...
+																	<div className="inCellHoverShow">{value.join(", ")}</div>	
+																	</span>
+																</>
                               ) : (
                                 value.join(", ")
                               )

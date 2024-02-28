@@ -150,6 +150,25 @@
 								width: 100px;
 							}
               width: 150px;
+							.inCellHover{
+								position: relative;
+								cursor: pointer;
+								.inCellHoverShow{
+									display: none;
+								}
+								&:hover > .inCellHoverShow{
+									display: block;
+									position: absolute;
+									width: max-content;
+									z-index: 9999;
+									padding: 6px;
+									border-radius: 5px;
+									top: 3px;
+									left: 10px;
+									background-color: #bfd9ff;
+									color: #0b55c5;
+								}
+							}
             }
             &:nth-child(odd) {
               background-color: var(--tr-bg-color);
