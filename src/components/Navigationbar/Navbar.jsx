@@ -1,4 +1,4 @@
-import { useContext, useState } from "react";
+import { useContext, useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import { LoggedinContext } from "../../context/loggedinContext";
@@ -111,6 +111,9 @@ const Navbar2 = () => {
                 src={theme === "light" ? search_icon_dark : search_icon_light}
                 alt=""
               />
+            </div>
+            <div>
+              <p></p>
             </div>
             <div className="profile-wrapper">
               <div className="profile-avatar" onClick={toggleProfileMenu}>

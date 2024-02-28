@@ -22,14 +22,7 @@ export const Ticket = () => {
     editorId: "",
   });
 
-  const {
-    loggedInUser,
-    isAdmin,
-    saveDateTimeTicketEstellen,
-    saveDateTimeBenutzerZuOrdnen,
-    saveDateTimeTicketBearbeitet,
-    saveDateTimeTicketLöschen,
-  } = useContext(LoggedinContext);
+  const { loggedInUser, isAdmin } = useContext(LoggedinContext);
   const { theme } = useContext(ThemeContext);
   const [showEditor, setShowEditor] = useState(false);
 
@@ -38,6 +31,7 @@ export const Ticket = () => {
   const optionsGet = {
     method: "GET",
   };
+  const [newMessage, setNewMessage] = useState("");
 
   const fetchTickets = async () => {
     try {
@@ -161,10 +155,18 @@ export const Ticket = () => {
           throw new Error("Network response was not ok");
         }
         saveEditorZuweisung(loggedInUser.userId, ticket.id);
+        notifyUser(selectedUser, ticket);
       } else {
         console.log("Ticket ID already exists in user profile.");
       }
     }
+  };
+
+  const notifyUser = (user, ticket) => {
+    // Hier kannst du die Benachrichtigungslogik implementieren, z.B. eine Benachrichtigungskomponente aktualisieren oder eine Benachrichtigungsnachricht anzeigen
+    setNewMessage(
+      `User ${user.fname} has been assigned a new ticket: ${ticket.id}`
+    );
   };
 
   useEffect(() => {
