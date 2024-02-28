@@ -1,19 +1,21 @@
 {
   "users": [
     {
-      "id": 1,
+      "id": "1",
       "email": "danny@mail.com",
       "fname": "Danny",
       "lname": "Böhm",
       "password": "test12345",
       "avatar": "https://robohash.org/ph38?set=set4",
-      "ticketIds": [],
+      "ticketIds": [
+        "6sa3Fb_"
+      ],
       "role": "admin",
       "isadmin": true,
       "isloggedin": true
     },
     {
-      "id": 2,
+      "id": "2",
       "email": "michelle@mail.com",
       "fname": "Michelle",
       "lname": "Sträßer",
@@ -27,31 +29,35 @@
       "isloggedin": false
     },
     {
-      "id": 3,
+      "id": "3",
       "email": "david@mail.com",
       "fname": "David",
       "lname": "Brandenburg",
       "password": "test1234",
       "avatar": "https://robohash.org/da1234dsa?set=set4",
-      "ticketIds": [],
+      "ticketIds": [
+        "6sa3Fb_"
+      ],
       "role": "admin",
       "isadmin": true,
       "isloggedin": false
     },
     {
-      "id": 4,
+      "id": "4",
       "email": "manager@mail.com",
       "fname": "Test",
       "lname": "Manager",
       "password": "test1234",
       "avatar": "https://robohash.org/da1234dsa?set=set4",
-      "ticketIds": [],
+      "ticketIds": [
+        "6sa3Fb_"
+      ],
       "role": "manager",
       "isadmin": false,
       "isloggedin": false
     },
     {
-      "id": 5,
+      "id": "5",
       "email": "user@mail.com",
       "fname": "Test",
       "lname": "User",
@@ -76,5 +82,27 @@
       "id": "6sa3Fb_"
     }
   ],
-  "log": []
+  "log": [
+    {
+      "id": "379f",
+      "userId": "3",
+      "date": "28.2.2024",
+      "time": "10:50:04",
+      "status": "Benutzer zugewiesen 6sa3Fb_"
+    },
+    {
+      "id": "27e9",
+      "userId": "3",
+      "date": "28.2.2024",
+      "time": "10:52:26",
+      "status": "Benutzer zugewiesen 6sa3Fb_"
+    },
+    {
+      "id": "11f6",
+      "userId": "3",
+      "date": "28.2.2024",
+      "time": "10:52:31",
+      "status": "Benutzer zugewiesen 6sa3Fb_"
+    }
+  ]
 }
