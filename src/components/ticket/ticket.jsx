@@ -122,8 +122,7 @@ export const Ticket = () => {
       toast.success("Ticket erfolgreich bearbeitet!");
       setEditTicket(null);
       fetchTickets();
-      // saveEdit(loggedInUser.userId, ticketId2);
-      postLog(loggedInUser.userId, `Ticket bearbeitet ${ticketId2}`);
+      postLog(loggedInUser.userId, `Ticket '${ticketId2}' wurde bearbeitet.`);
     } catch (error) {
       toast.error("Ticket konnte nicht gespeichert werden!");
       console.error(error);
@@ -131,37 +130,56 @@ export const Ticket = () => {
     console.log(ticketId2);
   };
 
-  const updateEditor = async (ticketId) => {
-    const selectedUser = users.find((user) => user.id === benutzer);
-    const ticket = tickets.find((ticket) => ticket.id === ticketId);
+	const updateEditor = async (ticketId) => {
+		try {
+			const selectedUser = users.find((user) => user.id === benutzer);
+			const ticket = tickets.find((ticket) => ticket.id === ticketId);
+			const userToUpdate = users.find((user) => user.ticketIds.includes(ticketId));
+	
+			if (selectedUser && ticket) {
+				if (!selectedUser.ticketIds.includes(ticketId)) {
+					const updatedSelectedUser = {
+						...selectedUser,
+						ticketIds: [...selectedUser.ticketIds, ticketId]
+					};
+					await updateUser(updatedSelectedUser);
+				} else {
+					console.log("Ticket ID ist bereits dem Benutzer zugewiesen.");
+				}
+			}
 
-    if (selectedUser && ticket) {
-      // Überprüfen, ob die Ticket-ID bereits im Benutzerprofil vorhanden ist
-      if (!selectedUser.ticketIds.includes(ticketId)) {
-        const updatedUser = {
-          ...selectedUser,
-          ticketIds: [ticketId], // Hinzufügen der neuen Ticket-ID
-        };
+			if (userToUpdate && userToUpdate.id !== selectedUser.id) {
+				const updatedUserToUpdate = {
+					...userToUpdate,
+					ticketIds: userToUpdate.ticketIds.filter(id => id !== ticketId)
+				};
+				await updateUser(updatedUserToUpdate);
+				postLog(loggedInUser.userId, `Ticket '${ticketId}' wurde dem Benutzer ${selectedUser.id} (${selectedUser.fname}) zugewiesen.`);
+				fetchTickets();
+				fetchUsers();
+				setBenutzer("");
+			}
+		} catch (error) {
+			console.error(error);
+		}
+	};
 
-        // Benutzerprofil aktualisieren
-        const updateUserResponse = await fetch(`${url2}/${selectedUser.id}`, {
-          method: "PATCH",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify(updatedUser),
-        });
-
-        if (!updateUserResponse.ok) {
-          throw new Error("Network response was not ok");
-        }
-        // saveEditorZuweisung(loggedInUser.userId, ticket.id);
-        postLog(loggedInUser.userId, `Benutzer zugewiesen ${ticket.id}`);
-      } else {
-        console.log("Ticket ID already exists in user profile.");
-      }
-    }
-  };
+	const updateUser = async (updatedUser) => {
+		const updateUserResponse = await fetch(`${url2}/${updatedUser.id}`, {
+			method: "PATCH",
+			headers: {
+				"Content-Type": "application/json",
+			},
+			body: JSON.stringify(updatedUser),
+		});
+	
+		if (!updateUserResponse.ok) {
+			throw new Error("Network response was not ok");
+		}
+		fetchTickets();
+		fetchUsers();
+		setBenutzer("");
+	};
 
   useEffect(() => {
     fetchTickets();
@@ -194,7 +212,7 @@ export const Ticket = () => {
           throw new Error("Failed to update editor!", response.status);
         }
         toast.success("Editor erfolgreich aktualisiert!");
-        fetchTickets(); // Tickets erneut abrufen, um die aktualisierten Daten anzuzeigen
+        fetchTickets();
       } catch (error) {
         toast.error("Editor konnte nicht aktualisiert werden!");
         console.error(error);
@@ -202,31 +220,24 @@ export const Ticket = () => {
     }
   };
 
-  const updateUserTicketId = async (userEditorId, ticketId) => {
+  const updateUserTicketId = async (ticketId) => {
     try {
-      const userToUpdate = users.find((user) => user.id === userEditorId);
-      if (!userToUpdate) {
-        throw new Error("User not found!");
-      }
-
-      const optionsPatch = {
-        method: "PATCH",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          ticketIds: [], // Setze die Ticket-IDs auf eine leere Liste
-        }),
-      };
-
-      const updateUserResponse = await fetch(
-        `${url2}/${userEditorId}`,
-        optionsPatch
-      );
-
-      if (!updateUserResponse.ok) {
-        throw new Error("Network response was not ok");
-      }
+      const userToUpdate = users.find((user) => user.ticketIds.includes(ticketId));
+			if (userToUpdate) {
+				userToUpdate.ticketIds = userToUpdate.ticketIds.filter((id) => id !== ticketId);
+				const updateUserResponse = await fetch(`${url2}/${userToUpdate.id}`,
+					{
+						method: "PUT",
+						headers: {
+							"Content-Type": "application/json",
+						},
+						body: JSON.stringify(userToUpdate),
+					}
+				);
+				if (!updateUserResponse.ok) {
+					throw new Error("Failed to update user data", updateUserResponse.status);
+				}
+			}
     } catch (error) {
       console.error(error);
     }
@@ -234,25 +245,17 @@ export const Ticket = () => {
 
   const handleDeleteTicket = async (ticketId) => {
     try {
-      const response = await fetch(`${url}/${ticketId}`, { method: "DELETE" });
+			const response = await fetch(`${url}/${ticketId}`, { method: "DELETE" });
       if (!response.ok) {
-        throw new Error("Failed to delete ticket!", response.status);
+				throw new Error("Failed to delete ticket!", response.status);
       }
-      toast.success("Ticket erfolgreich gelöscht!");
+      toast.success(`Ticket '${ticketId}' erfolgreich gelöscht!`);
 
-      const editedTicket = tickets.find((ticket) => ticket.id === ticketId);
-      if (!editedTicket) {
-        throw new Error("Ticket not found!");
-      }
-
-      const userEditorId = editedTicket.editorId; // Annahme: Das editor-Attribut des Tickets enthält die userId
-
-      updateUserTicketId(userEditorId, ticketId); // Benutzerprofil aktualisieren
-      // saveDeleteTicket(loggedInUser.userId, ticketId);
-			postLog(loggedInUser.userId, `Ticket gelöscht ${ticketId}`)
-      fetchTickets(); // Tickets erneut abrufen, um die aktualisierten Daten anzuzeigen
+			updateUserTicketId(ticketId)
+			postLog(loggedInUser.userId, `Ticket '${ticketId}' wurde gelöscht.`)
+      fetchTickets();
     } catch (error) {
-      toast.error("Ticket konnte nicht gelöscht werden!");
+      toast.error(`Ticket '${ticketId}' konnte nicht gelöscht werden!`);
       console.error(error);
     }
   };
@@ -288,7 +291,7 @@ export const Ticket = () => {
       setErstellen(false);
       fetchTickets();
       // saveErstellDatum(loggedInUser.userId, newTicket.id);
-      postLog(loggedInUser.userId, `Ticket erstellt ${newTicket.id}`);
+      postLog(loggedInUser.userId, `Ticket '${newTicket.id}' wurde erstellt.`);
     } catch (error) {
       console.error("Error creating ticket:", error);
     }

@@ -71,7 +71,7 @@
       background: var(--bg-color);
       color: var(--color);
       box-shadow: var(--box-shadow);
-      height: inherit;
+      height: calc(100dvh - 170px);
       padding: 20px;
       .avatar {
         width: 25px;
@@ -81,6 +81,11 @@
         display: flex;
         flex-direction: column;
         user-select: none;
+				height: 100%;
+				// overflow: hidden;
+				tbody{
+					overflow-x: auto;
+				}
       }
       td {
         &:hover {
@@ -218,11 +223,11 @@
 								width: 100px;
 							}
               &:last-child {
-                width: 50px;
+                width: 100px;
                 border: none;
               }
 							&:nth-child(4){
-								width: 350px;
+								width: 500px;
 							}
               width: 150px;
             }
@@ -238,11 +243,11 @@
 								width: 100px;
 							}
               &:last-child {
-                width: 50px;
+                width: 100px;
                 border: none;
               }
 							&:nth-child(4){
-								width: 350px;
+								width: 500px;
 							}
               width: 150px;
             }

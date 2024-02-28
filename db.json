@@ -7,7 +7,9 @@
       "lname": "Böhm",
       "password": "test12345",
       "avatar": "https://robohash.org/ph38?set=set4",
-      "ticketIds": [],
+      "ticketIds": [
+        "UTFH51W"
+      ],
       "role": "admin",
       "isadmin": true,
       "isloggedin": true
@@ -20,7 +22,7 @@
       "password": "test1234",
       "avatar": "https://robohash.org/asd213sd?set=set4",
       "ticketIds": [
-        
+        "kkvavqR"
       ],
       "role": "admin",
       "isadmin": true,
@@ -34,7 +36,7 @@
       "password": "test1234",
       "avatar": "https://robohash.org/da1234dsa?set=set4",
       "ticketIds": [
-        "6sa3Fb_"
+        "lTw7hIc"
       ],
       "role": "admin",
       "isadmin": true,
@@ -67,52 +69,123 @@
   ],
   "tickets": [
     {
-      "title": "Test Role Ticket",
-      "desc": "Test Role Ticket",
+      "title": "test123",
+      "desc": "123",
+      "status": "TO DO",
+      "deadline": "2024-02-17",
+      "creator": "Danny",
+      "editor": "Michelle",
+      "editorId": "2",
+      "editorAvatar": "https://robohash.org/asd213sd?set=set4",
+      "id": "kkvavqR"
+    },
+    {
+      "title": "123",
+      "desc": "test log",
       "status": "IN PROGRESS",
-      "deadline": "2024-02-16",
+      "deadline": "2024-02-17",
+      "creator": "Danny",
+      "editor": "Danny",
+      "editorId": "1",
+      "editorAvatar": "https://robohash.org/ph38?set=set4",
+      "id": "UTFH51W"
+    },
+    {
+      "title": "rrrrr",
+      "desc": "rrrrrrrrrrrrrrrrrr",
+      "status": "TO DO",
+      "deadline": "2024-03-10",
       "creator": "Danny",
       "editor": "David",
       "editorId": "3",
       "editorAvatar": "https://robohash.org/da1234dsa?set=set4",
-      "id": "6sa3Fb_"
+      "id": "lTw7hIc"
     }
   ],
   "log": [
     {
-      "id": "379f",
-      "userId": "3",
+      "userId": 1,
       "date": "28.2.2024",
-      "time": "10:50:04",
-      "status": "Benutzer zugewiesen 6sa3Fb_"
-    },
-    {
-      "id": "27e9",
-      "userId": "3",
-      "date": "28.2.2024",
-      "time": "10:52:26",
-      "status": "Benutzer zugewiesen 6sa3Fb_"
-    },
-    {
-      "id": "11f6",
-      "userId": "3",
-      "date": "28.2.2024",
-      "time": "10:52:31",
-      "status": "Benutzer zugewiesen 6sa3Fb_"
+      "time": "13:34:07",
+      "status": "Ticket '6sa3Fb_' wurde dem Benutzer 1 (Danny) zugewiesen.",
+      "id": 1
     },
     {
       "userId": 1,
       "date": "28.2.2024",
-      "time": "10:55:37",
-      "status": "Benutzer zugewiesen 6sa3Fb_",
-      "id": "rZT1RC1"
+      "time": "13:34:40",
+      "status": "Ticket '6sa3Fb_' wurde gelöscht.",
+      "id": 2
     },
     {
       "userId": 1,
       "date": "28.2.2024",
-      "time": "11:07:00",
-      "status": "Benutzer zugewiesen 6sa3Fb_",
-      "id": "_HWETVu"
+      "time": "13:36:17",
+      "status": "Ticket 'UTFH51W' wurde erstellt.",
+      "id": 3
+    },
+    {
+      "userId": 1,
+      "date": "28.2.2024",
+      "time": "13:39:35",
+      "status": "Ticket 'lTw7hIc' wurde erstellt.",
+      "id": 4
+    },
+    {
+      "userId": 1,
+      "date": "28.2.2024",
+      "time": "13:41:04",
+      "status": "Ticket 'lTw7hIc' wurde dem Benutzer 3 (David) zugewiesen.",
+      "id": 5
+    },
+    {
+      "userId": 1,
+      "date": "28.2.2024",
+      "time": "13:41:12",
+      "status": "Ticket 'kkvavqR' wurde dem Benutzer 3 (David) zugewiesen.",
+      "id": 6
+    },
+    {
+      "userId": 1,
+      "date": "28.2.2024",
+      "time": "13:42:02",
+      "status": "Ticket 'lTw7hIc' wurde dem Benutzer 1 (Danny) zugewiesen.",
+      "id": 7
+    },
+    {
+      "userId": 1,
+      "date": "28.2.2024",
+      "time": "13:42:08",
+      "status": "Ticket 'lTw7hIc' wurde dem Benutzer 3 (David) zugewiesen.",
+      "id": 8
+    },
+    {
+      "userId": 1,
+      "date": "28.2.2024",
+      "time": "13:42:15",
+      "status": "Ticket 'UTFH51W' wurde dem Benutzer 1 (Danny) zugewiesen.",
+      "id": 9
+    },
+    {
+      "userId": 1,
+      "date": "28.2.2024",
+      "time": "13:42:31",
+      "status": "Ticket 'UTFH51W' wurde dem Benutzer 2 (Michelle) zugewiesen.",
+      "id": 10
+    },
+    {
+      "userId": 1,
+      "date": "28.2.2024",
+      "time": "13:42:38",
+      "status": "Ticket 'kkvavqR' wurde dem Benutzer 2 (Michelle) zugewiesen.",
+      "id": 11
+    },
+    {
+      "userId": 1,
+      "date": "28.2.2024",
+      "time": "13:42:45",
+      "status": "Ticket 'UTFH51W' wurde dem Benutzer 1 (Danny) zugewiesen.",
+      "id": 12
     }
   ]
 }
