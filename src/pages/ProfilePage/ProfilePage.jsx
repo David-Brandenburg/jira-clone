@@ -241,7 +241,12 @@ const ProfilePage = () => {
 									? "N/A"
 									: tickets.length < 2
 									? (<span>{tickets}</span>)
-									: (<span>{tickets.join(", ")}</span>)
+									: (tickets.map(ticket => (
+										<>
+											<span className="ticketTag">{ticket}</span>
+											&nbsp;&nbsp;
+										</>
+									)))
 								}
 							</p>
 						</div>

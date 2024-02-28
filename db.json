@@ -5,12 +5,12 @@
       "email": "danny@mail.com",
       "fname": "Danny",
       "lname": "Böhm",
-      "password": "test12345",
+      "password": "test1234",
       "avatar": "https://robohash.org/ph38?set=set4",
       "ticketIds": [],
       "role": "admin",
       "isadmin": true,
-      "isloggedin": true
+      "isloggedin": false
     },
     {
       "id": "2",
@@ -26,7 +26,7 @@
       ],
       "role": "admin",
       "isadmin": true,
-      "isloggedin": false
+      "isloggedin": true
     },
     {
       "id": "3",
@@ -191,6 +191,20 @@
       "time": "13:58:52",
       "status": "Ticket 'UTFH51W' wurde dem Benutzer 2 (Michelle) zugewiesen.",
       "id": 13
+    },
+    {
+      "userId": 1,
+      "date": "28.2.2024",
+      "time": "15:32:15",
+      "status": "logout",
+      "id": 14
+    },
+    {
+      "userId": "2",
+      "date": "28.2.2024",
+      "time": "15:32:29",
+      "status": "login",
+      "id": 15
     }
   ]
 }
