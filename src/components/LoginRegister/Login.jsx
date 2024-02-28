@@ -1,14 +1,16 @@
 import { useState, useEffect, useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import { LoggedinContext } from "../../context/loggedinContext";
-import { ToastContainer, toast } from "react-toastify";
+import { toast } from "react-toastify";
 import { currentDateTime } from "../..";
 import "react-toastify/dist/ReactToastify.css";
+import { ThemeContext } from "../../context/themeContext";
 
 const Login = ({ setPage }) => {
   const [loginData, setLoginData] = useState({ mail: "", pass: "" });
   const { setLoggedIn, setStayLoggedIn, setLoggedInUser, setIsAdmin } =
     useContext(LoggedinContext);
+	const {theme} = useContext(ThemeContext);
   const usenavigate = useNavigate();
 
   const handleSubmit = (e) => {
@@ -81,7 +83,6 @@ const Login = ({ setPage }) => {
         toast.error("Wrong username or password!");
         throw new Error("Wrong username or password!");
       }
-      console.log(users);
     } catch (error) {
       console.error(error);
     }
@@ -112,7 +113,7 @@ const Login = ({ setPage }) => {
   };
 
   return (
-    <div className="form-wrapper">
+    <div className={`form-wrapper ${theme}`}>
       <div className="text-wrapper">
         <h2>&nbsp;</h2>
         <p>&nbsp;</p>

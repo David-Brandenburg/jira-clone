@@ -9,6 +9,9 @@ export const LoggedinContextProvider = ({ children }) => {
   const [isAdmin, setIsAdmin] = useState(
     sessionStorage.getItem("admin") === "true" ? true : false
   );
+  const [isManager, setIsManager] = useState(
+    sessionStorage.getItem("manager") === "true" ? true : false
+  );
   const [loggedIn, setLoggedIn] = useState(
     stayLoggedIn
       ? localStorage.getItem("loggedIn") === "true"
@@ -58,14 +61,20 @@ export const LoggedinContextProvider = ({ children }) => {
             sessionStorage.setItem("admin", false);
             setIsAdmin(false);
           }
+
+					if (user.role === "manager"){
+						sessionStorage.setItem("manager", true);
+						setIsManager(true);
+					} else {
+						sessionStorage.setItem("manager", false);
+						setIsManager(false);
+					}
         } catch (error) {
           console.error(error);
         }
       })();
     }
   }, [loggedIn, loggedInUser, setIsAdmin]);
-
-  console.log(loggedInUser);
 
   return (
     <LoggedinContext.Provider
@@ -77,6 +86,7 @@ export const LoggedinContextProvider = ({ children }) => {
         setLoggedInUser,
         isAdmin,
         setIsAdmin,
+				isManager
       }}>
       {children}
     </LoggedinContext.Provider>

@@ -13,6 +13,7 @@ const AdminPage = () => {
   const [entryData, setEntryData] = useState({});
   const [allUser, setAllUser] = useState([]);
   const [avatar, setAvatar] = useState(defaultAvatar);
+	const [role, setRole] = useState("")
   const [activeTab, setActiveTab] = useState(null);
   const [openModal, setOpenModal] = useState(false);
   const [openEditModal, setOpenEditModal] = useState(false);
@@ -32,6 +33,7 @@ const AdminPage = () => {
   const { loggedInUser } = useContext(LoggedinContext);
 
   const dataBase = ["Users", "Tickets", "Log", "Placeholder"];
+	const userRoles = ["Admin", "Manager", "User"]
 
   const url = "http://localhost:5000/";
   const options = {
@@ -60,8 +62,11 @@ const AdminPage = () => {
         throw new Error("Failed to fetch!", response.status);
       }
       const entryValue = await response.json();
-      console.log(entryValue);
       setEntryData(entryValue);
+			if (entryValue.role){
+				const getRole = entryValue.role
+				setRole(getRole)
+			}
     } catch (error) {
       console.error(error);
     }
@@ -116,7 +121,6 @@ const AdminPage = () => {
         throw new Error("Failed to fetch!", resp.status);
       }
       const allUsers = await resp.json();
-      // console.log(allUsers);
       setAllUser(allUsers);
     } catch (error) {
       console.error(error);
@@ -207,6 +211,7 @@ const AdminPage = () => {
         email: object.email,
         fname: object.fname,
         lname: object.lname,
+				role: role,
         isadmin: object.isadmin,
       }),
     };
@@ -227,6 +232,7 @@ const AdminPage = () => {
         setDataToPatch({});
         setEntryData({});
         fetchData(activeTab);
+				setRole("");
       } else if (activeTab === "tickets") {
         const ticketId = entryData.id;
         const selEditorId = selectedEditEditor.id;
@@ -301,7 +307,6 @@ const AdminPage = () => {
     } catch (error) {
       console.error(error);
     }
-    // console.log(object);
   };
 
   const postData = async (object) => {
@@ -467,7 +472,6 @@ const AdminPage = () => {
 
   const handleEditUser = (e, id) => {
     e.preventDefault();
-    console.log(id);
     setOpenEditModal(true);
     fetchEntry(id);
   };
@@ -531,6 +535,8 @@ const AdminPage = () => {
     }
   };
 
+	useEffect(() => {}, [role])
+
   return (
     <div className="main-content admin-page">
       <div className={`admin-wrapper ${theme}`}>
@@ -539,10 +545,7 @@ const AdminPage = () => {
             {dataBase.map((item, index) => (
               <li
                 key={index}
-                onClick={(e) => {
-                  fetchData(e.target.innerText);
-                  handleClass(e);
-                }}>
+                onClick={(e) => {fetchData(e.target.innerText); handleClass(e);}}>
                 {item}
               </li>
             ))}
@@ -570,6 +573,8 @@ const AdminPage = () => {
                             ? "FIRSTNAME"
                             : key === "lname"
                             ? "LASTNAME"
+														: key === "avatar"
+														? "IMG"
                             : key.toUpperCase()}
                         </th>
                       )
@@ -915,14 +920,15 @@ const AdminPage = () => {
                     </div>
                     <div className="input-row">
                       <label htmlFor="email">E-Mail</label>
-                      <input
-                        className="form-input"
-                        type="email"
-                        name="email"
-                        id="email"
-                        defaultValue={entryData.email}
-                        required
-                      />
+                      <input className="form-input" type="email" name="email" id="email" defaultValue={entryData.email}/>
+                    </div>
+                    <div className="input-row">
+                      <label htmlFor="role">Role</label>
+											<select name="role" id="role" onChange={((e) => setRole(e.target.value))}>
+												{userRoles.map(roles => {
+													return (<option key={roles} value={roles.toLowerCase()} selected={roles.toLowerCase() === role.toLowerCase()}>{roles}</option>)
+												})}
+											</select>
                     </div>
                     <div className="input-admin-row">
                       <label htmlFor="isadmin">isAdmin?</label>

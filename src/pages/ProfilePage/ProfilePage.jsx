@@ -163,6 +163,7 @@ const ProfilePage = () => {
 			inputs.forEach(input => {
 				input.disabled = true;
 			})
+			fetchUser();
 		}
 	}, [editProfile]);
 
