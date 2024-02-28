@@ -68,7 +68,7 @@ export const KanBanBoard = () => {
   };
 
   return (
-    <div className="main-content kanban-content">
+    <div className={`main-content kanban-content ${theme}`}>
       <table>
         <thead>
           <tr>

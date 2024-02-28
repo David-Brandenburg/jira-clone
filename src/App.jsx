@@ -18,13 +18,13 @@ function App() {
 	const { theme } = useContext(ThemeContext);
 	const navigate = useNavigate();
 
-  useEffect(() => {
-    if (loggedIn) {
-      window.onload = () => {
-        navigate('/home');
-      };
-    }
-  }, [loggedIn, navigate]);
+  // useEffect(() => {
+  //   if (loggedIn) {
+  //     window.onload = () => {
+  //       navigate('/home');
+  //     };
+  //   }
+  // }, [loggedIn, navigate]);
 
   function PrivateRoute({ element, loggedIn }) {
     return loggedIn ? element : <Navigate to="/" />;
@@ -36,6 +36,7 @@ function App() {
 
   return (
 		<div className="main">
+			<ToastContainer theme={theme} pauseOnFocusLoss={false} pauseOnHover={false} autoClose={3000}/>
       {loggedIn && (
         <>
           <Navbar />
@@ -47,10 +48,9 @@ function App() {
         <Route path="/home" element={<PrivateRoute element={<HomePage />} loggedIn={loggedIn} />} />
         <Route path="/profile" element={<PrivateRoute element={<ProfilePage />} loggedIn={loggedIn} />} />
         <Route path="/admin" element={ <AdminRoute element={<AdminPage />} loggedIn={loggedIn} isAdmin={isAdmin}/> } />
-        <Route path="*" element={<ErrorPage />} />
         <Route path="/kanBanBoard" element={<PrivateRoute element={<KanBanBoard />} loggedIn={loggedIn} /> } />
+        <Route path="*" element={<ErrorPage />} />
       </Routes>
-			<ToastContainer theme={theme} pauseOnFocusLoss={false} pauseOnHover={false} autoClose={3000}/>
     </div>
   );
 }

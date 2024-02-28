@@ -1,7 +1,15 @@
 .kanban-content {
+	.dark{
+		--color: #fff;
+	}
+	.light{
+		--color: #000;
+	}
+
   table {
     border-collapse: separate;
     border-spacing: 15px;
+		color: var(--color);
   }
 }
 

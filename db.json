@@ -1,54 +1,80 @@
 {
   "users": [
     {
+      "id": 1,
       "email": "danny@mail.com",
       "fname": "Danny",
       "lname": "Böhm",
       "password": "test12345",
       "avatar": "https://robohash.org/ph38?set=set4",
       "ticketIds": [],
+      "role": "admin",
       "isadmin": true,
-      "isloggedin": true,
-      "id": "1"
+      "isloggedin": true
     },
     {
+      "id": 2,
       "email": "michelle@mail.com",
       "fname": "Michelle",
       "lname": "Sträßer",
       "password": "test1234",
       "avatar": "https://robohash.org/asd213sd?set=set4",
-      "ticketIds": [],
+      "ticketIds": [
+        "6sa3Fb_"
+      ],
+      "role": "admin",
       "isadmin": true,
-      "isloggedin": false,
-      "id": "2"
+      "isloggedin": false
     },
     {
+      "id": 3,
       "email": "david@mail.com",
       "fname": "David",
       "lname": "Brandenburg",
       "password": "test1234",
       "avatar": "https://robohash.org/da1234dsa?set=set4",
       "ticketIds": [],
+      "role": "admin",
       "isadmin": true,
-      "isloggedin": false,
-      "id": "3"
-    }
-  ],
-  "tickets": [],
-  "log": [
-    {
-      "userId": "1",
-      "date": "27.2.2024",
-      "time": "14:21:49",
-      "status": "logout",
-      "id": 1
+      "isloggedin": false
     },
     {
-      "userId": "1",
-      "date": "27.2.2024",
-      "time": "14:22:13",
-      "status": "login",
-      "id": 2
+      "id": 4,
+      "email": "manager@mail.com",
+      "fname": "Test",
+      "lname": "Manager",
+      "password": "test1234",
+      "avatar": "https://robohash.org/da1234dsa?set=set4",
+      "ticketIds": [],
+      "role": "manager",
+      "isadmin": false,
+      "isloggedin": false
+    },
+    {
+      "id": 5,
+      "email": "user@mail.com",
+      "fname": "Test",
+      "lname": "User",
+      "password": "test1234",
+      "avatar": "https://robohash.org/vh2rqdgjrjij0s?set=set4",
+      "ticketIds": [],
+      "role": "user",
+      "isadmin": false,
+      "isloggedin": false
     }
-  ]
+  ],
+  "tickets": [
+    {
+      "title": "Test Role Ticket",
+      "desc": "Test Role Ticket",
+      "status": "IN PROGRESS",
+      "deadline": "2024-02-16",
+      "creator": "Danny",
+      "editor": "Michelle",
+      "editorId": "2",
+      "editorAvatar": "https://robohash.org/asd213sd?set=set4",
+      "id": "6sa3Fb_"
+    }
+  ],
+  "log": []
 }
