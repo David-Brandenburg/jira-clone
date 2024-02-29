@@ -14,6 +14,7 @@ const AdminPage = () => {
   const [allUser, setAllUser] = useState([]);
   const [avatar, setAvatar] = useState(defaultAvatar);
 	const [role, setRole] = useState("")
+	const [addRole, setAddRole] = useState("")
   const [activeTab, setActiveTab] = useState(null);
   const [openModal, setOpenModal] = useState(false);
   const [openEditModal, setOpenEditModal] = useState(false);
@@ -338,6 +339,7 @@ const AdminPage = () => {
         password: object.password,
         avatar: avatar,
         ticketIds: [],
+				role: addRole,
         isadmin: object.isadmin,
         isloggedin: false,
         id: Number,
@@ -755,6 +757,15 @@ const AdminPage = () => {
                         id="password"
                         required
                       />
+                    </div>
+										<div className="input-row">
+                      <label htmlFor="role">Role</label>
+											<select name="role" id="role" onChange={((e) => setAddRole(e.target.value))}>
+												<option defaultValue={addRole}>Bitte auswählen</option>
+												{userRoles.map(roles => {
+													return (<option key={roles} value={roles.toLowerCase()}>{roles}</option>)
+												})}
+											</select>
                     </div>
                     <div className="input-admin-row">
                       <label htmlFor="isadmin">isAdmin?</label>

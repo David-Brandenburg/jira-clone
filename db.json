@@ -1,7 +1,6 @@
 {
   "users": [
     {
-      "id": "1",
       "email": "danny@mail.com",
       "fname": "Danny",
       "lname": "Böhm",
@@ -10,10 +9,10 @@
       "ticketIds": [],
       "role": "admin",
       "isadmin": true,
-      "isloggedin": false
+      "isloggedin": true,
+      "id": "1"
     },
     {
-      "id": "2",
       "email": "michelle@mail.com",
       "fname": "Michelle",
       "lname": "Sträßer",
@@ -26,10 +25,10 @@
       ],
       "role": "admin",
       "isadmin": true,
-      "isloggedin": true
+      "isloggedin": true,
+      "id": "2"
     },
     {
-      "id": "3",
       "email": "david@mail.com",
       "fname": "David",
       "lname": "Brandenburg",
@@ -38,10 +37,10 @@
       "ticketIds": [],
       "role": "admin",
       "isadmin": true,
-      "isloggedin": false
+      "isloggedin": false,
+      "id": "3"
     },
     {
-      "id": "4",
       "email": "manager@mail.com",
       "fname": "Test",
       "lname": "Manager",
@@ -50,10 +49,10 @@
       "ticketIds": [],
       "role": "manager",
       "isadmin": false,
-      "isloggedin": false
+      "isloggedin": false,
+      "id": "4"
     },
     {
-      "id": "5",
       "email": "user@mail.com",
       "fname": "Test",
       "lname": "User",
@@ -62,7 +61,8 @@
       "ticketIds": [],
       "role": "user",
       "isadmin": false,
-      "isloggedin": false
+      "isloggedin": false,
+      "id": "5"
     }
   ],
   "tickets": [
@@ -205,6 +205,20 @@
       "time": "15:32:29",
       "status": "login",
       "id": 15
+    },
+    {
+      "userId": 1,
+      "date": "29.2.2024",
+      "time": "07:30:53",
+      "status": "logout",
+      "id": 16
+    },
+    {
+      "userId": "1",
+      "date": "29.2.2024",
+      "time": "07:31:08",
+      "status": "login",
+      "id": 17
     }
   ]
 }
