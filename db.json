@@ -63,6 +63,18 @@
       "isadmin": false,
       "isloggedin": false,
       "id": "5"
+    },
+    {
+      "email": "test@mail.com",
+      "fname": "Peter",
+      "lname": "Hanswurst",
+      "password": "test1234",
+      "avatar": "https://robohash.org/fbt40pzzbm?set=set4",
+      "ticketIds": [],
+      "role": "user",
+      "isadmin": false,
+      "isloggedin": false,
+      "id": "qGLAss7"
     }
   ],
   "tickets": [
@@ -219,6 +231,83 @@
       "time": "07:31:08",
       "status": "login",
       "id": 17
+    },
+    {
+      "userId": "1",
+      "date": "29.2.2024",
+      "time": "08:16:39",
+      "status": "logout",
+      "id": 18
+    },
+    {
+      "userId": "1",
+      "date": "29.2.2024",
+      "time": "08:17:29",
+      "status": "login",
+      "id": 19
+    },
+    {
+      "userId": "1",
+      "date": "29.2.2024",
+      "time": "08:18:04",
+      "status": "logout",
+      "id": 20
+    },
+    {
+      "userId": "qGLAss7",
+      "date": "29.2.2024",
+      "time": "08:18:20",
+      "status": "registered",
+      "id": 21
+    },
+    {
+      "userId": "qGLAss7",
+      "date": "29.2.2024",
+      "time": "08:18:45",
+      "status": "login",
+      "id": 22
+    },
+    {
+      "userId": "qGLAss7",
+      "date": "29.2.2024",
+      "time": "08:19:25",
+      "status": "logout",
+      "id": 23
+    },
+    {
+      "userId": "1",
+      "date": "29.2.2024",
+      "time": "08:19:44",
+      "status": "login",
+      "id": 24
+    },
+    {
+      "userId": "1",
+      "date": "29.2.2024",
+      "time": "08:20:06",
+      "status": "logout",
+      "id": 25
+    },
+    {
+      "userId": "qGLAss7",
+      "date": "29.2.2024",
+      "time": "08:20:24",
+      "status": "login",
+      "id": 26
+    },
+    {
+      "userId": "qGLAss7",
+      "date": "29.2.2024",
+      "time": "08:20:45",
+      "status": "logout",
+      "id": 27
+    },
+    {
+      "userId": "1",
+      "date": "29.2.2024",
+      "time": "08:21:01",
+      "status": "login",
+      "id": 28
     }
   ]
 }

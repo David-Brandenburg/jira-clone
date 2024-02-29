@@ -440,25 +440,12 @@ export const Ticket = () => {
             {(isManager || isAdmin) && (
               <>
                 <div className="ticket-buttons">
-                  <button
-                    className="btn edit-btn"
-                    onClick={() => handleTicketEdit(ticket.id)}>
-                    Bearbeiten
-                  </button>
-                  <button
-                    className="btn delete-btn"
-                    onClick={() => {
-                      handleDeleteTicket(ticket.id);
-                    }}>
-                    Löschen
-                  </button>
+                  <button className="btn edit-btn" onClick={() => handleTicketEdit(ticket.id)}> Bearbeiten</button>
+                  <button className="btn delete-btn" onClick={() => {handleDeleteTicket(ticket.id)}}>Löschen</button>
                 </div>
                 <h2>Benutzer zuordnen:</h2>
                 <div>
-                  <select
-                    value={benutzer}
-                    onChange={(e) => setBenutzer(e.target.value)}
-                    className="select-benutzer">
+                  <select value={benutzer} onChange={(e) => setBenutzer(e.target.value)} className="select-benutzer">
                     <option>Bitte auswählen</option>
                     {users?.map((user, index) => (
                       <option key={index} value={user.id}>
@@ -466,13 +453,7 @@ export const Ticket = () => {
                       </option>
                     ))}
                   </select>
-                  <button
-                    className="btn update-benutzer"
-                    onClick={(e) => {
-                      handleUpdateEditor(e, ticket.id);
-                    }}>
-                    Update Benutzer
-                  </button>
+                  <button className="btn update-benutzer" onClick={(e) => {handleUpdateEditor(e, ticket.id)}}>Update Benutzer</button>
                 </div>
               </>
             )}
