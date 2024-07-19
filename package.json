@@ -17,7 +17,7 @@
   "scripts": {
     "start": "concurrently \"npm:json-server\" \"react-scripts start\"",
     "json-server": "json-server --watch db.json --port 5000",
-    "build": "react-scripts build",
+    "build": "concurrently \"npm:json-server\" \"react-scripts start\"",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },
